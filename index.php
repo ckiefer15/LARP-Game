@@ -25,5 +25,8 @@
 			</td>
 		</tr>
 	</table>
+	Authorized users can access the project using 
+	<a href="https://console.bluemix.net/devops/code/edit/edit.html?env_id=ibm:yp:us-south#/devops/code/file/jeber@us.ibm.com-34bcc589272d4b728bb8fe9336a4fe11/larp2-cs410-winona/">
+	this link </a>
 </body>
 </html>
