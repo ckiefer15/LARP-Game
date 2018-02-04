@@ -1,35 +1,73 @@
 <h2 id="SystemRequirements">System Requirements Specification</h2>
 <p>
-<table>
-	<thead>
-		<tr>
-			<th>GUI Scenes</th>
-			<th>Descriptions</th>
-		</tr>
-	<thead>
-	<tbody>
-		<tr>
-			<td>1. Game Difficulty</td>
-			<td>
-				<p>
-					1.1 Game will increment game difficulty to one higher difficulty each time the Player interacts with the difficulty option.
-				</p>
-				<p>
-					1.2 Game will reset game difficulty to the lowest difficulty when the Player interacts with the difficulty option and the game difficulty is currently at the maximum setting.
-				</p>
-			</td>
-		</tr>
-			<td>2. Play game option in main menu will</td>
-			<td>
-				<p>
-					2.1 generate a new dungeon with the number of rooms and set enemy difficulty based on selected difficulty.
-				</p>
-				<p>
-					2.2 place Knight in the start room of the dungeon.
-				</p>
-			</td>
-		<tr>
-		</tr>
-	</tbody>
-</table>
+	<ol>
+		<li id="difficulty">Game Difficulty
+			<ol>
+				<li>Game will increment game difficulty to one higher difficulty each time the Player interacts with the difficulty option.</li>
+				<li>Game will reset game difficulty to the lowest difficulty when the Player interacts with the difficulty option and the game difficulty is currently at the maximum setting.</li>
+			</ol>
+		</li>
+		<li>Start New Game
+			<ol>
+				<li>generate a new dungeon with the number of rooms and set enemy difficulty based on selected difficulty.</li>
+				<li>place Knight in the start room of the dungeon.</li>
+			</ol>
+		</li>
+		<li id="character">Character Dynamics
+			<ol>
+				<li>Movement
+					<ol>
+						<li>Using the movement keys the player can move the knight by one square.</li>
+						<li>The knight can only move onto a tile that doesn't contain a chest or an obstacle and is within the room boundaries.</li>
+					</ol>
+				</li>
+				<li>Inventory
+					<ol>
+						<li>Pressing the inventory key/button will open a new screen to show the knight's inventory to the player.</li>
+						<li>The player can highlight an item in inventory using the movement keys.</li>
+						<li>Pressing the interaction key on a consumable will first apply the affects to the knight before removing it from inventory.</li>
+						<li>Pressing the interaction key on a weapon will swap the selected weapon with the currently equipped weapon.</li>
+					</ol>
+				</li>
+				<li>World Objects
+					<ol>
+						<li>Pressing the interact key when near a chest will move the chest's contents to the knight's inventory</li>
+						<li>Pressing the interact key near a door will tell the game to load the next room, placing the knight on the tile on the opposite side of the room relative to the tile the knight occupied in the previous room.</li>
+					</ol>
+				</li>
+				<li>Encounters
+					<ol>
+						<li>The knight will trigger an encounter if it moves onto an enemy tile which may or may not be visible to the player, bringing up a combat screen for the player to interact with as described in <a href="#combat">Section 4</a>.</li>
+					</ol>
+				</li>
+			</ol>
+		</li>
+		<li id="combat">Combat
+			<ol>
+				<li id="attack">Interacting with the 'Attack' button will initiate a round of attacks in the following order.
+					<ol>
+						<li id="playerAttack">Calculates knight's chance to hit the enemy and then apply damage based on knight's weapon by subtracting the damage from the enemy's hit points. If the enemy drops below one hit point the player wins the encounter and the dungeon screen is displayed.</li>
+						<li id="enemyAttack">Calculates enemy's chance to hit the knight and upon hit will subtract damage based on enemy level from the knight's hit points. If the knight drops below one hit point the player loses the game and the main menu screen is displayed.</li>
+					</ol>
+				</li>
+				<li id="heal">Interacting with the heal button will consume an available health consumable in the knight's inventory and replenish the knight's hit points. No attack round will be carried out.</li>
+				<li id="runAway">Interacting with the 'Run Away' button will give the player a chance to leave the encounter and return to the dungeon. Though if the knight does not succeed in running away the enemy will have a chance to attack which will follow the procedure at <a href="enemyAttack">Section 4.1.2</a></li>
+			</ol>
+		</li>
+		<li id="endGame">End Game
+			<ol>
+				<li id="win">Player Wins
+					<ol>
+						<li>The player wins a combat encounter against the dungeon's boss, the boss being randomly placed in one of the rooms within the dungeon.</li>
+					</ol>
+				</li>
+				<li id="lose">Player Loses
+					<ol>
+						<li>If at any time the knight's hit points drop below one the game will be over and the player will be returned to the main menu screen.</li>
+						<li>The player quits out of the dungeon, losing all progress and therefore losing the game.</li>
+					</ol>
+				</li>
+			</ol>
+		</li>
+	</ol>
 </p>

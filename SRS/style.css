@@ -70,3 +70,14 @@ pre {
 	margin: 0;
 }
 
+ol{
+	counter-reset: item;
+}
+li {
+	display: block;
+	padding: 3px;
+}
+li:before {
+	content: counters(item, ".") ". ";
+	counter-increment: item;
+}
