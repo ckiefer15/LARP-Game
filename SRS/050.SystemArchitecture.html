@@ -1,6 +1,41 @@
 <h2 id="SystemArchitecture">System Architecture</h2>
 <p>
-Provide a high level overview of the system architeture including major components.  
- Enough of the architecture should be designed so that design assignments can be made to
- individual members of the team. 
+Our LARP (Less Aggravating Role Playing) game will utilize the Model-View-Controller design pattern. Our View will also be implemented using the JavaFX UI Toolkit.
+</p>
+<img class="centerImg25" src="../images/MVC_diagram.png" title="Model View Controller" alt="Model View Controller" />
+<p>
+	<h2>View</h2>
+	The View will be our UI created in JavaFx. Because of the use of the MVC pattern in the LARP project the update method for our UI will exist in the controller. Whenever the player executes a task that requires the View to be updated the controller will execute the task as well as pass in the necessary game state data from the Model.
+</p>
+<div class="viewImage">
+	<a href="../images/main_screen.png">
+		<h3>Main Screen</h3>
+		<img src="../images/main_screen.png" title="Main Screen" alt="Main Screen" />
+	</a>
+</div>
+<div class="viewImage">
+	<a href="../images/game_screen.png">
+		<h3>Game Screen</h3>	
+		<img src="../images/game_screen.png" title="Game Screen" alt="Game Screen" />
+	</a>
+</div>
+<div class="viewImage">
+	<a href="../images/inventory_screen.png">
+		<h3>Inventory</h3>
+		<img src="../images/inventory_screen.png" title="Inventory Screen" alt="Inventory Screen" />
+	</a>
+</div>
+<div class="viewImage">
+	<a href="../images/fight_screen.png">
+		<h3>Fight Screen</h3>
+		<img src="../images/fight_screen.png" title="Fight Screen" alt="Fight Screen" />
+	</a>
+</div>
+<p>
+	<h2>Controller</h2>
+	In our LARP game the role of the Controller is to receive input from the user/game that requires action on the game state or updating of the View. It serves as a connection between the two separated View and Model components. When the controller receives input for some sort of data to be processed it calls methods that exist in the model. If it receives input that requires the View be updated it tells the model to pass the necessary data to the view as well as calls methods in View to render the update.
+</p>
+<p>
+	<h2>Model</h2>
+	The Model component does the heavy lifting in the background of the game. It handles all the data processing and management of game state. Without the Model component no interesting features could be implemented into the game, it handles everything from battle logic to storing inventory and player health data.
 </p>

@@ -6,8 +6,11 @@
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<div>
 <h1>SRS for Team Project</h1>
+</div>
 <hr>
+<div>
 <h2>Table of Contents</h2>
 <ul>
 <li><a href="#Preface">Preface</a></li> 
@@ -23,16 +26,18 @@
 <li><a href="#ContributionsSummary">Contributions Summary</a></li> 
 <li><a href="#AcceptanceParagraph">Acceptance Paragraph</a></li> 
 <li><a href="#DesignAssignments">Design Assignments</a></li> 
-
 </ul>
+</div>
 
 
 <?PHP
 			
 foreach (glob("*.html") as $filename) {
 	   echo "<hr>\n"; 
-	   $filecontents = file_get_contents($filename); 
+	   $filecontents = file_get_contents($filename);
+	   echo "<div>";
        echo "$filecontents";
+	   echo "</div>";
 }
 
 ?>	
