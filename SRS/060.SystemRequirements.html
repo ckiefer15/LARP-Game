@@ -1,13 +1,7 @@
 <h2 id="SystemRequirements">System Requirements Specification</h2>
 <p>
 	<ol>
-		<li id="difficulty">Game Difficulty
-			<ol>
-				<li>Game will increment game difficulty to one higher difficulty each time the Player interacts with the difficulty option.</li>
-				<li>Game will reset game difficulty to the lowest difficulty when the Player interacts with the difficulty option and the game difficulty is currently at the maximum setting.</li>
-			</ol>
-		</li>
-		<li>Start New Game
+		<li id="newGame">Start New Game
 			<ol>
 				<li>generate a new dungeon with the number of rooms and set enemy difficulty based on selected difficulty.</li>
 				<li>place Knight in the start room of the dungeon.</li>
@@ -15,13 +9,13 @@
 		</li>
 		<li id="character">Character Dynamics
 			<ol>
-				<li>Movement
+				<li id="movement">Movement
 					<ol>
 						<li>Using the movement keys the player can move the knight by one square.</li>
 						<li>The knight can only move onto a tile that doesn't contain a chest or an obstacle and is within the room boundaries.</li>
 					</ol>
 				</li>
-				<li>Inventory
+				<li id="inventory">Inventory
 					<ol>
 						<li>Pressing the inventory key/button will open a new screen to show the knight's inventory to the player.</li>
 						<li>The player can highlight an item in inventory using the movement keys.</li>
@@ -29,20 +23,20 @@
 						<li>Pressing the interaction key on a weapon will swap the selected weapon with the currently equipped weapon.</li>
 					</ol>
 				</li>
-				<li>World Objects
+				<li id="worldObjects">World Objects
 					<ol>
 						<li>Pressing the interact key when near a chest will move the chest's contents to the knight's inventory</li>
 						<li>Pressing the interact key near a door will tell the game to load the next room, placing the knight on the tile on the opposite side of the room relative to the tile the knight occupied in the previous room.</li>
 					</ol>
 				</li>
-				<li>Encounters
+				<li id="encounters">Encounters
 					<ol>
 						<li>The knight will trigger an encounter if it moves onto an enemy tile which may or may not be visible to the player, bringing up a combat screen for the player to interact with as described in <a href="#combat">Section 4</a>.</li>
 					</ol>
 				</li>
 			</ol>
 		</li>
-		<li id="combat">Combat
+		<li id="combat">Combat - <a href="#combatModel">Visual Model</a>
 			<ol>
 				<li id="attack">Interacting with the 'Attack' button will initiate a round of attacks in the following order.
 					<ol>
@@ -51,7 +45,7 @@
 					</ol>
 				</li>
 				<li id="heal">Interacting with the heal button will consume an available health consumable in the knight's inventory and replenish the knight's hit points. No attack round will be carried out.</li>
-				<li id="runAway">Interacting with the 'Run Away' button will give the player a chance to leave the encounter and return to the dungeon. Though if the knight does not succeed in running away the enemy will have a chance to attack which will follow the procedure at <a href="enemyAttack">Section 4.1.2</a></li>
+				<li id="runAway">Interacting with the 'Run Away' button will give the player a chance to leave the encounter and return to the dungeon. Though if the knight does not succeed in running away the enemy will have a chance to attack which will follow the procedure at <a href="#enemyAttack">Section 4.1.2</a></li>
 			</ol>
 		</li>
 		<li id="endGame">End Game

@@ -82,6 +82,10 @@ ol li:before {
 	counter-increment: item;
 }
 
+dd:before{
+	content: "- ";
+}
+
 div {
 	padding: 0.5em;
 }
