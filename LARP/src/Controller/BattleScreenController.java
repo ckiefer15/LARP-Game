@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author AfricanJesus
+ * @author Tyree Gustafson
  */
 public class BattleScreenController implements Initializable {
 

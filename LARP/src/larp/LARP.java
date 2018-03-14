@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author AfricanJesus
+ * @author Tyree Gustafson
  */
 public class LARP extends Application {
     

@@ -18,7 +18,7 @@ import javafx.scene.control.Button;
 /**
  * FXML Controller class
  *
- * @author AfricanJesus
+ * @author Tyree Gustafson
  */
 public class InventoryScreenController implements Initializable {
 

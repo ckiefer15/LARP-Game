@@ -35,7 +35,7 @@ import larp.Sprite;
 /**
  * FXML Controller class
  *
- * @author AfricanJesus
+ * @author Tyree Gustafson
  */
 public class GameScreenController implements Initializable {
 
