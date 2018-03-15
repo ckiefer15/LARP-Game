@@ -6,8 +6,11 @@
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<div>
 <h1>Software Design for Team Project</h1>
+</div>
 <hr>
+<div>
 <h2>Table of Contents</h2>
 <ul>
 <li><a href="#Preface">Preface</a></li> 
@@ -21,58 +24,19 @@
 <li><a href="#TestAndCodingAssignments">Test and Coding Assignments</a></li> 
 
 </ul>
-
+</div>
 
 <?PHP
 			
 foreach (glob("*.html") as $filename) {
 	   echo "<hr>\n"; 
-	   $filecontents = file_get_contents($filename); 
+	   $filecontents = file_get_contents($filename);
+	   echo "<div>";
        echo "$filecontents";
+	   echo "</div>";
 }
 
 ?>	
-<hr>
-<p>This section intentionally left blank. </p> 
-<pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre>
-<p>END OF THE DOCUMENT</p>
 <hr>
 </body>
 </html>
