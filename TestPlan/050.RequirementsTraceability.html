@@ -1,120 +1,119 @@
 <h2 id="RequirementsTraceability">Requirements Traceability</h2>
 <p>
-Create a traceability matrix between testcases and requirements. 
+	<table>
+		<tr>
+			<th>Requirement</th>
+			<th>Test Type</th>
+			<th>Test Name</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<th colspan="4">Start New Game</th>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#buildGame" target="_blank">Generate Dungeon</a></td>
+			<td>JUnit</td>
+			<td>TestDungeonInstantiation</td>
+			<td>Tests a completely instantiated dungeon object to ensure all sub components were properly instantiated and linked</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#placeKnight" target="_blank">Spawn Knight</a></td>
+			<td>JUnit</td>
+			<td>TestKnightSpawn</td>
+			<td>Checks Knight's initial spawn coordinates in the start room and ensures no blockable objects spawn on the Knight</td>
+		</tr>
+		<tr>
+			<th colspan="4">Character Dynamics</th>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#moveKnight" target="_blank">Player can move Knight</a></td>
+			<td>UI Test</td>
+			<td>N/A</td>
+			<td>A Tester will play the game and ensure the Knight is able to move up, down, left, and right using the arrow keys</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#blockKnight" target="_blank">Object Collision</a></td>
+			<td>UI Test</td>
+			<td>N/A</td>
+			<td>A Tester will play the game and ensure blockable objects in the dungeons will not let the Knight pass through them</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#openInventory" target="_blank">Open Inventory</a></td>
+			<td>UI Test</td>
+			<td>N/A</td>
+			<td>A Tester will open the Knight's inventory in game with the inventory button and ensure the inventory screen is displayed</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#selectItem" target="_blank">Navigate Inventory</a></td>
+			<td>UI Test</td>
+			<td>N/A</td>
+			<td>A Tester will ensure they can navigate between items in the inventory screen using the arrow keys</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#consumeItem" target="_blank">Consume Item</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: ConsumeItem</td>
+			<td>UI Test: A Tester will open the Knight's inventory and interact with a consumable item, ensuring the effects are applied and the item is removed from inventory<br />JUnit: Tests the game model interface and ensures the changes have been applied</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#swapWeapon" target="_blank">Change Weapons</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: SwapWeapon</td>
+			<td>UI Test: A Tester will open the Knight's inventory and interact with a weapon item, ensuring the weapon is moved to the equipped slot and any weapon previously in the equipped slot is moved back to inventory.<br />JUnit: Tests the game model interface, triggering a weapon swap from inventory and ensuring the model is proper after the action is performed.</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#openChest" target="_blank">Open Chest</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: TestChest</td>
+			<td>UI Test: A Tester will move the Knight in game towards a chest and interact with it, checking inventory to ensure a new item is added to the Knight's inventory.<br />JUnit: Tests the game model interface by opening a model chest using methods and ensuring the result is as expected.</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#enterDoor" target="_blank">Change Room</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: ChangeRoom</td>
+			<td>UI Test: A Tester will interact with a door object in the room and ensure the next room is the correct room based on the model as well as ensure the Knight is placed near the proper door based on the requirement description.<br />JUnit: Tests the game model by initiated a room change and checking the Knight's coordinates and current room for expected values.</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#triggerFight" target="_blank">Trigger Encounter</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: TestEncounter</td>
+			<td>UI Test: A Tester will move the Knight over an encounter object in the dungeon, checking to make sure the combat screen comes up and displays the proper information<br />JUnit: Tests the game model interface by sending the model a reference to an encounter object, verifying a proper combat object is returned.</td>
+		</tr>
+		<tr>
+			<th colspan="4">Combat</th>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#attack" target="_blank">Attack</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: TestAttack</td>
+			<td>UI Test: A Tester will interact with the attack button during a combat encounter and verify attack logic.<br />JUnit: Tests the attack method inside the combat object and verifies combat logic and damage applied if any.</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#heal" target="_blank">Heal</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: TestHeal</td>
+			<td>UI Test: A Tester will interact with the heal button during a combat encounter and verify effects are applied and consumables has been reduced.<br />JUnit: Tests the heal method inside the combat object and verifies number of consumables has been reduced and effects have been applied to Knight.</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#runAway" target="_blank">Run</a></td>
+			<td>UI Test & JUnit</td>
+			<td>JUnit: TestRunAway</td>
+			<td>UI Test: A Tester will interact with the run button during a combat encounter and verify run away logic.<br />JUnit: Tests the run method inside the combat object and verifies logic and damage applied if any.</td>
+		</tr>
+		<tr>
+			<th colspan="4">End Game</th>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#win" target="_blank">Win Game</a></td>
+			<td>UI Test</td>
+			<td>N/A</td>
+			<td>A Tester will defeat the dungeon boss and ensure the main menu screen is displayed after being notified they won the game.</td>
+		</tr>
+		<tr>
+			<td><a href="../SRS/index.php#lose" target="_blank">Lose Game</a></td>
+			<td>UI Test</td>
+			<td>N/A</td>
+			<td>A Tester will interact with the attack button during a combat encounter and verify attack logic.</td>
+		</tr>
+	</table>
 </p>
-<table>
-	<tr>
-		<th>Requirement</th>
-		<th>Test Type</th>
-		<th>Test Name</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<th colspan="4">Start New Game</th>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#buildGame" target="_blank">Generate Dungeon</a></td>
-		<td>JUnit</td>
-		<td>TestDungeonInstantiation</td>
-		<td>Tests a completely instantiated dungeon object to ensure all sub components were properly instantiated and linked</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#placeKnight" target="_blank">Spawn Knight</a></td>
-		<td>JUnit</td>
-		<td>TestKnightSpawn</td>
-		<td>Checks Knight's initial spawn coordinates in the start room and ensures no blockable objects spawn on the Knight</td>
-	</tr>
-	<tr>
-		<th colspan="4">Character Dynamics</th>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#moveKnight" target="_blank">Player can move Knight</a></td>
-		<td>UI Test</td>
-		<td>N/A</td>
-		<td>A Tester will play the game and ensure the Knight is able to move up, down, left, and right using the arrow keys</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#blockKnight" target="_blank">Object Collision</a></td>
-		<td>UI Test</td>
-		<td>N/A</td>
-		<td>A Tester will play the game and ensure blockable objects in the dungeons will not let the Knight pass through them</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#openInventory" target="_blank">Open Inventory</a></td>
-		<td>UI Test</td>
-		<td>N/A</td>
-		<td>A Tester will open the Knight's inventory in game with the inventory button and ensure the inventory screen is displayed</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#selectItem" target="_blank">Navigate Inventory</a></td>
-		<td>UI Test</td>
-		<td>N/A</td>
-		<td>A Tester will ensure they can navigate between items in the inventory screen using the arrow keys</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#consumeItem" target="_blank">Consume Item</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: ConsumeItem</td>
-		<td>UI Test: A Tester will open the Knight's inventory and interact with a consumable item, ensuring the effects are applied and the item is removed from inventory<br />JUnit: Tests the game model interface and ensures the changes have been applied</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#swapWeapon" target="_blank">Change Weapons</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: SwapWeapon</td>
-		<td>UI Test: A Tester will open the Knight's inventory and interact with a weapon item, ensuring the weapon is moved to the equipped slot and any weapon previously in the equipped slot is moved back to inventory.<br />JUnit: Tests the game model interface, triggering a weapon swap from inventory and ensuring the model is proper after the action is performed.</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#openChest" target="_blank">Open Chest</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: TestChest</td>
-		<td>UI Test: A Tester will move the Knight in game towards a chest and interact with it, checking inventory to ensure a new item is added to the Knight's inventory.<br />JUnit: Tests the game model interface by opening a model chest using methods and ensuring the result is as expected.</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#enterDoor" target="_blank">Change Room</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: ChangeRoom</td>
-		<td>UI Test: A Tester will interact with a door object in the room and ensure the next room is the correct room based on the model as well as ensure the Knight is placed near the proper door based on the requirement description.<br />JUnit: Tests the game model by initiated a room change and checking the Knight's coordinates and current room for expected values.</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#triggerFight" target="_blank">Trigger Encounter</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: TestEncounter</td>
-		<td>UI Test: A Tester will move the Knight over an encounter object in the dungeon, checking to make sure the combat screen comes up and displays the proper information<br />JUnit: Tests the game model interface by sending the model a reference to an encounter object, verifying a proper combat object is returned.</td>
-	</tr>
-	<tr>
-		<th colspan="4">Combat</th>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#attack" target="_blank">Attack</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: TestAttack</td>
-		<td>UI Test: A Tester will interact with the attack button during a combat encounter and verify attack logic.<br />JUnit: Tests the attack method inside the combat object and verifies combat logic and damage applied if any.</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#heal" target="_blank">Heal</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: TestHeal</td>
-		<td>UI Test: A Tester will interact with the heal button during a combat encounter and verify effects are applied and consumables has been reduced.<br />JUnit: Tests the heal method inside the combat object and verifies number of consumables has been reduced and effects have been applied to Knight.</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#runAway" target="_blank">Run</a></td>
-		<td>UI Test & JUnit</td>
-		<td>JUnit: TestRunAway</td>
-		<td>UI Test: A Tester will interact with the run button during a combat encounter and verify run away logic.<br />JUnit: Tests the run method inside the combat object and verifies logic and damage applied if any.</td>
-	</tr>
-	<tr>
-		<th colspan="4">End Game</th>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#win" target="_blank">Win Game</a></td>
-		<td>UI Test</td>
-		<td>N/A</td>
-		<td>A Tester will defeat the dungeon boss and ensure the main menu screen is displayed after being notified they won the game.</td>
-	</tr>
-	<tr>
-		<td><a href="../SRS/index.php#lose" target="_blank">Lose Game</a></td>
-		<td>UI Test</td>
-		<td>N/A</td>
-		<td>A Tester will interact with the attack button during a combat encounter and verify attack logic.</td>
-	</tr>
-</table>
