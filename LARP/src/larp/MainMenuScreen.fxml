@@ -12,34 +12,34 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.MainMenuScreenController">
   <children>
-    <ImageView fitHeight="537.845947265625" fitWidth="304.04688653939047" layoutX="153.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fitHeight="800.0" fitWidth="800.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../img/main_menu_background.png" />
       </image>
     </ImageView>
-    <Label layoutX="226.0" layoutY="53.0" text="L.A.R.P.">
+    <Label layoutX="322.0" layoutY="144.0" text="L.A.R.P." textFill="WHITE">
       <font>
         <Font size="50.0" />
       </font>
     </Label>
-    <Label layoutX="157.0" layoutY="110.0" text="Less Aggravating Role Play">
+    <Label layoutX="253.0" layoutY="201.0" text="Less Aggravating Role Play" textFill="WHITE">
       <font>
         <Font size="25.0" />
       </font>
     </Label>
-    <Button fx:id="exitButton" focusTraversable="false" layoutX="215.0" layoutY="494.0" mnemonicParsing="false" onAction="#closeGame" prefHeight="73.0" prefWidth="181.0" styleClass="exit-button" text="">
+    <Button fx:id="exitButton" focusTraversable="false" layoutX="312.0" layoutY="664.0" mnemonicParsing="false" onAction="#closeGame" prefHeight="73.0" prefWidth="181.0" styleClass="exit-button" text="">
       <font>
         <Font size="20.0" fx:id="x1" />
       </font>
     </Button>
-    <Button fx:id="playButton" alignment="CENTER" focusTraversable="false" font="$x1" layoutX="216.0" layoutY="168.0" mnemonicParsing="false" onAction="#GoToGame" opacity="1.0" prefHeight="73.0" prefWidth="181.0" styleClass="play-button" text="" visible="true" />
-    <Button fx:id="optionButton" focusTraversable="false" font="$x1" layoutX="216.0" layoutY="241.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="option-button" text="">
+    <Button fx:id="playButton" alignment="CENTER" focusTraversable="false" font="$x1" layoutX="313.0" layoutY="338.0" mnemonicParsing="false" onAction="#GoToGame" opacity="1.0" prefHeight="73.0" prefWidth="181.0" styleClass="play-button" text="" visible="true" />
+    <Button fx:id="optionButton" focusTraversable="false" font="$x1" layoutX="313.0" layoutY="411.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="option-button" text="">
       <stylesheets>
         <URL value="@larpCSS.css" />
       </stylesheets>
     </Button>
-    <Button fx:id="tutorialButton" focusTraversable="false" font="$x1" layoutX="216.0" layoutY="314.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="tut-button" text="" />
-    <Button fx:id="creditButton" focusTraversable="false" font="$x1" layoutX="216.0" layoutY="387.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="credit-button" text="" />
+    <Button fx:id="tutorialButton" focusTraversable="false" font="$x1" layoutX="313.0" layoutY="484.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="tut-button" text="" />
+    <Button fx:id="creditButton" focusTraversable="false" font="$x1" layoutX="312.0" layoutY="557.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="credit-button" text="" />
   </children>
   <stylesheets>
     <URL value="@larpCSS.css" />
