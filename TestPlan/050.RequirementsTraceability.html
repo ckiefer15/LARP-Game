@@ -25,7 +25,7 @@ Create a traceability matrix between testcases and requirements.
 		<td>Checks Knight's initial spawn coordinates in the start room and ensures no blockable objects spawn on the Knight</td>
 	</tr>
 	<tr>
-		<td colspan="4">Character Dynamics</td>
+		<th colspan="4">Character Dynamics</th>
 	</tr>
 	<tr>
 		<td><a href="../SRS/index.php#moveKnight" target="_blank">Player can move Knight</a></td>
@@ -66,6 +66,7 @@ Create a traceability matrix between testcases and requirements.
 	<tr>
 		<td><a href="../SRS/index.php#openChest" target="_blank">Open Chest</a></td>
 		<td>UI Test & JUnit</td>
+		<td>JUnit: TestChest</td>
 		<td>UI Test: A Tester will move the Knight in game towards a chest and interact with it, checking inventory to ensure a new item is added to the Knight's inventory.<br />JUnit: Tests the game model interface by opening a model chest using methods and ensuring the result is as expected.</td>
 	</tr>
 	<tr>
@@ -81,7 +82,7 @@ Create a traceability matrix between testcases and requirements.
 		<td>UI Test: A Tester will move the Knight over an encounter object in the dungeon, checking to make sure the combat screen comes up and displays the proper information<br />JUnit: Tests the game model interface by sending the model a reference to an encounter object, verifying a proper combat object is returned.</td>
 	</tr>
 	<tr>
-		<td colspan="4">Combat</td>
+		<th colspan="4">Combat</th>
 	</tr>
 	<tr>
 		<td><a href="../SRS/index.php#attack" target="_blank">Attack</a></td>
@@ -102,7 +103,7 @@ Create a traceability matrix between testcases and requirements.
 		<td>UI Test: A Tester will interact with the run button during a combat encounter and verify run away logic.<br />JUnit: Tests the run method inside the combat object and verifies logic and damage applied if any.</td>
 	</tr>
 	<tr>
-		<td colspan="4">End Game</td>
+		<th colspan="4">End Game</th>
 	</tr>
 	<tr>
 		<td><a href="../SRS/index.php#win" target="_blank">Win Game</a></td>
