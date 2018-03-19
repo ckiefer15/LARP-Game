@@ -70,3 +70,60 @@ pre {
 	margin: 0;
 }
 
+ol{
+	counter-reset: item;
+}
+li {
+	display: block;
+	padding: 3px;
+}
+ol li:before {
+	content: counters(item, ".") ". ";
+	counter-increment: item;
+}
+
+dd:before{
+	content: "- ";
+}
+
+div {
+	padding: 0.5em;
+}
+
+.centerImg25 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 25%;
+}
+
+.centerImg50 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+p {
+	clear: left;
+}
+
+.viewImage {
+	margin: 5px;
+	float: left;
+	width: 180px;
+}
+
+.viewImage img {
+	width: 100%;
+	height: auto;
+}
+
+table, th, td {
+	border: 2px solid white;
+	border-collapse: collapse;
+}
+
+td {
+	padding: 3px;
+}

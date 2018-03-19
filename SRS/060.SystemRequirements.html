@@ -3,35 +3,35 @@
 	<ol>
 		<li id="newGame">Start New Game
 			<ol>
-				<li>generate a new dungeon with the number of rooms and set enemy difficulty based on selected difficulty.</li>
-				<li>place Knight in the start room of the dungeon.</li>
+				<li id="buildGame">generate a new dungeon with the number of rooms and set enemy difficulty based on selected difficulty.</li>
+				<li id="placeKnight">place Knight in the start room of the dungeon.</li>
 			</ol>
 		</li>
 		<li id="character">Character Dynamics
 			<ol>
 				<li id="movement">Movement
 					<ol>
-						<li>Using the movement keys the player can move the knight by one square.</li>
-						<li>The knight can only move onto a tile that doesn't contain a chest or an obstacle and is within the room boundaries.</li>
+						<li id="moveKnight">Using the movement keys the player can move the knight by one square.</li>
+						<li id="blockKnight">The knight can only move onto a tile that doesn't contain a chest or an obstacle and is within the room boundaries.</li>
 					</ol>
 				</li>
 				<li id="inventory">Inventory
 					<ol>
-						<li>Pressing the inventory key/button will open a new screen to show the knight's inventory to the player.</li>
-						<li>The player can highlight an item in inventory using the movement keys.</li>
-						<li>Pressing the interaction key on a consumable will first apply the affects to the knight before removing it from inventory.</li>
-						<li>Pressing the interaction key on a weapon will swap the selected weapon with the currently equipped weapon.</li>
+						<li id="openInventory">Pressing the inventory key/button will open a new screen to show the knight's inventory to the player.</li>
+						<li id="selectItem">The player can highlight an item in inventory using the movement keys.</li>
+						<li id="consumeItem">Pressing the interaction key on a consumable will first apply the affects to the knight before removing it from inventory.</li>
+						<li id="swapWeapon">Pressing the interaction key on a weapon will swap the selected weapon with the currently equipped weapon.</li>
 					</ol>
 				</li>
 				<li id="worldObjects">World Objects
 					<ol>
-						<li>Pressing the interact key when near a chest will move the chest's contents to the knight's inventory</li>
-						<li>Pressing the interact key near a door will tell the game to load the next room, placing the knight on the tile on the opposite side of the room relative to the tile the knight occupied in the previous room.</li>
+						<li id="openChest">Pressing the interact key when near a chest will move the chest's contents to the knight's inventory</li>
+						<li id="enterDoor">Pressing the interact key near a door will tell the game to load the next room, placing the knight on the tile on the opposite side of the room relative to the tile the knight occupied in the previous room.</li>
 					</ol>
 				</li>
 				<li id="encounters">Encounters
 					<ol>
-						<li>The knight will trigger an encounter if it moves onto an enemy tile which may or may not be visible to the player, bringing up a combat screen for the player to interact with as described in <a href="#combat">Section 4</a>.</li>
+						<li id="triggerFight">The knight will trigger an encounter if it moves onto an enemy tile which may or may not be visible to the player, bringing up a combat screen for the player to interact with as described in <a href="#combat">Section 4</a>.</li>
 					</ol>
 				</li>
 			</ol>
