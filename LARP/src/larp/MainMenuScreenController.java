@@ -8,12 +8,14 @@ package larp;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
 
@@ -38,11 +40,12 @@ public class MainMenuScreenController implements Initializable {
     //private Parent gameScreen;
     @FXML
     private Font x1;
+    @FXML
+    private AnchorPane rootPane;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
     }    
 
     @FXML
@@ -50,5 +53,9 @@ public class MainMenuScreenController implements Initializable {
         Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
         playButton.getScene().setRoot(gameScreen);
     }
-    
+    @FXML
+    private void closeGame(ActionEvent event) throws IOException {
+        Platform.exit();
+        System.exit(0);
+    }
 }
