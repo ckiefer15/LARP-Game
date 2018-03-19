@@ -1,4 +1,4 @@
-package Controller;
+package larp;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -82,7 +82,6 @@ public class GameScreenController implements Initializable {
         graphics = new Canvas(WIDTH, HEIGHT);
         //rootPane.getChildren().add(graphics);
         rootPane.getChildren().add(0, graphics);
-        System.out.println(rootPane.getChildren().toString());
         gc = graphics.getGraphicsContext2D();
         player = new Sprite();
         keyPressed = new ArrayList<>();
