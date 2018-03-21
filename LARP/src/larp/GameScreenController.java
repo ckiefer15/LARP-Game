@@ -30,8 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import larp.Sprite;
-import larp.Sprite;
+import larp.model.graphic.Sprite;
 
 /**
  * FXML Controller class

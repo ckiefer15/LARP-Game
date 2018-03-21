@@ -2,7 +2,7 @@
  * This class is a super class of all objects that will be drawn by the canvas,
  * holding the x and y coordinates plus the offsets for each coordinate.
  */
-package larp;
+package larp.model.graphic;
 
 /**
  *

@@ -3,7 +3,7 @@
  * the proper images. This class handles the sprite animation by iterating through
  * the image arrays that contain the frames for each direction.
  */
-package larp;
+package larp.model.graphic;
 
 import javafx.scene.image.Image;
 /**
