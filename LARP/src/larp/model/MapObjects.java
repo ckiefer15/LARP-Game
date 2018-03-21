@@ -1,0 +1,15 @@
+package larp.model;
+
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import larp.model.graphic.Graphic;
+
+public class MapObjects extends Graphic {
+    public Rectangle bounds;
+
+    public MapObjects(){
+        super(60,60,35,40);
+        bounds = new Rectangle(350, 350, 75, 75);
+    }
+}

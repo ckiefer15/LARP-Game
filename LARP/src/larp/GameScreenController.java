@@ -9,6 +9,7 @@ package larp;
 
 
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,8 +29,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import larp.model.MapObjects;
 import larp.model.graphic.Sprite;
 
 /**
@@ -49,7 +52,8 @@ public class GameScreenController implements Initializable {
     static public final int WIDTH = 700;
     static public final int HEIGHT = 700;
     static public final int MOVEMENT = 3;
-    
+
+    static MapObjects thingy = new MapObjects();
     static Scene scene;
     static Canvas graphics;
     static GraphicsContext gc;
@@ -79,9 +83,12 @@ public class GameScreenController implements Initializable {
     }
     
     public void setup(){
+
+
         graphics = new Canvas(WIDTH, HEIGHT);
         //rootPane.getChildren().add(graphics);
         rootPane.getChildren().add(0, graphics);
+        rootPane.getChildren().add(thingy.bounds);
         gc = graphics.getGraphicsContext2D();
         player = new Sprite();
         keyPressed = new ArrayList<>();
@@ -105,6 +112,8 @@ public class GameScreenController implements Initializable {
             public void handle(long currentNanoTime){
                 update();
                 paint();
+
+
             }
         }.start();
     
@@ -112,22 +121,27 @@ public class GameScreenController implements Initializable {
     public static void update(){
         if(keyPressed.contains("UP")){
             if(player.getYCoordinate() - MOVEMENT >= 0){
-                player.updateCoord(0,(0 - MOVEMENT));
+                if (!checkCollision())
+                    player.updateCoord(0,(0 - MOVEMENT));
             }
         }
         if(keyPressed.contains("DOWN")){
             if(player.getYOffset() + MOVEMENT <= HEIGHT){
-                player.updateCoord(0, MOVEMENT);
+                if (!checkCollision())
+                    player.updateCoord(0, MOVEMENT);
             }
         }
         if(keyPressed.contains("LEFT")){
             if(player.getXCoordinate() - MOVEMENT >= 0){
-                player.updateCoord((0 - MOVEMENT), 0);
+                if (!checkCollision())
+                    player.updateCoord((0 - MOVEMENT), 0);
             }
         }
         if(keyPressed.contains("RIGHT")){
             if(player.getXOffset() + MOVEMENT <= WIDTH){
-                player.updateCoord(MOVEMENT, 0);
+                if (!checkCollision()) {
+                    player.updateCoord(MOVEMENT, 0);
+                }
             }
         }
     }
@@ -136,10 +150,50 @@ public class GameScreenController implements Initializable {
         gc.setFill(Paint.valueOf("white"));
         gc.fillRect(0, 0, graphics.getWidth(), graphics.getHeight());
         
-        if(keyPressed.isEmpty())
+        if(keyPressed.isEmpty()) {
             gc.drawImage(player.stay(), player.getXCoordinate(), player.getYCoordinate());
-        else
+            //gc.a (thingy.bounds, thingy.getXCoordinate(), thingy.getYCoordinate());
+        }
+        else {
             gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
+        }
+    }
+
+    public static boolean checkCollision(){
+        if(keyPressed.contains("RIGHT")){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate()+3, player.getYCoordinate(), 60, 60);
+            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+
+                return true;
+            }
+
+        }
+        if(keyPressed.contains("LEFT")){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate()-3, player.getYCoordinate(), 60, 60);
+            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+
+                return true;
+            }
+
+        }
+        if(keyPressed.contains("UP")){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate()-3, 60, 60);
+            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+
+                return true;
+            }
+
+        }
+        if(keyPressed.contains("DOWN")){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate()+3, 60, 60);
+            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+
+                return true;
+            }
+
+        }
+            return false;
+
     }
 
     @FXML

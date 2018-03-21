@@ -6,6 +6,9 @@
 package larp.model.graphic;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 /**
  *
  * @author up6071fd
@@ -20,7 +23,7 @@ public class Sprite extends Graphic{
     private char direction;
     
     public Sprite(){
-        super(50,50,45,60);
+        super(50,50,60,60);
         left = new Image[4];
         right = new Image[4];
         up = new Image[4];
@@ -81,5 +84,9 @@ public class Sprite extends Graphic{
             direction = 'd';
         else if(y < 0)
             direction = 'u';
+    }
+
+    public Rectangle getCollisionBounds() {
+        return new Rectangle(getXCoordinate(), getYCoordinate(), (int)left[0].getWidth(), (int)left[0].getHeight());
     }
 }
