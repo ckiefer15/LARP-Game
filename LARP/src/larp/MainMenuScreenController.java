@@ -14,9 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 
 
@@ -36,12 +38,10 @@ public class MainMenuScreenController implements Initializable {
     private Button creditButton;
     @FXML
     private Button exitButton;
-    
-    //private Parent gameScreen;
-    @FXML
-    private Font x1;
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private Font x1;
     
     
     @Override

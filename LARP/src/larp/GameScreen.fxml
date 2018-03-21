@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" snapToPixel="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.GameScreenController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.GameScreenController">
   <children>
     <GridPane alignment="CENTER" layoutX="520.0" layoutY="529.0" prefHeight="57.0" prefWidth="67.0">
       <children>
@@ -17,7 +17,7 @@
             <Font size="10.0" fx:id="x1" />
           </font>
         </Button>
-        <Button fx:id="inventoryButton" alignment="CENTER" font="$x1" mnemonicParsing="false" onAction="#showInventory" prefHeight="20.0" prefWidth="67.0" text="Inventory" textAlignment="LEFT" />
+        <Button fx:id="inventoryButton" alignment="CENTER" font="$x1" mnemonicParsing="false" onAction="#GoToPage" prefHeight="20.0" prefWidth="67.0" text="Inventory" textAlignment="LEFT" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,7 +36,7 @@
     </Label>
     <Label layoutX="14.0" layoutY="38.0" text="Name">
       <font>
-        <Font size="18.0" />
+        <Font size="18.0" fx:id="x2" />
       </font>
     </Label>
     <Label font="$x1" layoutX="113.0" layoutY="43.0" text="Currency" />
@@ -54,54 +54,50 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-      <Pane fx:id="inventoryPane" disable="true" layoutX="1.0" opacity="0.0" prefHeight="615.0" prefWidth="622.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="610.0" layoutX="-13.0" layoutY="-10.0" stroke="BLACK" strokeType="INSIDE" width="613.0" />
-            <Button fx:id="backButton" layoutX="431.0" layoutY="457.0" mnemonicParsing="false" onAction="#hideInventory" prefHeight="27.0" prefWidth="112.0" text="Back To Game" />
-            <GridPane layoutX="431.0" layoutY="315.0" prefWidth="121.0">
-               <children>
-                  <Button fx:id="equipItemButton" mnemonicParsing="false" text="Equip/Use Item" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                  <Button fx:id="sellItemButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="111.0" text="Sell Item" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                  <Button fx:id="deleteItemButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="111.0" text="Delete Item" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Label layoutX="472.0" layoutY="100.0" text="Item info">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextArea layoutX="431.0" layoutY="126.0" prefHeight="145.0" prefWidth="157.0" text="Item Name:&#10;Item Stats:&#10;Item Image:" wrapText="true" />
-            <Label layoutX="112.0" layoutY="27.0" text="Inventory">
-               <font>
-                  <Font size="50.0" />
-               </font>
-            </Label>
-            <GridPane gridLinesVisible="true" layoutX="24.0" layoutY="100.0" prefHeight="400.0" prefWidth="400.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children>
-      </Pane>
+    <Pane fx:id="inventoryPane" disable="true" layoutX="1.0" opacity="0.0" prefHeight="615.0" prefWidth="622.0">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="610.0" layoutX="-13.0" layoutY="-10.0" stroke="BLACK" strokeType="INSIDE" width="613.0" />
+        <Button fx:id="backButton" layoutX="431.0" layoutY="457.0" mnemonicParsing="false" onAction="#hideInventory" prefHeight="27.0" prefWidth="112.0" text="Back To Game" />
+        <GridPane layoutX="431.0" layoutY="315.0" prefWidth="121.0">
+          <children>
+            <Button fx:id="equipItemButton" mnemonicParsing="false" text="Equip/Use Item" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Button fx:id="sellItemButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="111.0" text="Sell Item" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Button fx:id="deleteItemButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="111.0" text="Delete Item" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <Label font="$x2" layoutX="472.0" layoutY="100.0" text="Item info" />
+        <TextArea layoutX="431.0" layoutY="126.0" prefHeight="145.0" prefWidth="157.0" text="Item Name:&#10;Item Stats:&#10;Item Image:" wrapText="true" />
+        <Label layoutX="112.0" layoutY="27.0" text="Inventory">
+          <font>
+            <Font size="50.0" />
+          </font>
+        </Label>
+        <GridPane gridLinesVisible="true" layoutX="24.0" layoutY="100.0" prefHeight="400.0" prefWidth="400.0">
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+    </Pane>
   </children>
 </AnchorPane>

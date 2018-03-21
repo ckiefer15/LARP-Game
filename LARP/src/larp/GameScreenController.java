@@ -29,6 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import larp.Sprite;
 import larp.Sprite;
 
@@ -46,8 +47,8 @@ public class GameScreenController implements Initializable {
     /*@FXML
     private Button playButton;*/
     
-    static public final int WIDTH = 600;
-    static public final int HEIGHT = 600;
+    static public final int WIDTH = 700;
+    static public final int HEIGHT = 700;
     static public final int MOVEMENT = 3;
     
     static Scene scene;
@@ -141,12 +142,6 @@ public class GameScreenController implements Initializable {
         else
             gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
     }
-    
-    /*@FXML
-    private void GoToGame(ActionEvent event) throws IOException {
-        Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-        playButton.getScene().setRoot(gameScreen);
-    }*/
 
     @FXML
     private void GoToPage(ActionEvent event) throws IOException {
