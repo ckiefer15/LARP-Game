@@ -16,6 +16,9 @@ public class StaticImage extends Graphic{
     private String path;
     private Image image;
     
+    /**
+     * Sets everything to null and does nothing else.
+     */
     public StaticImage(){
         super();
         path = "NO IMAGE";
