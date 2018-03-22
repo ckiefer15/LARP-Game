@@ -9,7 +9,7 @@ public class MapObjects extends Graphic {
     public Rectangle bounds;
 
     public MapObjects(){
-        super(60,60,35,40);
+        super(50,50,75,75);
         bounds = new Rectangle(350, 350, 75, 75);
     }
 }

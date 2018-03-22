@@ -23,7 +23,7 @@ public class Sprite extends Graphic{
     private char direction;
     
     public Sprite(){
-        super(50,50,60,60);
+        super(100,100,20,20);
         left = new Image[4];
         right = new Image[4];
         up = new Image[4];

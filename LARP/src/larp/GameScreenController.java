@@ -9,11 +9,12 @@ package larp;
 
 
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,10 +29,9 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import larp.model.MapObjects;
 import larp.model.graphic.Sprite;
 
@@ -40,18 +40,16 @@ import larp.model.graphic.Sprite;
  *
  * @author Tyree Gustafson
  */
-public class GameScreenController implements Initializable {
+public class GameScreenController implements Initializable  {
 
     @FXML
     private Button inventoryButton;
     @FXML
     private Button menuButton;
-    /*@FXML
-    private Button playButton;*/
     
     static public final int WIDTH = 700;
     static public final int HEIGHT = 700;
-    static public final int MOVEMENT = 3;
+    static public final int MOVEMENT = 10;
 
     static MapObjects thingy = new MapObjects();
     static Scene scene;
@@ -59,6 +57,7 @@ public class GameScreenController implements Initializable {
     static GraphicsContext gc;
     static ArrayList<String> keyPressed;
     static Sprite player;
+    static AnimationTimer timer;
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -84,15 +83,16 @@ public class GameScreenController implements Initializable {
     
     public void setup(){
 
-
         graphics = new Canvas(WIDTH, HEIGHT);
-        //rootPane.getChildren().add(graphics);
-        rootPane.getChildren().add(0, graphics);
-        rootPane.getChildren().add(thingy.bounds);
         gc = graphics.getGraphicsContext2D();
         player = new Sprite();
         keyPressed = new ArrayList<>();
-        
+        rootPane.getChildren().add(0, graphics);
+        rootPane.getChildren().add(thingy.bounds);
+        setupKeyPresses();
+        startGameLoop();
+    }
+    public void setupKeyPresses(){
         rootPane.setOnKeyPressed( new EventHandler<KeyEvent>(){
             
             public void handle(KeyEvent e){
@@ -100,24 +100,29 @@ public class GameScreenController implements Initializable {
                     keyPressed.add(e.getCode().toString());
             }
         });
-        
         rootPane.setOnKeyReleased( new EventHandler<KeyEvent>(){
             
             public void handle(KeyEvent e){
                 keyPressed.remove(e.getCode().toString());
             }
         });
-        
-        new AnimationTimer() {
-            public void handle(long currentNanoTime){
+    }
+    public void startGameLoop(){
+        timer = new AnimationTimer(){
+            @Override
+            public void handle(long nanoseconds) {
                 update();
                 paint();
-
-
+                try {
+                    Thread.sleep(35);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }.start();
-    
+        };
+        timer.start();
     }
+    
     public static void update(){
         if(keyPressed.contains("UP")){
             if(player.getYCoordinate() - MOVEMENT >= 0){
@@ -147,12 +152,11 @@ public class GameScreenController implements Initializable {
     }
     
     public static void paint(){
-        gc.setFill(Paint.valueOf("white"));
+        gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, graphics.getWidth(), graphics.getHeight());
         
         if(keyPressed.isEmpty()) {
             gc.drawImage(player.stay(), player.getXCoordinate(), player.getYCoordinate());
-            //gc.a (thingy.bounds, thingy.getXCoordinate(), thingy.getYCoordinate());
         }
         else {
             gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
@@ -161,39 +165,30 @@ public class GameScreenController implements Initializable {
 
     public static boolean checkCollision(){
         if(keyPressed.contains("RIGHT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate()+3, player.getYCoordinate(), 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() + MOVEMENT, player.getYCoordinate(), 60, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
-
                 return true;
             }
-
         }
         if(keyPressed.contains("LEFT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate()-3, player.getYCoordinate(), 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() - MOVEMENT, player.getYCoordinate(), 60, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
-
                 return true;
             }
-
         }
         if(keyPressed.contains("UP")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate()-3, 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() - MOVEMENT, 60, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
-
                 return true;
             }
-
         }
         if(keyPressed.contains("DOWN")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate()+3, 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() + MOVEMENT, 60, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
-
                 return true;
             }
-
         }
             return false;
-
     }
 
     @FXML
@@ -205,18 +200,6 @@ public class GameScreenController implements Initializable {
             Parent menuScreen = FXMLLoader.load(getClass().getResource("MainMenuScreen.fxml"));
             menuButton.getScene().setRoot(menuScreen);
         }
+        timer.stop();
     }
-
-    @FXML
-    private void showInventory(ActionEvent event) {
-        inventoryPane.setDisable(false);
-        inventoryPane.setOpacity(1.0);
-    }
-
-    @FXML
-    private void hideInventory(ActionEvent event) {
-        inventoryPane.setDisable(true);
-        inventoryPane.setOpacity(0);
-    }
-
 }
