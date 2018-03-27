@@ -14,12 +14,25 @@ import java.util.ArrayList;
 public class DGame {
     
     private final ArrayList<Item> LOOT;
+    private static DGame instance = null;
     
-    public DGame(){
+    protected DGame(){
         LOOT = new ArrayList<>();
     }
     
-    public ArrayList getLoot(){
+    public static DGame getInstance(){
+        if(instance == null)
+            instance = new DGame();
+        return instance;
+    }
+    
+    private ArrayList instanceLoot(){
         return LOOT;
+    }
+    
+    public static ArrayList getLoot(){
+        if(instance == null)
+            return null;
+        return instance.instanceLoot();
     }
 }
