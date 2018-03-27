@@ -165,25 +165,25 @@ public class GameScreenController implements Initializable  {
 
     public static boolean checkCollision(){
         if(keyPressed.contains("RIGHT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() + MOVEMENT, player.getYCoordinate(), 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() + MOVEMENT  , player.getYCoordinate(), 45, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("LEFT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() - MOVEMENT, player.getYCoordinate(), 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() - MOVEMENT, player.getYCoordinate(), 45, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("UP")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() - MOVEMENT, 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() - MOVEMENT, 45, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("DOWN")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() + MOVEMENT, 60, 60);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() + MOVEMENT, 45, 60);
             if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
                 return true;
             }
