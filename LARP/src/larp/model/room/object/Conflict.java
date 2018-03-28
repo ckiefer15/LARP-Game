@@ -9,7 +9,7 @@ package larp.model.room.object;
  *
  * @author Andrew Poss
  */
-public class Conflict {
+public class Conflict extends RoomObject{
     
    private Character enemy;
     

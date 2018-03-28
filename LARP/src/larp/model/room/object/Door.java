@@ -9,7 +9,7 @@ package larp.model.room.object;
  *
  * @author Andrew Poss
  */
-public class Door {
+public class Door extends RoomObject{
     
    private int nextRoomIndex;
     
