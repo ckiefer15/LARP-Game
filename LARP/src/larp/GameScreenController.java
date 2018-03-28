@@ -28,7 +28,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -49,29 +48,27 @@ public class GameScreenController implements Initializable  {
     
     static public final int WIDTH = 700;
     static public final int HEIGHT = 700;
-    static public final int MOVEMENT = 10;
+    static public final int MOVEMENT = 5;
+    static public final int OVERLAP_OFFSET = 45;
 
-    static MapObjects thingy = new MapObjects();
+    static MapObjects thingy = new MapObjects(150,150,50,50);
+    static MapObjects thingy1 = new MapObjects(400,400,50,50);
+    static MapObjects thingy2 = new MapObjects(600,400,50,50);
+    static MapObjects thingy3 = new MapObjects(200,500,50,50);
+    static ArrayList<MapObjects> thingyList = new ArrayList<MapObjects>();
     static Scene scene;
     static Canvas graphics;
     static GraphicsContext gc;
     static ArrayList<String> keyPressed;
     static Sprite player;
     static AnimationTimer timer;
+    //static DGame game = new DGame();
     @FXML
     private AnchorPane rootPane;
     @FXML
     private Font x1;
     @FXML
-    private Pane inventoryPane;
-    @FXML
-    private Button backButton;
-    @FXML
-    private Button equipItemButton;
-    @FXML
-    private Button sellItemButton;
-    @FXML
-    private Button deleteItemButton;
+    private Font x2;
     
     /**
      * Initializes the controller class.
@@ -87,10 +84,23 @@ public class GameScreenController implements Initializable  {
         gc = graphics.getGraphicsContext2D();
         player = new Sprite();
         keyPressed = new ArrayList<>();
-        rootPane.getChildren().add(0, graphics);
-        rootPane.getChildren().add(thingy.bounds);
+        
+        thingyList.add(thingy);
+        thingyList.add(thingy1);
+        thingyList.add(thingy2);
+        thingyList.add(thingy3);
+        
+        rootPane.getChildren().add(0,graphics);
+        addThingyToPane();
         setupKeyPresses();
         startGameLoop();
+    }
+    public void addThingyToPane(){
+        for(int i = 0; i < thingyList.size(); i++){
+            thingyList.get(i).bounds.setFill(Color.TRANSPARENT);
+            thingyList.get(i).bounds.setStroke(Color.BLACK);
+            rootPane.getChildren().add(thingyList.get(i).bounds);
+        }
     }
     public void setupKeyPresses(){
         rootPane.setOnKeyPressed( new EventHandler<KeyEvent>(){
@@ -114,7 +124,7 @@ public class GameScreenController implements Initializable  {
                 update();
                 paint();
                 try {
-                    Thread.sleep(35);
+                    Thread.sleep(45);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -126,29 +136,36 @@ public class GameScreenController implements Initializable  {
     public static void update(){
         if(keyPressed.contains("UP")){
             if(player.getYCoordinate() - MOVEMENT >= 0){
-                if (!checkCollision())
+                if (!checkCollisionAllObjects())
                     player.updateCoord(0,(0 - MOVEMENT));
             }
         }
         if(keyPressed.contains("DOWN")){
             if(player.getYOffset() + MOVEMENT <= HEIGHT){
-                if (!checkCollision())
+                if (!checkCollisionAllObjects())
                     player.updateCoord(0, MOVEMENT);
             }
         }
         if(keyPressed.contains("LEFT")){
             if(player.getXCoordinate() - MOVEMENT >= 0){
-                if (!checkCollision())
+                if (!checkCollisionAllObjects())
                     player.updateCoord((0 - MOVEMENT), 0);
             }
         }
         if(keyPressed.contains("RIGHT")){
             if(player.getXOffset() + MOVEMENT <= WIDTH){
-                if (!checkCollision()) {
+                if (!checkCollisionAllObjects()) {
                     player.updateCoord(MOVEMENT, 0);
                 }
             }
         }
+    }
+    public static boolean checkCollisionAllObjects(){
+        for(int i = 0; i < thingyList.size(); i++){
+            if(checkCollision(thingyList.get(i)))
+                return true;
+        }
+        return false;
     }
     
     public static void paint(){
@@ -163,28 +180,28 @@ public class GameScreenController implements Initializable  {
         }
     }
 
-    public static boolean checkCollision(){
+    public static boolean checkCollision(MapObjects objectBounds){
         if(keyPressed.contains("RIGHT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() + MOVEMENT  , player.getYCoordinate(), 45, 60);
-            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() + MOVEMENT  , player.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("LEFT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() - MOVEMENT, player.getYCoordinate(), 45, 60);
-            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() - MOVEMENT, player.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("UP")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() - MOVEMENT, 45, 60);
-            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() - MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("DOWN")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() + MOVEMENT, 45, 60);
-            if (temp.getBoundsInParent().intersects(thingy.bounds.getBoundsInParent())){
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() + MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
         }
