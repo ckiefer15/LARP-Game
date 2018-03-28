@@ -26,9 +26,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import larp.model.MapObjects;
@@ -46,14 +48,15 @@ public class GameScreenController implements Initializable  {
     @FXML
     private Button menuButton;
     
-    static public final int WIDTH = 700;
-    static public final int HEIGHT = 700;
+    static public final int WIDTH = 640;
+    static public final int HEIGHT = 640;
     static public final int MOVEMENT = 5;
     static public final int OVERLAP_OFFSET = 45;
+    static public final int TILE_SIZE = 32;
 
-    static MapObjects thingy = new MapObjects(150,150,50,50);
+    static MapObjects thingy = new MapObjects(0,0,20 * TILE_SIZE,4 * TILE_SIZE);
     static MapObjects thingy1 = new MapObjects(400,400,50,50);
-    static MapObjects thingy2 = new MapObjects(600,400,50,50);
+    static MapObjects thingy2 = new MapObjects(9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE);
     static MapObjects thingy3 = new MapObjects(200,500,50,50);
     static ArrayList<MapObjects> thingyList = new ArrayList<MapObjects>();
     static Scene scene;
@@ -62,6 +65,8 @@ public class GameScreenController implements Initializable  {
     static ArrayList<String> keyPressed;
     static Sprite player;
     static AnimationTimer timer;
+    static Image background = new Image("/img/DungeonMap2.png");
+    static ImagePattern backgroundPattern = new ImagePattern(background);
     //static DGame game = new DGame();
     @FXML
     private AnchorPane rootPane;
@@ -90,7 +95,7 @@ public class GameScreenController implements Initializable  {
         thingyList.add(thingy2);
         thingyList.add(thingy3);
         
-        rootPane.getChildren().add(0,graphics);
+        rootPane.getChildren().add(graphics);
         addThingyToPane();
         setupKeyPresses();
         startGameLoop();
@@ -98,7 +103,7 @@ public class GameScreenController implements Initializable  {
     public void addThingyToPane(){
         for(int i = 0; i < thingyList.size(); i++){
             thingyList.get(i).bounds.setFill(Color.TRANSPARENT);
-            thingyList.get(i).bounds.setStroke(Color.BLACK);
+            thingyList.get(i).bounds.setStroke(Color.RED);
             rootPane.getChildren().add(thingyList.get(i).bounds);
         }
     }
@@ -138,25 +143,32 @@ public class GameScreenController implements Initializable  {
             if(player.getYCoordinate() - MOVEMENT >= 0){
                 if (!checkCollisionAllObjects())
                     player.updateCoord(0,(0 - MOVEMENT));
+                else
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
         if(keyPressed.contains("DOWN")){
             if(player.getYOffset() + MOVEMENT <= HEIGHT){
                 if (!checkCollisionAllObjects())
                     player.updateCoord(0, MOVEMENT);
+                else
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
         if(keyPressed.contains("LEFT")){
             if(player.getXCoordinate() - MOVEMENT >= 0){
                 if (!checkCollisionAllObjects())
                     player.updateCoord((0 - MOVEMENT), 0);
+                else
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
         if(keyPressed.contains("RIGHT")){
             if(player.getXOffset() + MOVEMENT <= WIDTH){
-                if (!checkCollisionAllObjects()) {
+                if (!checkCollisionAllObjects())
                     player.updateCoord(MOVEMENT, 0);
-                }
+                else
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
     }
@@ -169,7 +181,7 @@ public class GameScreenController implements Initializable  {
     }
     
     public static void paint(){
-        gc.setFill(Color.WHITE);
+        gc.setFill(backgroundPattern);
         gc.fillRect(0, 0, graphics.getWidth(), graphics.getHeight());
         
         if(keyPressed.isEmpty()) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.GameScreenController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" snapToPixel="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.GameScreenController">
   <children>
     <GridPane alignment="CENTER" layoutX="520.0" layoutY="529.0" prefHeight="57.0" prefWidth="67.0">
       <children>
@@ -28,19 +29,19 @@
       </rowConstraints>
     </GridPane>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="24.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="139.0" />
-    <Label layoutX="62.0" layoutY="18.0" text="Health" />
-    <Label layoutX="246.0" layoutY="278.0" text="Game">
+    <Label layoutX="62.0" layoutY="18.0" text="Health" textFill="WHITE" />
+    <Label layoutX="246.0" layoutY="278.0" text="Game" textFill="WHITE">
       <font>
         <Font size="35.0" />
       </font>
     </Label>
-    <Label layoutX="14.0" layoutY="38.0" text="Name">
+    <Label layoutX="14.0" layoutY="38.0" text="Name" textFill="WHITE">
       <font>
         <Font size="18.0" fx:id="x2" />
       </font>
     </Label>
-    <Label font="$x1" layoutX="113.0" layoutY="43.0" text="Currency" />
-    <Label layoutX="16.0" layoutY="70.0" text="Equipped Items">
+    <Label font="$x1" layoutX="113.0" layoutY="43.0" text="Currency" textFill="WHITE" />
+    <Label layoutX="16.0" layoutY="70.0" text="Equipped Items" textFill="WHITE">
       <font>
         <Font size="12.0" />
       </font>

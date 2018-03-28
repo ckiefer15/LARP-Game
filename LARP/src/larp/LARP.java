@@ -20,7 +20,7 @@ public class LARP extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainMenuScreen.fxml"));
-        Scene scene = new Scene(root,700,700);
+        Scene scene = new Scene(root,640,640);
         stage.setScene(scene);
         stage.setTitle("L.A.R.P.");
         stage.setResizable(false);

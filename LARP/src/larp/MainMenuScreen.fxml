@@ -10,11 +10,11 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="700.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.MainMenuScreenController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="640.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.MainMenuScreenController">
   <children>
-    <Pane layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="700.0">
+    <Pane layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="640.0" prefWidth="640.0">
       <children>
-        <ImageView fitHeight="700.0" fitWidth="700.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0">
+        <ImageView fitHeight="640.0" fitWidth="640.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" rotate="0.0" scaleX="1.0">
           <image>
             <Image url="@../img/main_menu_background.png" />
           </image>
