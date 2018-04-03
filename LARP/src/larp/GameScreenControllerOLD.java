@@ -33,18 +33,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import larp.model.*;
-import larp.model.graphic.*;
-import larp.model.character.*;
-import larp.model.inventory.*;
-import larp.model.room.object.*;
+import larp.model.MapObjects;
+import larp.model.graphic.Sprite;
 
 /**
  * FXML Controller class
  *
  * @author Tyree Gustafson
  */
-public class GameScreenController implements Initializable  {
+public class GameScreenControllerOLD implements Initializable  {
 
     @FXML
     private Button inventoryButton;
@@ -57,23 +54,20 @@ public class GameScreenController implements Initializable  {
     static public final int OVERLAP_OFFSET = 45;
     static public final int TILE_SIZE = 32;
 
-    //static ArrayList<MapObjects> thingyList = new ArrayList<MapObjects>();
+    static MapObjects thingy = new MapObjects(0,0,20 * TILE_SIZE,4 * TILE_SIZE);
+    static MapObjects thingy1 = new MapObjects(400,400,50,50);
+    static MapObjects thingy2 = new MapObjects(9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE);
+    static MapObjects thingy3 = new MapObjects(200,500,50,50);
+    static ArrayList<MapObjects> thingyList = new ArrayList<MapObjects>();
     static Scene scene;
     static Canvas graphics;
     static GraphicsContext gc;
     static ArrayList<String> keyPressed;
+    static Sprite player;
     static AnimationTimer timer;
-    static ImagePattern backgroundPattern;
-    
-    
-    //============DGame Attributes===============
-    static DGame game;
-    static DRoom currentRoom;
-    static ArrayList<RoomObject> roomObjects;
-    static ArrayList<RoomObject> blockable;
-    static Knight player;
-    static Sprite playerSprite;
-    
+    static Image background = new Image("/img/DungeonMap2.png");
+    static ImagePattern backgroundPattern = new ImagePattern(background);
+    //static DGame game = new DGame();
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -93,16 +87,13 @@ public class GameScreenController implements Initializable  {
 
         graphics = new Canvas(WIDTH, HEIGHT);
         gc = graphics.getGraphicsContext2D();
+        player = new Sprite();
         keyPressed = new ArrayList<>();
         
-        //============Initialize Game and Reference Variables==============
-        game = SetupDGame.setupGame();
-        currentRoom = game.getCurrentRoom();
-        backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
-        roomObjects = currentRoom.getRoomObjects();
-        blockable = currentRoom.getBlockable();
-        player = game.getPlayer();
-        playerSprite = player.getSprite();
+        thingyList.add(thingy);
+        thingyList.add(thingy1);
+        thingyList.add(thingy2);
+        thingyList.add(thingy3);
         
         rootPane.getChildren().add(graphics);
         addThingyToPane();
@@ -110,10 +101,10 @@ public class GameScreenController implements Initializable  {
         startGameLoop();
     }
     public void addThingyToPane(){
-        for(int i = 0; i < roomObjects.size(); i++){
-            roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
-            roomObjects.get(i).bounds.setStroke(Color.RED);
-            rootPane.getChildren().add(roomObjects.get(i).bounds);
+        for(int i = 0; i < thingyList.size(); i++){
+            thingyList.get(i).bounds.setFill(Color.TRANSPARENT);
+            thingyList.get(i).bounds.setStroke(Color.RED);
+            rootPane.getChildren().add(thingyList.get(i).bounds);
         }
     }
     public void setupKeyPresses(){
@@ -149,41 +140,41 @@ public class GameScreenController implements Initializable  {
     
     public static void update(){
         if(keyPressed.contains("UP")){
-            if(playerSprite.getYCoordinate() - MOVEMENT >= 0){
+            if(player.getYCoordinate() - MOVEMENT >= 0){
                 if (!checkCollisionAllObjects())
-                    playerSprite.updateCoord(0,(0 - MOVEMENT));
+                    player.updateCoord(0,(0 - MOVEMENT));
                 else
-                    gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
         if(keyPressed.contains("DOWN")){
-            if(playerSprite.getYOffset() + MOVEMENT <= HEIGHT){
+            if(player.getYOffset() + MOVEMENT <= HEIGHT){
                 if (!checkCollisionAllObjects())
-                    playerSprite.updateCoord(0, MOVEMENT);
+                    player.updateCoord(0, MOVEMENT);
                 else
-                    gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
         if(keyPressed.contains("LEFT")){
-            if(playerSprite.getXCoordinate() - MOVEMENT >= 0){
+            if(player.getXCoordinate() - MOVEMENT >= 0){
                 if (!checkCollisionAllObjects())
-                    playerSprite.updateCoord((0 - MOVEMENT), 0);
+                    player.updateCoord((0 - MOVEMENT), 0);
                 else
-                    gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
         if(keyPressed.contains("RIGHT")){
-            if(playerSprite.getXOffset() + MOVEMENT <= WIDTH){
+            if(player.getXOffset() + MOVEMENT <= WIDTH){
                 if (!checkCollisionAllObjects())
-                    playerSprite.updateCoord(MOVEMENT, 0);
+                    player.updateCoord(MOVEMENT, 0);
                 else
-                    gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
+                    gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
             }
         }
     }
     public static boolean checkCollisionAllObjects(){
-        for(int i = 0; i < blockable.size(); i++){
-            if(checkCollision(blockable.get(i)))
+        for(int i = 0; i < thingyList.size(); i++){
+            if(checkCollision(thingyList.get(i)))
                 return true;
         }
         return false;
@@ -194,34 +185,34 @@ public class GameScreenController implements Initializable  {
         gc.fillRect(0, 0, graphics.getWidth(), graphics.getHeight());
         
         if(keyPressed.isEmpty()) {
-            gc.drawImage(playerSprite.stay(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
+            gc.drawImage(player.stay(), player.getXCoordinate(), player.getYCoordinate());
         }
         else {
-            gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
+            gc.drawImage(player.move(), player.getXCoordinate(), player.getYCoordinate());
         }
     }
 
-    public static boolean checkCollision(RoomObject objectBounds){
+    public static boolean checkCollision(MapObjects objectBounds){
         if(keyPressed.contains("RIGHT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + MOVEMENT  , playerSprite.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() + MOVEMENT  , player.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("LEFT")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() - MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate() - MOVEMENT, player.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("UP")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() - MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() - MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
         }
         if(keyPressed.contains("DOWN")){
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() + MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(player.getXCoordinate(), player.getYCoordinate() + MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())){
                 return true;
             }
