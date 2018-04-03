@@ -9,6 +9,7 @@ import larp.model.character.*;
 import larp.model.graphic.*;
 import larp.model.inventory.*;
 import larp.model.room.object.*;
+import larp.GameScreenController;
 import java.util.ArrayList;
 /**
  *
@@ -16,11 +17,7 @@ import java.util.ArrayList;
  */
 public interface SetupDGame {
     
-    static public final int WIDTH = 640;
-    static public final int HEIGHT = 640;
-    static public final int MOVEMENT = 5;
-    static public final int OVERLAP_OFFSET = 45;
-    static public final int TILE_SIZE = 32;
+    static public final int TILE_SIZE = GameScreenController.TILE_SIZE;
     
     static final Knight player =
             new Knight("Bobby",50,10,100,100,20,20,null,"/img/player/sprite");
