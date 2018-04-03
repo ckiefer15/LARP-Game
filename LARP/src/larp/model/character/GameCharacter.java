@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  *
  * @author up6071fd
  */
-public class Character {
+public class GameCharacter {
     
     private int hitPoints;
     private int damage;
@@ -21,8 +21,8 @@ public class Character {
     /**
      * Default constructor instantiates needed attributes and variables.
      */
-    public Character(){
-        this("Bobby",9001,9001);
+    public GameCharacter(){
+        this("Bobby",9001,9001,null);
     }
     
     /**
@@ -32,10 +32,14 @@ public class Character {
      * @param hitPoints How many hit points the Character has before dying.
      * @param damage How much base damage the Character does with each attack.
      */
-    public Character(String name, int hitPoints, int damage){
+    public GameCharacter(String name, int hitPoints, int damage, String imgPath){
         this.name = name;
         this.hitPoints = hitPoints;
         this.damage = damage;
+        if(imgPath != null && imgPath.length() > 0)
+            image = new StaticImage(imgPath);
+        else
+            image = new StaticImage();
     }
     
     public String getName(){

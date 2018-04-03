@@ -11,7 +11,9 @@ import larp.model.inventory.*;
  *
  * @author up6071fd
  */
-public class Knight extends Character{
+public class Knight extends GameCharacter{
+    
+    private static final String DEFAULT_IMG = "/img/player/default.png";
     
     private Weapon equippedWeapon;
     private Inventory inventory;
@@ -23,9 +25,23 @@ public class Knight extends Character{
         animation = null;
     }
     
-    public Knight(String name, int hitPoints, int damage, String animPath){
-        super(name, hitPoints, damage);
+    public Knight(String name, int xPos, int yPos, int hitWidth, int hitHeight,
+            String animPath){
+        this(name,50,10,xPos,yPos,hitWidth,hitHeight,DEFAULT_IMG,animPath);
+    }
+    
+    public Knight(String name, int hitPoints, int damage, String animPath,
+            String imgPath){
+        super(name, hitPoints, damage,imgPath);
         animation = new Sprite();
+        inventory = new Inventory();
+        equippedWeapon = null;
+    }
+    
+    public Knight(String name, int hitPoints, int damage, int xPos, int yPos,
+            int hitWidth, int hitHeight, String imgPath, String animPath){
+        super(name, hitPoints, damage,imgPath);
+        animation = new Sprite(xPos, yPos, hitWidth, hitHeight, animPath);
         inventory = new Inventory();
         equippedWeapon = null;
     }

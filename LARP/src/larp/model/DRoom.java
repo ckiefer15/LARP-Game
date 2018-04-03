@@ -18,14 +18,40 @@ import java.util.Iterator;
 public class DRoom implements Iterable{
     
     ArrayList<RoomObject> roomObjects;
+    ArrayList<RoomObject> blockableObjects;
     StaticImage background;
     
-    public DRoom(){
+    public DRoom(ArrayList<RoomObject> roomObjects, String imgPath){
+        this(roomObjects,0,0,0,0,imgPath);
+    }
+    
+    public DRoom(ArrayList<RoomObject> roomObjects, int xPos, int yPos,
+            int width, int height, String imgPath){
         
+        this.roomObjects = roomObjects;
+        blockableObjects = buildBlockableList(roomObjects);
+        background = StaticImage.makeImage(xPos, yPos, width, height, imgPath);
+    }
+    
+    private ArrayList<RoomObject> buildBlockableList(ArrayList<RoomObject> objects){
+        ArrayList<RoomObject> blockable = new ArrayList<>();
+        for(RoomObject obj : objects){
+            if(obj.isBlockable())
+                blockable.add(obj);
+        }
+        return blockable;
+    }
+    
+    public StaticImage getImage(){
+        return background;
     }
     
     public ArrayList<RoomObject> getRoomObjects(){
         return roomObjects;
+    }
+    
+    public ArrayList<RoomObject> getBlockable(){
+        return blockableObjects;
     }
     
     public Iterator iterator(){

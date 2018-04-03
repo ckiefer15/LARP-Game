@@ -8,6 +8,7 @@ package larp.model.graphic;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import java.io.File;
 
 /**
  *
@@ -30,10 +31,30 @@ public class Sprite extends Graphic{
         down = new Image[4];
         
         for(int i = 0; i < left.length; i++){
-            left[i] = new Image("/img/sprite/player/L" + (i + 1) + ".png");
-            right[i] = new Image("/img/sprite/player/R" + (i + 1) + ".png");
-            up[i] = new Image("/img/sprite/player/U" + (i + 1) + ".png");
-            down[i] = new Image("/img/sprite/player/D" + (i + 1) + ".png");
+            left[i] = new Image("img/player/sprite/L" + (i + 1) + ".png");
+            right[i] = new Image("img/player/sprite/R" + (i + 1) + ".png");
+            up[i] = new Image("img/player/sprite/U" + (i + 1) + ".png");
+            down[i] = new Image("img/player/sprite/D" + (i + 1) + ".png");
+        }
+        this.xOff = (int)left[0].getWidth();
+        this.yOff = (int)left[0].getHeight();
+        direction = 'r';
+        frame = 0;
+    }
+    
+    public Sprite(int xPos, int yPos, int hitWidth, int hitHeight,
+            String animPath){
+        super(xPos, yPos, hitWidth, hitHeight);
+        left = new Image[4];
+        right = new Image[4];
+        up = new Image[4];
+        down = new Image[4];
+        
+        for(int i = 0; i < left.length; i++){
+            left[i] = new Image(animPath + "/L" + (i + 1) + ".png");
+            right[i] = new Image(animPath + "/R" + (i + 1) + ".png");
+            up[i] = new Image(animPath + "/U" + (i + 1) + ".png");
+            down[i] = new Image(animPath + "/D" + (i + 1) + ".png");
         }
         this.xOff = (int)left[0].getWidth();
         this.yOff = (int)left[0].getHeight();

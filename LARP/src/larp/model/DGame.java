@@ -25,6 +25,17 @@ public class DGame {
         LOOT = new ArrayList<>();
     }
     
+    public DGame(ArrayList<DRoom> rooms, Knight player){
+        this(null,rooms,player);
+    }
+    
+    public DGame(ArrayList<Item> loot, ArrayList<DRoom> rooms, Knight player){
+        LOOT = loot;
+        this.rooms = rooms;
+        this.player = player;
+        currentRoom = rooms.get(0);
+    }
+    
     /**
      * Get the set static instance for DGame, may be null if not set.
      * @return Returns the instance of DGame or null if no instance is set.

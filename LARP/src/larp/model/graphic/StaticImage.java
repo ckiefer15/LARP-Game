@@ -25,6 +25,10 @@ public class StaticImage extends Graphic{
         image = null;
     }
     
+    public StaticImage(String imgPath){
+        this(0,0,0,0,imgPath);
+    }
+    
     /**
      * This constructor will used the passed x and y coordinates and path but will
      * set the x offset and y offset both to 0.
@@ -64,5 +68,36 @@ public class StaticImage extends Graphic{
      */
     public Image getStaticImage(){
         return image;
+    }
+    
+    /**
+     * Handles StaticImage input verification and returns the appropriate
+     * StaticImage object based on the input. xPos AND yPos must be positive or
+     * will default to 0 for both, hitWidth and hitHeight must be positive or
+     * will default to 0 for both. Null or empty string for image path will result
+     * in a default image being used.
+     * @param xPos The x position coordinate for the image.
+     * @param yPos The y position coordinate for the image.
+     * @param hitWidth The hit box width represented for
+     * @param hitHeight
+     * @param imgPath
+     * @return Returns an instantiated StaticImage object based on input.
+     */
+    public static StaticImage makeImage(int xPos, int yPos, int hitWidth, int hitHeight,
+            String imgPath){
+        if(imgPath != null && imgPath.length() > 0){
+            if(xPos >= 0 && yPos >= 0){
+                if(hitWidth >= 0 && hitHeight >= 0)
+                    return new StaticImage(xPos, yPos, hitWidth, hitHeight,
+                    imgPath);
+                else
+                    return new StaticImage(xPos, yPos, imgPath);
+            }
+            else
+                return new StaticImage(imgPath);
+        }
+        else{
+            return new StaticImage();
+        }
     }
 }
