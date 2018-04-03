@@ -4,27 +4,37 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.BattleScreenController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.BattleScreenController">
   <children>
-    <Label layoutX="222.0" layoutY="16.0" text="BATTLE">
+    <ImageView fitHeight="640.0" fitWidth="640.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../img/FightMap.png" />
+      </image>
+    </ImageView>
+    <Label layoutX="222.0" layoutY="16.0" text="BATTLE" textFill="WHITE">
       <font>
         <Font size="45.0" />
       </font>
     </Label>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="27.0" layoutX="14.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="27.0" layoutX="412.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
-    <Label layoutX="71.0" layoutY="39.0" text="Player Health" />
-    <Label layoutX="458.0" layoutY="38.0" text="Enemy Health" />
-    <Label layoutX="14.0" layoutY="63.0" text="Player Name" />
-    <Label layoutX="515.0" layoutY="60.0" text="Enemy Name" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8fff00" height="195.0" layoutX="62.0" layoutY="172.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a5ff33" height="195.0" layoutX="414.0" layoutY="172.0" stroke="BLACK" strokeType="INSIDE" width="135.0" />
-    <Label layoutX="87.0" layoutY="254.0" text="Player Character" />
-    <Label layoutX="434.0" layoutY="257.0" text="Enemy Character" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8fff00" height="84.0" layoutX="214.0" layoutY="283.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a5ff33" height="76.0" layoutX="373.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" width="54.0" />
+    <Label layoutX="224.0" layoutY="317.0" minHeight="2.999908447265625" prefHeight="16.0" text="Player Character">
+      <font>
+        <Font size="5.0" />
+      </font>
+    </Label>
+    <Label layoutX="373.0" layoutY="314.0" text="Enemy Character">
+      <font>
+        <Font size="8.0" />
+      </font>
+    </Label>
     <Button layoutX="103.0" layoutY="452.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="ATTACK" />
     <Button layoutX="251.0" layoutY="449.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="RUN" />
     <Button layoutX="400.0" layoutY="449.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="HEAL" />
