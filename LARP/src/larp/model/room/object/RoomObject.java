@@ -6,6 +6,7 @@
 package larp.model.room.object;
 
 import larp.model.graphic.*;
+import larp.model.ModelDefaults;
 import javafx.scene.shape.Rectangle;
 /**
  *
@@ -13,8 +14,6 @@ import javafx.scene.shape.Rectangle;
  */
 public class RoomObject {
     
-    private static final String DEFAULT_IMG = "/img/blank.png";
-    private static final String DEFAULT_NAME = "SomeObject";
     public Rectangle bounds;
     
     StaticImage image;
@@ -28,11 +27,11 @@ public class RoomObject {
     }
 
     public RoomObject() {
-        this(true,DEFAULT_NAME,0,0,0,0,DEFAULT_IMG);
+        this(true,ModelDefaults.ROOM_OBJ_NAME,0,0,0,0,ModelDefaults.ROOM_OBJ_IMG);
     }
     
     public RoomObject(int xPos, int yPos, int hitWidth, int hitHeight){
-        this(true,DEFAULT_NAME,xPos,yPos,hitWidth,hitHeight,DEFAULT_IMG);
+        this(true,ModelDefaults.ROOM_OBJ_NAME,xPos,yPos,hitWidth,hitHeight,ModelDefaults.ROOM_OBJ_IMG);
     }
     
     /**
@@ -53,12 +52,12 @@ public class RoomObject {
         if(imgPath != null && imgPath.length() > 5)
             image = StaticImage.makeImage(xPos, yPos, hitWidth, hitHeight, imgPath);
         else
-            image = StaticImage.makeImage(xPos, yPos, hitWidth, hitHeight, DEFAULT_IMG);
+            image = StaticImage.makeImage(xPos, yPos, hitWidth, hitHeight, ModelDefaults.ROOM_OBJ_IMG);
             
         if(name != null && name.length() > 0)
             this.name = name;
         else
-            this.name = DEFAULT_NAME;
+            this.name = ModelDefaults.ROOM_OBJ_NAME;
         this.blockable = blockable;
         bounds = new Rectangle(xPos, yPos, hitWidth, hitHeight);
     }

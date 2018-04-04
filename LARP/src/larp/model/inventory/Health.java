@@ -5,6 +5,7 @@
  */
 package larp.model.inventory;
 
+import larp.model.ModelDefaults;
 /**
  *
  * @author Andrew Poss
@@ -12,11 +13,9 @@ package larp.model.inventory;
 public class Health extends Item{
     
     private int healthPoints;
-    private static final String DEFAULT_IMG = "/img/health/default.png";
-    private static final String DEFAULT_NAME = "SomePotion";
     
     public Health(){
-        this(1,DEFAULT_NAME,0,0,0,0,DEFAULT_IMG);
+        this(1,ModelDefaults.HEALTH_NAME,0,0,0,0,ModelDefaults.HEALTH_IMG);
     }
     
     public Health(int healPoints, String name, int xPos, int yPos, int hitWidth,

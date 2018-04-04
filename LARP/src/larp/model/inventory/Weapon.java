@@ -5,6 +5,7 @@
  */
 package larp.model.inventory;
 
+import larp.model.ModelDefaults;
 /**
  *
  * @author Andrew Poss
@@ -12,11 +13,9 @@ package larp.model.inventory;
 public class Weapon extends Item {
     
     private int weaponDamage;
-    private static final String DEFAULT_IMG = "/img/weapons/default.png";
-    private static final String DEFAULT_NAME = "SomeWeapon";
     
     public Weapon(){
-        this(1,DEFAULT_NAME,0,0,0,0,DEFAULT_IMG);
+        this(1,ModelDefaults.WEAPON_NAME,0,0,0,0,ModelDefaults.WEAPON_IMG);
     }
     
     public Weapon(int damage, String name, int xPos, int yPos, int hitWidth,
