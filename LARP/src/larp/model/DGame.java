@@ -94,10 +94,24 @@ public class DGame {
      */
     public DRoom changeRoom(Door door){
         if(door != null){
-            int temp = door.getNextRoom();
-            if(temp < rooms.size() && temp >= 0){
-                currentRoom = rooms.get(temp);
-                return currentRoom;
+            int nRoom = door.getNextRoom();
+            System.out.println("Next room is: " + nRoom);
+            String nDoor = door.getNextDoor();
+            System.out.println("Next door is: " + nDoor);
+            if(nRoom < rooms.size() && nRoom >= 0){
+                DRoom tempRoom;
+                tempRoom = rooms.get(nRoom);
+                if(tempRoom != null){
+                    System.out.println("FOUND THE ROOM!");
+                    for(RoomObject obj : tempRoom.getRoomObjects()){
+                        if(obj instanceof Door && obj.getName().equalsIgnoreCase(nDoor)){
+                            System.out.println("FOUND THE DOOR!");
+                            currentRoom = tempRoom;
+                            player.changeRoom((Door)obj);
+                            return currentRoom;
+                        }
+                    }
+                }
             }
         }
         return currentRoom;

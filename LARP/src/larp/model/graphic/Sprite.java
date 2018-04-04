@@ -36,8 +36,8 @@ public class Sprite extends Graphic{
             up[i] = new Image("img/player/sprite/U" + (i + 1) + ".png");
             down[i] = new Image("img/player/sprite/D" + (i + 1) + ".png");
         }
-        this.xOff = (int)left[0].getWidth();
-        this.yOff = (int)left[0].getHeight();
+        vertices[2] = (int)left[0].getWidth();
+        vertices[3] = (int)left[0].getHeight();
         direction = 'r';
         frame = 0;
     }
@@ -56,8 +56,8 @@ public class Sprite extends Graphic{
             up[i] = new Image(animPath + "/U" + (i + 1) + ".png");
             down[i] = new Image(animPath + "/D" + (i + 1) + ".png");
         }
-        this.xOff = (int)left[0].getWidth();
-        this.yOff = (int)left[0].getHeight();
+        vertices[2] = (int)left[0].getWidth();
+        vertices[3] = (int)left[0].getHeight();
         direction = 'r';
         frame = 0;
     }
@@ -88,6 +88,11 @@ public class Sprite extends Graphic{
         }
     }
     
+    public void setDirection(char dir){
+        if(dir == 'l' || dir == 'r' || dir == 'u' || dir == 'd')
+            direction = dir;
+    }
+    
     /*
         The if statements must be < or > and never <= or >= as that would cause
         issues with proper direction setting. Example being if incoming x,y is
@@ -95,8 +100,8 @@ public class Sprite extends Graphic{
         to the y direction even though it didn't change.
     */
     public void updateCoord(int x, int y){
-        this.x += x;
-        this.y += y;
+        vertices[0] += x;
+        vertices[1] += y;
         if(x > 0)
             direction = 'r';
         else if(x < 0)
