@@ -155,11 +155,7 @@ public class GameScreenController implements Initializable {
                 if (tempObj == null) {
                     playerSprite.updateCoord(0, (0 - MOVEMENT));
                 } else {
-                    if(tempObj instanceof Door){
-                        currentRoom = game.changeRoom((Door)tempObj);
-                        roomObjects = currentRoom.getRoomObjects();
-                        backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
-                    }
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
@@ -170,11 +166,7 @@ public class GameScreenController implements Initializable {
                 if (tempObj == null) {
                     playerSprite.updateCoord(0, MOVEMENT);
                 } else {
-                    if(tempObj instanceof Door){
-                        currentRoom = game.changeRoom((Door)tempObj);
-                        roomObjects = currentRoom.getRoomObjects();
-                        backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
-                    }
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
@@ -185,11 +177,7 @@ public class GameScreenController implements Initializable {
                 if (tempObj == null) {
                     playerSprite.updateCoord((0 - MOVEMENT), 0);
                 } else {
-                    if(tempObj instanceof Door){
-                        currentRoom = game.changeRoom((Door)tempObj);
-                        roomObjects = currentRoom.getRoomObjects();
-                        backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
-                    }
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
@@ -200,11 +188,7 @@ public class GameScreenController implements Initializable {
                 if (tempObj == null) {
                     playerSprite.updateCoord(MOVEMENT, 0);
                 } else {
-                    if(tempObj instanceof Door){
-                        currentRoom = game.changeRoom((Door)tempObj);
-                        roomObjects = currentRoom.getRoomObjects();
-                        backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
-                    }
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
@@ -218,6 +202,15 @@ public class GameScreenController implements Initializable {
             }
         }
         return null;
+    }
+    
+    public static void handleRoomObject(RoomObject obj){
+        
+        if(obj instanceof Door){
+            currentRoom = game.changeRoom((Door)obj);
+            roomObjects = currentRoom.getRoomObjects();
+            backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
+        }
     }
 
     public static void paint() {
