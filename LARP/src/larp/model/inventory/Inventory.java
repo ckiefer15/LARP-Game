@@ -13,6 +13,11 @@ import java.util.*;
 public class Inventory {
     
     private ArrayList<Item> inventory;
+    private static final int MAX_SIZE = 15;
+    
+    public Inventory(){
+        inventory = new ArrayList<>();
+    }
     
     /**
      * This method returns the knight's inventory items
@@ -32,4 +37,31 @@ public class Inventory {
         return inventory.iterator();
     }
     
+    /**
+     * Search the inventory for a Health item and if found remove it from inventory
+     * and return the amount of health the item provides.
+     * @return Returns the amount of points to heal or 0 if no health item.
+     */
+    public int heal(){
+        Item temp;
+        for(int i = 0; i < inventory.size(); ++i){
+            temp = inventory.get(i);
+            if(temp instanceof Health){
+                inventory.remove(i);
+                return ((Health)temp).getHealthPoints();
+            }
+        }
+        return 0;
+    }
+    
+    /**
+     * Add an item to the inventory list.
+     * @param item The item to be added to inventory.
+     * @return Returns true if item added or false if there's no space left.
+     */
+    public boolean addItem(Item item){
+        if(MAX_SIZE > inventory.size() && item != null)
+            return inventory.add(item);
+        return false;
+    }
 }

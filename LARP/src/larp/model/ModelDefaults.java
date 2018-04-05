@@ -5,6 +5,7 @@
  */
 package larp.model;
 
+import larp.model.character.GameCharacter;
 /**
  *
  * @author up6071fd
@@ -18,15 +19,16 @@ public interface ModelDefaults {
     public static final String DOOR_NAME = "SomeDoor";
     public static final String CHEST_IMG = "/img/chest/default.png";
     public static final String CHEST_NAME = "SomeChest";
-    public static final String ENEMY_IMG = "/img/enemy/default.png";
-    public static final String ENEMY_NAME = "SomeEnemy";
+    public static final String CONFLICT_IMG = "/img/FightMap.png";
+    public static final String CONFLICT_NAME = "SomeBattle";
     
     //=============Item Defaults========================
     public static final String HEALTH_IMG = "/img/health/default.png";
-    public static final String HEALTH_NAME = "SomePotion";
+    public static final String HEALTH_NAME = "Potion";
     public static final String WEAPON_IMG = "/img/weapons/default.png";
-    public static final String WEAPON_NAME = "SomeWeapon";
+    public static final String WEAPON_NAME = "Sword";
     
     //==============Character Defaults====================
     public static final String PLAYER_IMG = "/img/player/default.png";
+    public static GameCharacter ENEMY_OBJ = new GameCharacter("Hank",50,10,"/img/enemy/default.png");
 }

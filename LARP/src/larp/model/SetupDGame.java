@@ -25,9 +25,15 @@ public interface SetupDGame {
             new GameCharacter("Hank",50,10,null);
     
     public static DGame setupGame(){
-        DGame game;
+        
+        //  Initialize rooms
         ArrayList<DRoom> rooms = initRooms();
-        game = new DGame(rooms,player);
+        //  Initialize loot
+        ArrayList<Item> loot = initLoot();
+        //  Instantiate game
+        DGame game = new DGame(loot,rooms,player);
+        //  Add starting items to player's inventory
+        initInventory();
         
         return game;
     }
@@ -42,11 +48,32 @@ public interface SetupDGame {
         objects.add(new RoomObject(true,"Thingy2",400,400,50,50,null));
         objects.add(new RoomObject(true,"Thingy3",9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE,null));
         objects.add(new RoomObject(true,"Thingy4",200,500,50,50,null));
+        objects.add(new Conflict(200,300,50,50));
         rooms.add(new DRoom(objects,"/img/DungeonMap2.png"));
         
         //==============Build _____ Room==================
         
         
         return rooms;
+    }
+    
+    /**
+     * Use this method to instantiate the available loot items for DGame.
+     * @return Returns an ArrayList of loot items to pass to DGame.
+     */
+    public static ArrayList<Item> initLoot(){
+        ArrayList<Item> loot = new ArrayList<>();
+        
+        loot.add(new Health());
+        
+        return loot;
+    }
+    
+    /**
+     * Use this method to setup the player's initial inventory items. Make sure
+     * DGame is instantiated first!
+     */
+    public static void initInventory(){
+        player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
     }
 }

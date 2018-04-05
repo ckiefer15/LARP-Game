@@ -15,10 +15,10 @@ public class Health extends Item{
     private int healthPoints;
     
     public Health(){
-        this(1,ModelDefaults.HEALTH_NAME,0,0,0,0,ModelDefaults.HEALTH_IMG);
+        this(ModelDefaults.HEALTH_NAME,20,0,0,0,0,ModelDefaults.HEALTH_IMG);
     }
     
-    public Health(int healPoints, String name, int xPos, int yPos, int hitWidth,
+    public Health(String name, int healPoints, int xPos, int yPos, int hitWidth,
             int hitHeight, String imgPath){
         super(name, xPos, yPos, hitWidth, hitHeight, imgPath);
         if(healPoints > 0)
