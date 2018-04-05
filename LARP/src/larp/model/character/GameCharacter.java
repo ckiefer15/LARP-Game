@@ -84,4 +84,8 @@ public class GameCharacter {
     public Image getImage(){
         return image.getStaticImage();
     }
+    
+    public StaticImage getStaticImage(){
+        return image;
+    }
 }

@@ -57,4 +57,8 @@ public class DRoom implements Iterable{
     public Iterator iterator(){
         return roomObjects.iterator();
     }
+    
+    public void removeRoomObject(RoomObject obj){
+        roomObjects.remove(obj);
+    }
 }

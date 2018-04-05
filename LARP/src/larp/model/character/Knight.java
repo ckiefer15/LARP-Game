@@ -55,10 +55,19 @@ public class Knight extends GameCharacter{
         return inventory;
     }
     
+    public void heal(){
+        super.healHitPoints(inventory.heal());
+    }
+    
+    public boolean addItemToInventory(Item item){
+        return inventory.addItem(item);
+    }
+    
     public Sprite getSprite(){
         return animation;
     }
     
+    @Override
     public int getDamage(){
         if(equippedWeapon == null)
             return super.getDamage();

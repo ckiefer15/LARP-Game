@@ -20,6 +20,7 @@ public class DGame {
     private ArrayList<DRoom> rooms;
     private Knight player;
     private DRoom currentRoom;
+    private boolean gameStatus;
     
     protected DGame(){
         LOOT = new ArrayList<>();
@@ -34,6 +35,7 @@ public class DGame {
         this.rooms = rooms;
         this.player = player;
         currentRoom = rooms.get(0);
+        gameStatus = false;
     }
     
     /**
@@ -68,6 +70,26 @@ public class DGame {
     }
     
     /**
+     * Use to statically search the current game's LOOT list for a specific item
+     * by name.
+     * @param itemName The item name to search for in LOOT list.
+     * @return Returns the found Item object or null if the Item isn't in the list.
+     */
+    public static Item getLoot(String itemName){
+        if(instance == null)
+            return null;
+        return instance.searchLoot(itemName);
+    }
+    
+    private Item searchLoot(String itemName){
+        for(Item item : LOOT){
+            if(itemName.equalsIgnoreCase(itemName))
+                return item;
+        }
+        return null;
+    }
+    
+    /**
      * Get the current room the player is in.
      * @return Returns the room the player is currently in.
      */
@@ -81,6 +103,14 @@ public class DGame {
      */
     public Knight getPlayer(){
         return player;
+    }
+    
+    /**
+     * Get the status of the currently running game.
+     * @return Returns TRUE if player has won the game, false if not.
+     */
+    public boolean getGameStatus(){
+        return gameStatus;
     }
     
     /**
@@ -115,5 +145,25 @@ public class DGame {
             }
         }
         return currentRoom;
+    }
+    
+    /**
+     * Retrieve a Battle object using the passed conflict to setup the battle. A
+     * Battle object handles the model manipulation and leaves action operations
+     * up to the owner of the Battle object.
+     * @param conflict The conflict that will become a battle!
+     * @return Returns an instantiated Battle object.
+     */
+    public Battle initBattle(Conflict conflict){
+        return new Battle(conflict, player);
+    }
+    
+    protected void cleanupBattle(Conflict conflict){
+        if(conflict.isFinalBoss()){
+            gameStatus = true;
+            return;
+        }
+            
+        currentRoom.removeRoomObject(conflict);
     }
 }
