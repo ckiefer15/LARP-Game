@@ -45,14 +45,18 @@ public interface SetupDGame {
         //==============Build Start Room=============
         objects = new ArrayList<>();
         objects.add(new RoomObject(true,"Thingy1",0,0,20 * TILE_SIZE,4 * TILE_SIZE,null));
-        objects.add(new RoomObject(true,"Thingy2",400,400,50,50,null));
-        objects.add(new RoomObject(true,"Thingy3",9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE,null));
-        objects.add(new RoomObject(true,"Thingy4",200,500,50,50,null));
-        objects.add(new Conflict(200,300,50,50));
+        //objects.add(new RoomObject(true,"Thingy2",400,400,50,50,null));
+        //objects.add(new RoomObject(true,"Thingy3",9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE,null));
+        //objects.add(new RoomObject(true,"Thingy4",200,500,50,50,null));
+        objects.add(new Door("mainL",'r',1,"battleR",0,300,100,100));
+        objects.add(new Door("mainB",'u',1,"battleT",200,550,100,100));
         rooms.add(new DRoom(objects,"/img/DungeonMap2.png"));
         
         //==============Build _____ Room==================
-        
+        objects = new ArrayList<>();
+        objects.add(new Door("battleR",'l',0,"mainL",600,100,100,100));
+        objects.add(new Door("battleT",'d',0,"mainB",100,10,100,100));
+        rooms.add(new DRoom(objects,"/img/FightMap.png"));
         
         return rooms;
     }

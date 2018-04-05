@@ -10,7 +10,7 @@ package larp.model.graphic;
  */
 public class Graphic {
     
-    protected int x, y, xOff, yOff;
+    protected int [] vertices;
     
     public Graphic(){
         this(0,0,0,0);
@@ -21,41 +21,46 @@ public class Graphic {
     }
     
     public Graphic(int x, int y, int xOff, int yOff){
-        this.x = x;
-        this.y = y;
-        this.xOff = xOff;
-        this.yOff = yOff;
+        vertices = new int[4];
+        vertices [0] = x;
+        vertices [1] = y;
+        vertices [2] = xOff;
+        vertices [3] = yOff;
     }
     
     public int getXCoordinate(){
-        return x;
+        return vertices[0];
     }
     
     public void setXCoordinate(int x){
-        this.x = x;
+        vertices[0] = x;
     }
     
     public int getYCoordinate(){
-        return y;
+        return vertices[1];
     }
     
     public void setYCoordinate(int y){
-        this.y = y;
+        vertices[1] = y;
     }
     
     public int getXOffset(){
-        return xOff + x;
+        return vertices[2];
     }
     
     public void setXOffset(int xOff){
-        this.xOff = xOff;
+        vertices[2] = xOff;
     }
     
     public int getYOffset(){
-        return yOff + y;
+        return vertices [3];
     }
     
     public void setYOffset(int yOff){
-        this.yOff = yOff;
+        vertices[3] = yOff;
+    }
+    
+    public int [] getVertices(){
+        return vertices;
     }
 }

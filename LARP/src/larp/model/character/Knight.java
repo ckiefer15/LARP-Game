@@ -5,6 +5,8 @@
  */
 package larp.model.character;
 
+import larp.model.ModelDefaults;
+import larp.model.room.object.Door;
 import larp.model.graphic.*;
 import larp.model.inventory.*;
 /**
@@ -13,7 +15,6 @@ import larp.model.inventory.*;
  */
 public class Knight extends GameCharacter{
     
-    private static final String DEFAULT_IMG = "/img/player/default.png";
     
     private Weapon equippedWeapon;
     private Inventory inventory;
@@ -27,7 +28,7 @@ public class Knight extends GameCharacter{
     
     public Knight(String name, int xPos, int yPos, int hitWidth, int hitHeight,
             String animPath){
-        this(name,50,10,xPos,yPos,hitWidth,hitHeight,DEFAULT_IMG,animPath);
+        this(name,50,10,xPos,yPos,hitWidth,hitHeight,ModelDefaults.PLAYER_IMG,animPath);
     }
     
     public Knight(String name, int hitPoints, int damage, String animPath,
@@ -71,5 +72,55 @@ public class Knight extends GameCharacter{
         if(equippedWeapon == null)
             return super.getDamage();
         return equippedWeapon.getWeaponDamage() + super.getDamage();
+    }
+    
+    public void changeRoom(Door nextDoor){
+        int [] offset = nextDoor.getPlayerSpawnOffset();
+        int [] doorVertices = nextDoor.getImage().getVertices();
+        
+        int updateX, updateY;
+        
+        if(offset[0] < doorVertices[0]){  //  Spawn Left of Door
+            updateX = 0 - animation.getXOffset();
+            updateY = 0 - (animation.getYOffset() / 2);
+            animation.setDirection('l');
+        }
+        else if(offset[1] < doorVertices[1]){     //  Spawn Above Door
+            updateX = 0 - (animation.getXOffset() / 2);
+            updateY = 0 - animation.getYOffset();
+            animation.setDirection('u');
+        }
+        else{
+            if(offset[0] > doorVertices[2] + doorVertices[0]){    //  Spawn Right of Door
+                updateX = 0;
+                updateY = 0 - (animation.getYOffset() / 2);
+                animation.setDirection('r');
+            }
+            else{   //  Spawn Below Door
+                updateX = 0 - (animation.getXOffset() / 2);
+                updateY = 0;
+                animation.setDirection('d');
+            }
+        }
+        
+        animation.setXCoordinate(updateX + offset[0]);
+        animation.setYCoordinate(updateY + offset[1]);
+        printRoomUpdate(doorVertices, offset, updateX, updateY);
+    }
+    
+    private void printRoomUpdate(int [] door, int [] offset, int updateX, int updateY){
+        System.out.println("\nCharacter is at X = " + animation.getXCoordinate()
+        + "    Y = " + animation.getYCoordinate());
+        System.out.println("Character width: " + animation.getXOffset()
+                            + "\nCharacter height: " + animation.getYOffset());
+        System.out.println("Update X : " + updateX
+                            + "\nUpdate Y: " + updateY);
+        System.out.println("Door offset is: (" + offset[0] + "," + offset[1] + ")");
+        System.out.println("Door vertices are {"
+                + "\n(" + door[0] + "," + door[1] + ")"
+                + "\n(" + door[2] + "," + door[1] + ")"
+                + "\n(" + door[0] + "," + door[3] + ")"
+                + "\n(" + door[2] + "," + door[3] + ")}\n\n");
+        
     }
 }

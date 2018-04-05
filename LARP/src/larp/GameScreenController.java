@@ -147,57 +147,82 @@ public class GameScreenController implements Initializable {
     }
 
     public static void update() {
+        RoomObject tempObj;
+        
         if (keyPressed.contains("UP")) {
             if (playerSprite.getYCoordinate() - MOVEMENT >= 0) {
-                if (!checkCollisionAllObjects()) {
+                tempObj = checkCollisionAllObjects();
+                if (tempObj == null) {
                     playerSprite.updateCoord(0, (0 - MOVEMENT));
                 } else {
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
         }
         if (keyPressed.contains("DOWN")) {
             if (playerSprite.getYOffset() + MOVEMENT <= HEIGHT) {
-                if (!checkCollisionAllObjects()) {
+                tempObj = checkCollisionAllObjects();
+                if (tempObj == null) {
                     playerSprite.updateCoord(0, MOVEMENT);
                 } else {
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
         }
         if (keyPressed.contains("LEFT")) {
             if (playerSprite.getXCoordinate() - MOVEMENT >= 0) {
-                if (!checkCollisionAllObjects()) {
+                tempObj = checkCollisionAllObjects();
+                if (tempObj == null) {
                     playerSprite.updateCoord((0 - MOVEMENT), 0);
                 } else {
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
         }
         if (keyPressed.contains("RIGHT")) {
             if (playerSprite.getXOffset() + MOVEMENT <= WIDTH) {
-                if (!checkCollisionAllObjects()) {
+                tempObj = checkCollisionAllObjects();
+                if (tempObj == null) {
                     playerSprite.updateCoord(MOVEMENT, 0);
                 } else {
+                    handleRoomObject(tempObj);
                     gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
                 }
             }
         }
     }
 
-    public static boolean checkCollisionAllObjects() {
-        for (int i = 0; i < blockable.size(); i++) {
-            if (checkCollision(blockable.get(i))) {
-                return true;
+    public static RoomObject checkCollisionAllObjects() {
+        for (int i = 0; i < roomObjects.size(); i++) {
+            if (checkCollision(roomObjects.get(i))) {
+                return roomObjects.get(i);
             }
         }
-        return false;
+        return null;
+    }
+    
+    public static void handleRoomObject(RoomObject obj){
+        
+        if(obj instanceof Door){
+            currentRoom = game.changeRoom((Door)obj);
+            roomObjects = currentRoom.getRoomObjects();
+            backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
+        }
     }
 
     public static void paint() {
         gc.setFill(backgroundPattern);
         gc.fillRect(0, 0, graphics.getWidth(), graphics.getHeight());
-
+        
+        StaticImage temp;
+        for(RoomObject obj : roomObjects){
+            temp = obj.getImage();
+            gc.drawImage(temp.getStaticImage(),temp.getXCoordinate(),temp.getYCoordinate());
+        }
+        
         if (keyPressed.isEmpty()) {
             gc.drawImage(playerSprite.stay(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
         } else {
