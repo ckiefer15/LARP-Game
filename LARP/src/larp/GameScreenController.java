@@ -161,7 +161,7 @@ public class GameScreenController implements Initializable {
             }
         }
         if (keyPressed.contains("DOWN")) {
-            if (playerSprite.getYOffset() + MOVEMENT <= HEIGHT) {
+            if (playerSprite.getYOffset() + playerSprite.getYCoordinate() + MOVEMENT <= HEIGHT) {
                 tempObj = checkCollisionAllObjects();
                 if (tempObj == null) {
                     playerSprite.updateCoord(0, MOVEMENT);
@@ -183,7 +183,7 @@ public class GameScreenController implements Initializable {
             }
         }
         if (keyPressed.contains("RIGHT")) {
-            if (playerSprite.getXOffset() + MOVEMENT <= WIDTH) {
+            if (playerSprite.getXOffset() + playerSprite.getXCoordinate() + MOVEMENT <= WIDTH) {
                 tempObj = checkCollisionAllObjects();
                 if (tempObj == null) {
                     playerSprite.updateCoord(MOVEMENT, 0);
