@@ -269,7 +269,7 @@ public class GameScreenController implements Initializable {
         } else if (event.getSource() == fightButton) {
             Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
             fightButton.getScene().setRoot(fightScreen);
-            timer.stop();
         }
+        timer.stop();
     }
 }
