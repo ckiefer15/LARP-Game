@@ -91,7 +91,7 @@ public class GameScreenController implements Initializable {
         keyPressed = new ArrayList<>();
 
         //============Initialize Game and Reference Variables==============
-        game = SetupDGame.setupGame();
+        game = SetupDGame.setupGame(false);
         currentRoom = game.getCurrentRoom();
         backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
         roomObjects = currentRoom.getRoomObjects();

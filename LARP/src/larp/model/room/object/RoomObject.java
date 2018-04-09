@@ -27,11 +27,11 @@ public class RoomObject {
     }
 
     public RoomObject() {
-        this(true,ModelDefaults.ROOM_OBJ_NAME,0,0,0,0,ModelDefaults.ROOM_OBJ_IMG);
+        this(true,ModelDefaults.ROOM_OBJ_NAME,0,0,0,0,ModelDefaults.ROOM_OBJ_IMG,true);
     }
     
-    public RoomObject(int xPos, int yPos, int hitWidth, int hitHeight){
-        this(true,ModelDefaults.ROOM_OBJ_NAME,xPos,yPos,hitWidth,hitHeight,ModelDefaults.ROOM_OBJ_IMG);
+    public RoomObject(int xPos, int yPos, int hitWidth, int hitHeight, boolean testing){
+        this(true,ModelDefaults.ROOM_OBJ_NAME,xPos,yPos,hitWidth,hitHeight,ModelDefaults.ROOM_OBJ_IMG, testing);
     }
     
     /**
@@ -48,11 +48,11 @@ public class RoomObject {
      * @param name The name of the object, primarily used for debugging.
      */
     public RoomObject(boolean blockable, String name, int xPos, int yPos,
-            int hitWidth, int hitHeight, String imgPath){
+            int hitWidth, int hitHeight, String imgPath, boolean testing){
         if(imgPath != null && imgPath.length() > 5)
-            image = StaticImage.makeImage(xPos, yPos, hitWidth, hitHeight, imgPath);
+            image = StaticImage.makeImage(xPos, yPos, hitWidth, hitHeight, imgPath, testing);
         else
-            image = StaticImage.makeImage(xPos, yPos, hitWidth, hitHeight, ModelDefaults.ROOM_OBJ_IMG);
+            image = StaticImage.makeImage(xPos, yPos, hitWidth, hitHeight, ModelDefaults.ROOM_OBJ_IMG, testing);
             
         if(name != null && name.length() > 0)
             this.name = name;

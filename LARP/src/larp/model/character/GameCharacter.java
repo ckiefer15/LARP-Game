@@ -22,7 +22,7 @@ public class GameCharacter {
      * Default constructor instantiates needed attributes and variables.
      */
     public GameCharacter(){
-        this("Bobby",9001,9001,null);
+        this("Bobby",9001,9001,null,false);
     }
     
     /**
@@ -32,12 +32,13 @@ public class GameCharacter {
      * @param hitPoints How many hit points the Character has before dying.
      * @param damage How much base damage the Character does with each attack.
      */
-    public GameCharacter(String name, int hitPoints, int damage, String imgPath){
+    public GameCharacter(String name, int hitPoints, int damage, String imgPath,
+            boolean testing){
         this.name = name;
         this.hitPoints = hitPoints;
         this.damage = damage;
         if(imgPath != null && imgPath.length() > 0)
-            image = new StaticImage(imgPath);
+            image = new StaticImage(imgPath,testing);
         else
             image = new StaticImage();
     }

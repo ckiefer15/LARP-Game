@@ -43,21 +43,25 @@ public class Sprite extends Graphic{
     }
     
     public Sprite(int xPos, int yPos, int hitWidth, int hitHeight,
-            String animPath){
+            String animPath, boolean testing){
         super(xPos, yPos, hitWidth, hitHeight);
         left = new Image[4];
         right = new Image[4];
         up = new Image[4];
         down = new Image[4];
         
-        for(int i = 0; i < left.length; i++){
-            left[i] = new Image(animPath + "/L" + (i + 1) + ".png");
-            right[i] = new Image(animPath + "/R" + (i + 1) + ".png");
-            up[i] = new Image(animPath + "/U" + (i + 1) + ".png");
-            down[i] = new Image(animPath + "/D" + (i + 1) + ".png");
+        System.out.println("File path: " + new File("").getAbsolutePath());
+        
+        if(!testing){
+            for(int i = 0; i < left.length; i++){
+                left[i] = new Image(animPath + "/L" + (i + 1) + ".png");
+                right[i] = new Image(animPath + "/R" + (i + 1) + ".png");
+                up[i] = new Image(animPath + "/U" + (i + 1) + ".png");
+                down[i] = new Image(animPath + "/D" + (i + 1) + ".png");
+            }
+            vertices[2] = (int)left[0].getWidth();
+            vertices[3] = (int)left[0].getHeight();
         }
-        vertices[2] = (int)left[0].getWidth();
-        vertices[3] = (int)left[0].getHeight();
         direction = 'r';
         frame = 0;
     }
@@ -114,5 +118,9 @@ public class Sprite extends Graphic{
 
     public Rectangle getCollisionBounds() {
         return new Rectangle(getXCoordinate(), getYCoordinate(), (int)left[0].getWidth(), (int)left[0].getHeight());
+    }
+    
+    public Rectangle testingCollisionBounds(){
+        return new Rectangle(getXCoordinate(),getYCoordinate(),getXOffset(),getYOffset());
     }
 }

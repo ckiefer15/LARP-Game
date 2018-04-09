@@ -30,5 +30,5 @@ public interface ModelDefaults {
     
     //==============Character Defaults====================
     public static final String PLAYER_IMG = "/img/player/default.png";
-    public static GameCharacter ENEMY_OBJ = new GameCharacter("Hank",50,10,"/img/enemy/default.png");
+    public static GameCharacter ENEMY_OBJ = new GameCharacter("Hank",50,10,"/img/enemy/default.png",false);
 }

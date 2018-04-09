@@ -14,16 +14,17 @@ import java.util.*;
 public class Chest extends RoomObject{
     
     public Chest(){
-        this(0,0,0,0,ModelDefaults.CHEST_IMG,true,ModelDefaults.CHEST_NAME);
+        this(0,0,0,0,ModelDefaults.CHEST_IMG,true,ModelDefaults.CHEST_NAME,true);
     }
     
-    public Chest(int xPos, int yPos, int hitWidth, int hitHeight, boolean blockable){
-        this(xPos, yPos, hitWidth, hitHeight, ModelDefaults.CHEST_IMG, blockable, ModelDefaults.CHEST_NAME);
+    public Chest(int xPos, int yPos, int hitWidth, int hitHeight, boolean blockable, boolean testing){
+        this(xPos, yPos, hitWidth, hitHeight, ModelDefaults.CHEST_IMG, blockable, ModelDefaults.CHEST_NAME,
+                testing);
     }
     
    public Chest(int xPos, int yPos, int hitWidth, int hitHeight, String imgPath,
-           boolean blockable, String name){
-       super(blockable, name, xPos, yPos, hitWidth, hitHeight, imgPath);
+           boolean blockable, String name, boolean testing){
+       super(blockable, name, xPos, yPos, hitWidth, hitHeight, imgPath,testing);
    }
     
    Random rand = new Random();

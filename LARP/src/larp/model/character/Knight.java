@@ -27,22 +27,22 @@ public class Knight extends GameCharacter{
     }
     
     public Knight(String name, int xPos, int yPos, int hitWidth, int hitHeight,
-            String animPath){
-        this(name,50,10,xPos,yPos,hitWidth,hitHeight,ModelDefaults.PLAYER_IMG,animPath);
+            String animPath, boolean testing){
+        this(name,50,10,xPos,yPos,hitWidth,hitHeight,ModelDefaults.PLAYER_IMG,animPath, testing);
     }
     
     public Knight(String name, int hitPoints, int damage, String animPath,
-            String imgPath){
-        super(name, hitPoints, damage,imgPath);
+            String imgPath, boolean testing){
+        super(name, hitPoints, damage,imgPath, testing);
         animation = new Sprite();
         inventory = new Inventory();
         equippedWeapon = null;
     }
     
     public Knight(String name, int hitPoints, int damage, int xPos, int yPos,
-            int hitWidth, int hitHeight, String imgPath, String animPath){
-        super(name, hitPoints, damage,imgPath);
-        animation = new Sprite(xPos, yPos, hitWidth, hitHeight, animPath);
+            int hitWidth, int hitHeight, String imgPath, String animPath, boolean testing){
+        super(name, hitPoints, damage,imgPath, testing);
+        animation = new Sprite(xPos, yPos, hitWidth, hitHeight, animPath, testing);
         inventory = new Inventory();
         equippedWeapon = null;
     }
@@ -105,7 +105,6 @@ public class Knight extends GameCharacter{
         
         animation.setXCoordinate(updateX + offset[0]);
         animation.setYCoordinate(updateY + offset[1]);
-        printRoomUpdate(doorVertices, offset, updateX, updateY);
     }
     
     private void printRoomUpdate(int [] door, int [] offset, int updateX, int updateY){

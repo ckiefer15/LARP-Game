@@ -15,12 +15,12 @@ public class Weapon extends Item {
     private int weaponDamage;
     
     public Weapon(){
-        this(1,ModelDefaults.WEAPON_NAME,0,0,0,0,ModelDefaults.WEAPON_IMG);
+        this(10,ModelDefaults.WEAPON_NAME,0,0,0,0,ModelDefaults.WEAPON_IMG,true);
     }
     
     public Weapon(int damage, String name, int xPos, int yPos, int hitWidth,
-            int hitHeight, String imgPath){
-        super(name, xPos, yPos, hitWidth, hitHeight, imgPath);
+            int hitHeight, String imgPath, boolean testing){
+        super(name, xPos, yPos, hitWidth, hitHeight, imgPath, testing);
         if(damage > 0)
             weaponDamage = damage;
         else

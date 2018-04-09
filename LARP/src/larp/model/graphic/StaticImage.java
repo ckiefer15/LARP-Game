@@ -25,8 +25,8 @@ public class StaticImage extends Graphic{
         image = null;
     }
     
-    public StaticImage(String imgPath){
-        this(0,0,0,0,imgPath);
+    public StaticImage(String imgPath, boolean testing){
+        this(0,0,0,0,imgPath,testing);
     }
     
     /**
@@ -36,8 +36,8 @@ public class StaticImage extends Graphic{
      * @param y The y coordinate for positioning the image
      * @param path The relative or absolute path to the image to be used
      */
-    public StaticImage(int x, int y, String path){
-        this(x, y, 0, 0, path);
+    public StaticImage(int x, int y, String path, boolean testing){
+        this(x, y, 0, 0, path,testing);
     }
     
     /**
@@ -48,10 +48,11 @@ public class StaticImage extends Graphic{
      * @param yOff The y offset to define boundaries for other purposes
      * @param path The relative or absolute path to the image to be used
      */
-    public StaticImage(int x, int y, int xOff, int yOff, String path){
+    public StaticImage(int x, int y, int xOff, int yOff, String path, boolean testing){
         super(x,y,xOff,yOff);
         this.path = path;
-        image = new Image(path);
+        if(!testing)
+            image = new Image(path);
     }
     
     /**
@@ -84,17 +85,17 @@ public class StaticImage extends Graphic{
      * @return Returns an instantiated StaticImage object based on input.
      */
     public static StaticImage makeImage(int xPos, int yPos, int hitWidth, int hitHeight,
-            String imgPath){
+            String imgPath, boolean testing){
         if(imgPath != null && imgPath.length() > 0){
             if(xPos >= 0 && yPos >= 0){
                 if(hitWidth >= 0 && hitHeight >= 0)
                     return new StaticImage(xPos, yPos, hitWidth, hitHeight,
-                    imgPath);
+                    imgPath, testing);
                 else
-                    return new StaticImage(xPos, yPos, imgPath);
+                    return new StaticImage(xPos, yPos, imgPath, testing);
             }
             else
-                return new StaticImage(imgPath);
+                return new StaticImage(imgPath, testing);
         }
         else{
             return new StaticImage();

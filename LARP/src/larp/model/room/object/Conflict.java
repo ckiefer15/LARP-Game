@@ -18,17 +18,17 @@ public class Conflict extends RoomObject{
    
    public Conflict(){
         this(ModelDefaults.CONFLICT_NAME,ModelDefaults.ENEMY_OBJ,true,
-                0,0,0,0,ModelDefaults.CONFLICT_IMG);
+                0,0,0,0,ModelDefaults.CONFLICT_IMG,true);
     }
    
-   public Conflict(int xPos, int yPos, int hitWidth, int hitHeight){
+   public Conflict(int xPos, int yPos, int hitWidth, int hitHeight, boolean testing){
        this(ModelDefaults.CONFLICT_NAME,ModelDefaults.ENEMY_OBJ,true,xPos,
-               yPos,hitWidth,hitHeight,ModelDefaults.CONFLICT_IMG);
+               yPos,hitWidth,hitHeight,ModelDefaults.CONFLICT_IMG, testing);
    }
     
    public Conflict(String name, GameCharacter enemy, boolean finalBoss, int xPos,
-           int yPos, int hitWidth, int hitHeight, String imgPath){
-       super(true, name, xPos, yPos, hitWidth, hitHeight, imgPath);
+           int yPos, int hitWidth, int hitHeight, String imgPath, boolean testing){
+       super(true, name, xPos, yPos, hitWidth, hitHeight, imgPath, testing);
        this.enemy = enemy;
        this.finalBoss = finalBoss;
    }

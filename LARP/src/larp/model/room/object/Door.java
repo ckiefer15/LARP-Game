@@ -20,22 +20,26 @@ public class Door extends RoomObject{
    private int [] spawnOffset;
    
    public Door(){
-        this(ModelDefaults.DOOR_NAME,'u',DEFAULT_ROOM,"start",0,0,0,0,ModelDefaults.DOOR_IMG);
+        this(ModelDefaults.DOOR_NAME,'u',DEFAULT_ROOM,"start",0,0,0,0,
+                ModelDefaults.DOOR_IMG,true);
     }
     
-    public Door(int xPos, int yPos, int hitWidth, int hitHeight){
-        this(ModelDefaults.DOOR_NAME,'u',DEFAULT_ROOM,"start",xPos,yPos,hitWidth,hitHeight,ModelDefaults.DOOR_IMG);
+    public Door(int xPos, int yPos, int hitWidth, int hitHeight, boolean testing){
+        this(ModelDefaults.DOOR_NAME,'u',DEFAULT_ROOM,"start",xPos,yPos,hitWidth,
+                hitHeight,ModelDefaults.DOOR_IMG, testing);
     }
     
     public Door(String name, char playerSpawn, int nextRoom, String nextDoorName,
-           int xPos, int yPos, int hitWidth, int hitHeight){
-        this(name,playerSpawn,nextRoom,nextDoorName,xPos,yPos,hitWidth,hitHeight,ModelDefaults.DOOR_IMG);
+           int xPos, int yPos, int hitWidth, int hitHeight, boolean testing){
+        this(name,playerSpawn,nextRoom,nextDoorName,xPos,yPos,hitWidth,hitHeight,
+                ModelDefaults.DOOR_IMG,testing);
     }
     
    public Door(String name, char playerSpawn, int nextRoom, String nextDoorName,
-           int xPos, int yPos, int hitWidth, int hitHeight, String imgPath){
+           int xPos, int yPos, int hitWidth, int hitHeight, String imgPath,
+           boolean testing){
        
-       super(true, name, xPos, yPos, hitWidth, hitHeight, imgPath);
+       super(true, name, xPos, yPos, hitWidth, hitHeight, imgPath, testing);
        
        initPlayerSpawnOffset(playerSpawn,xPos,yPos,hitWidth,hitHeight);
        

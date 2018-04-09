@@ -21,16 +21,16 @@ public class DRoom implements Iterable{
     ArrayList<RoomObject> blockableObjects;
     StaticImage background;
     
-    public DRoom(ArrayList<RoomObject> roomObjects, String imgPath){
-        this(roomObjects,0,0,0,0,imgPath);
+    public DRoom(ArrayList<RoomObject> roomObjects, String imgPath, boolean testing){
+        this(roomObjects,0,0,0,0,imgPath,testing);
     }
     
     public DRoom(ArrayList<RoomObject> roomObjects, int xPos, int yPos,
-            int width, int height, String imgPath){
+            int width, int height, String imgPath, boolean testing){
         
         this.roomObjects = roomObjects;
         blockableObjects = buildBlockableList(roomObjects);
-        background = StaticImage.makeImage(xPos, yPos, width, height, imgPath);
+        background = StaticImage.makeImage(xPos, yPos, width, height, imgPath,testing);
     }
     
     private ArrayList<RoomObject> buildBlockableList(ArrayList<RoomObject> objects){
