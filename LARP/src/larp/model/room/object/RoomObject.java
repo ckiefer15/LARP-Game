@@ -27,7 +27,7 @@ public class RoomObject {
     }
 
     public RoomObject() {
-        this(true,ModelDefaults.ROOM_OBJ_NAME,0,0,0,0,ModelDefaults.ROOM_OBJ_IMG,true);
+        this(true,ModelDefaults.ROOM_OBJ_NAME,0,0,0,0,ModelDefaults.ROOM_OBJ_IMG,false);
     }
     
     public RoomObject(int xPos, int yPos, int hitWidth, int hitHeight, boolean testing){

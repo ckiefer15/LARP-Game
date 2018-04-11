@@ -21,7 +21,7 @@ public class Door extends RoomObject{
    
    public Door(){
         this(ModelDefaults.DOOR_NAME,'u',DEFAULT_ROOM,"start",0,0,0,0,
-                ModelDefaults.DOOR_IMG,true);
+                ModelDefaults.DOOR_IMG,false);
     }
     
     public Door(int xPos, int yPos, int hitWidth, int hitHeight, boolean testing){

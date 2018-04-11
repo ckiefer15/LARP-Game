@@ -14,7 +14,7 @@ import java.util.*;
 public class Chest extends RoomObject{
     
     public Chest(){
-        this(0,0,0,0,ModelDefaults.CHEST_IMG,true,ModelDefaults.CHEST_NAME,true);
+        this(0,0,0,0,ModelDefaults.CHEST_IMG,true,ModelDefaults.CHEST_NAME,false);
     }
     
     public Chest(int xPos, int yPos, int hitWidth, int hitHeight, boolean blockable, boolean testing){
