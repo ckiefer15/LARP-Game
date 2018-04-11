@@ -54,14 +54,15 @@ public class InventoryScreenController implements Initializable {
         int count = 0;
         int inventorySize = game.getPlayer().getInventory().getArrayList().size();
         ArrayList<Item>  temp = game.getPlayer().getInventory().getArrayList();
-        for (int y = 0; y < 5; y++) {
-            for (int x = 0; x < 4; x++) {
+        System.out.println(temp);
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 5; y++) {
                 if(count < inventorySize)
-                    inventoryGrid.add(new ImageView(temp.get(count).getImage().getStaticImage()), x, y);
+                    inventoryGrid.add(new ImageView(temp.get(count).getImage().getStaticImage()), y, x);
                 count++;
             }
         }
-        //inventoryGrid.add(new ImageView(temp.get(0).getImage().getStaticImage()),0,0);
+        //System.out.println(temp.toString());
     }
 
     @FXML

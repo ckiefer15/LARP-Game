@@ -29,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import static larp.InventoryScreenController.game;
 import larp.model.*;
 import larp.model.graphic.*;
 import larp.model.character.*;
@@ -262,6 +263,7 @@ public class GameScreenController implements Initializable {
     private void GoToPage(ActionEvent event) throws IOException {
         if (event.getSource() == inventoryButton) {
             InventoryScreenController.game = this.game;
+
             Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
             inventoryButton.getScene().setRoot(inventoryScreen);
         } else if (event.getSource() == menuButton) {
