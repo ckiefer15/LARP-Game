@@ -15,7 +15,7 @@ public class Health extends Item{
     private int healthPoints;
     
     public Health(){
-        this(ModelDefaults.HEALTH_NAME,20,0,0,0,0,ModelDefaults.HEALTH_IMG,true);
+        this(ModelDefaults.HEALTH_NAME,20,0,0,0,0,ModelDefaults.HEALTH_IMG,false);
     }
     
     public Health(String name, int healPoints, int xPos, int yPos, int hitWidth,

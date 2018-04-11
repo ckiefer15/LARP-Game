@@ -261,6 +261,7 @@ public class GameScreenController implements Initializable {
     @FXML
     private void GoToPage(ActionEvent event) throws IOException {
         if (event.getSource() == inventoryButton) {
+            InventoryScreenController.game = this.game;
             Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
             inventoryButton.getScene().setRoot(inventoryScreen);
         } else if (event.getSource() == menuButton) {

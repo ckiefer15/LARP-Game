@@ -73,6 +73,9 @@ public interface SetupDGame {
         ArrayList<Item> loot = new ArrayList<>();
         
         loot.add(new Health());
+        loot.add(new Health());
+        loot.add(new Health());
+
         
         return loot;
     }

@@ -7,6 +7,7 @@ package larp;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import larp.model.DGame;
+import larp.model.inventory.Item;
 
 /**
  * FXML Controller class
@@ -30,6 +35,11 @@ public class InventoryScreenController implements Initializable {
     private Button deleteItemButton;
     @FXML
     private Button backButton;
+    public static DGame game;
+    @FXML
+    private GridPane inventoryGrid;
+    @FXML
+    private ImageView testview;
 
     /**
      * Initializes the controller class.
@@ -37,14 +47,29 @@ public class InventoryScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        loadInventory();
+    }
+
+    private void loadInventory() {
+        int count = 0;
+        int inventorySize = game.getPlayer().getInventory().getArrayList().size();
+        ArrayList<Item>  temp = game.getPlayer().getInventory().getArrayList();
+        for (int y = 0; y < 5; y++) {
+            for (int x = 0; x < 4; x++) {
+                if(count < inventorySize)
+                    inventoryGrid.add(new ImageView(temp.get(count).getImage().getStaticImage()), x, y);
+                count++;
+            }
+        }
+        //inventoryGrid.add(new ImageView(temp.get(0).getImage().getStaticImage()),0,0);
+    }
 
     @FXML
     private void GoToPage(ActionEvent event) throws IOException {
-        if(event.getSource() == backButton){
+        if (event.getSource() == backButton) {
             Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
             backButton.getScene().setRoot(gameScreen);
         }
     }
-    
+
 }
