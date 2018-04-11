@@ -18,7 +18,7 @@ public class Conflict extends RoomObject{
    
    public Conflict(){
         this(ModelDefaults.CONFLICT_NAME,ModelDefaults.ENEMY_OBJ,true,
-                0,0,0,0,ModelDefaults.CONFLICT_IMG,true);
+                0,0,0,0,ModelDefaults.CONFLICT_IMG,false);
     }
    
    public Conflict(int xPos, int yPos, int hitWidth, int hitHeight, boolean testing){

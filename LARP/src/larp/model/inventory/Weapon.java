@@ -15,7 +15,7 @@ public class Weapon extends Item {
     private int weaponDamage;
     
     public Weapon(){
-        this(10,ModelDefaults.WEAPON_NAME,0,0,0,0,ModelDefaults.WEAPON_IMG,true);
+        this(10,ModelDefaults.WEAPON_NAME,0,0,0,0,ModelDefaults.WEAPON_IMG,false);
     }
     
     public Weapon(int damage, String name, int xPos, int yPos, int hitWidth,
