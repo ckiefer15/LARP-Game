@@ -51,6 +51,19 @@ public class Knight extends GameCharacter{
         return equippedWeapon;
     }
     
+    public void useItem(Item item){
+        if(item != null){
+            if(item instanceof Weapon){
+                inventory.addItem(equippedWeapon);
+                equippedWeapon = (Weapon)inventory.removeItem(item);
+            }
+            else if(item instanceof Health){
+                inventory.removeItem(item);
+                super.healHitPoints(((Health) item).getHealthPoints());
+            }
+        }
+    }
+    
     public Inventory getInventory(){
         return inventory;
     }

@@ -51,6 +51,7 @@ public class StaticImage extends Graphic{
     public StaticImage(int x, int y, int xOff, int yOff, String path, boolean testing){
         super(x,y,xOff,yOff);
         this.path = path;
+        System.out.println(path);
         if(!testing)
             image = new Image(path);
     }

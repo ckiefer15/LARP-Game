@@ -36,6 +36,7 @@ public interface SetupDGame {
         Knight player = initPlayer(testing);
         //  Instantiate game
         DGame game = new DGame(loot,rooms,player);
+        DGame.setInstance(game);
         //  Add starting items to player's inventory
         initInventory(player,testing);
         
@@ -73,7 +74,7 @@ public interface SetupDGame {
         ArrayList<Item> loot = new ArrayList<>();
         
         loot.add(new Health());
-
+        loot.add(new Weapon());
         
         return loot;
     }
@@ -85,7 +86,10 @@ public interface SetupDGame {
     public static void initInventory(Knight player, boolean testing){
         if(DGame.getInstance() != null){
             player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
- 
+            player.addItemToInventory(DGame.getLoot(ModelDefaults.WEAPON_NAME));
+            player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
+            player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
+            player.addItemToInventory(DGame.getLoot(ModelDefaults.WEAPON_NAME));
         }
         else{
             player.addItemToInventory(new Health());
