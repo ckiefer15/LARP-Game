@@ -22,18 +22,16 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import static larp.InventoryScreenController.game;
 import larp.model.*;
 import larp.model.graphic.*;
 import larp.model.character.*;
-import larp.model.inventory.*;
+import larp.model.inventory.Health;
 import larp.model.room.object.*;
 
 /**
@@ -92,14 +90,15 @@ public class GameScreenController implements Initializable {
         keyPressed = new ArrayList<>();
 
         //============Initialize Game and Reference Variables==============
-        game = SetupDGame.setupGame(false);
-        currentRoom = game.getCurrentRoom();
-        backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
-        roomObjects = currentRoom.getRoomObjects();
-        blockable = currentRoom.getBlockable();
-        player = game.getPlayer();
-        playerSprite = player.getSprite();
-
+        if(game == null){
+            game = SetupDGame.setupGame(false);
+            currentRoom = game.getCurrentRoom();
+            backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
+            roomObjects = currentRoom.getRoomObjects();
+            blockable = currentRoom.getBlockable();
+            player = game.getPlayer();
+            playerSprite = player.getSprite();
+        }
         rootPane.getChildren().add(0, graphics);
         addThingyToPane();
         setupKeyPresses();
@@ -263,7 +262,7 @@ public class GameScreenController implements Initializable {
     private void GoToPage(ActionEvent event) throws IOException {
         if (event.getSource() == inventoryButton) {
             InventoryScreenController.game = this.game;
-
+            //game.getPlayer().getInventory().getArrayList().add(new Health());
             Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
             inventoryButton.getScene().setRoot(inventoryScreen);
         } else if (event.getSource() == menuButton) {

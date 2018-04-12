@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.InventoryScreenController">
+<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.InventoryScreenController">
   <children>
     <ImageView fitHeight="638.0" fitWidth="641.0" pickOnBounds="true" preserveRatio="true">
       <image>
@@ -17,25 +17,26 @@
       </image>
     </ImageView>
     <Button fx:id="backButton" layoutX="455.0" layoutY="586.0" mnemonicParsing="false" onAction="#GoToPage" prefHeight="27.0" prefWidth="112.0" text="Back To Game" />
-    <Button fx:id="equipItemButton" layoutX="434.0" layoutY="382.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" styleClass="equip-button" text="" />
-    <Button fx:id="sellItemButton" layoutX="434.0" layoutY="429.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" styleClass="sell-button" text="" />
-    <Button fx:id="deleteItemButton" layoutX="434.0" layoutY="477.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="160.0" styleClass="delete-button" text="" />
-      <GridPane fx:id="inventoryGrid" gridLinesVisible="true" layoutX="56.0" layoutY="145.0" prefHeight="414.0" prefWidth="338.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <ImageView fx:id="testview" fitHeight="129.0" fitWidth="114.0" layoutX="497.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+    <Button fx:id="equipItemButton" layoutX="428.0" layoutY="404.0" mnemonicParsing="false" onAction="#useItem" prefHeight="47.0" prefWidth="160.0" styleClass="equip-button" text="" />
+    <Button fx:id="sellItemButton" layoutX="428.0" layoutY="444.0" mnemonicParsing="false" onAction="#sellItem" prefHeight="47.0" prefWidth="160.0" styleClass="sell-button" text="" />
+    <Button fx:id="deleteItemButton" layoutX="428.0" layoutY="485.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="47.0" prefWidth="160.0" styleClass="delete-button" text="" />
+    <GridPane fx:id="inventoryGrid" alignment="CENTER" focusTraversable="true" gridLinesVisible="false" layoutX="56.0" layoutY="146.0" onMouseReleased="#getCellSelection" prefHeight="414.0" prefWidth="338.0">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <ImageView fx:id="testview" fitHeight="129.0" fitWidth="114.0" layoutX="497.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="itemView" fitHeight="80.0" fitWidth="80.0" layoutX="464.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
   </children>
   <stylesheets>
     <URL value="@larpCSS.css" />

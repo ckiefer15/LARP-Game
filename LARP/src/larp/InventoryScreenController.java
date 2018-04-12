@@ -13,12 +13,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import larp.model.DGame;
+import larp.model.inventory.Health;
 import larp.model.inventory.Item;
+import larp.model.inventory.Weapon;
 
 /**
  * FXML Controller class
@@ -26,7 +31,8 @@ import larp.model.inventory.Item;
  * @author Tyree Gustafson
  */
 public class InventoryScreenController implements Initializable {
-
+    private static final double X_CELL_SIZE = 84.5;
+    private static final double Y_CELL_SIZE = 82.8;
     @FXML
     private Button equipItemButton;
     @FXML
@@ -35,11 +41,17 @@ public class InventoryScreenController implements Initializable {
     private Button deleteItemButton;
     @FXML
     private Button backButton;
-    public static DGame game;
     @FXML
     private GridPane inventoryGrid;
     @FXML
     private ImageView testview;
+    @FXML
+    private ImageView itemView;
+    
+    public static DGame game;
+    private Item itemSelected;
+    private int cellOfItemSelected;
+    private ImageView itemImageInGrid;
 
     /**
      * Initializes the controller class.
@@ -54,15 +66,18 @@ public class InventoryScreenController implements Initializable {
         int count = 0;
         int inventorySize = game.getPlayer().getInventory().getArrayList().size();
         ArrayList<Item>  temp = game.getPlayer().getInventory().getArrayList();
-        System.out.println(temp);
-        for (int x = 0; x < 4; x++) {
-            for (int y = 0; y < 5; y++) {
-                if(count < inventorySize)
-                    inventoryGrid.add(new ImageView(temp.get(count).getImage().getStaticImage()), y, x);
+        for (int x = 0; x < 5; x++) {
+            for (int y = 0; y < 4; y++) {
+                if(count < inventorySize){
+                    itemImageInGrid = new ImageView(temp.get(count).getImage().getStaticImage());
+                    itemImageInGrid.setFitHeight(50);
+                    itemImageInGrid.setFitWidth(50);
+                    GridPane.setHalignment(itemImageInGrid, HPos.CENTER);
+                    inventoryGrid.add(itemImageInGrid, y, x);   
+                }
                 count++;
             }
         }
-        //System.out.println(temp.toString());
     }
 
     @FXML
@@ -73,4 +88,57 @@ public class InventoryScreenController implements Initializable {
         }
     }
 
+    @FXML
+    private void getCellSelection(MouseEvent event) {
+        double tempX = event.getX() / X_CELL_SIZE;
+        double tempY = event.getY() / Y_CELL_SIZE;
+        int row, col;
+        
+        if(tempX <= 1){
+            col = 1;
+        }else if(tempX <= 2){
+            col = 2;
+        }else if(tempX <= 3){
+            col = 3;
+        }else{
+            col = 4;
+        }
+        if(tempY <= 1){
+            row = 1;
+        }else if(tempY <= 2){
+            row = 2;
+        }else if(tempY <= 3){
+            row = 3;
+        }else if(tempY <= 4){
+            row = 4;
+        }else{
+            row = 5;
+        }
+        
+        cellOfItemSelected = (row - 1) * 4 + col;
+        if(cellOfItemSelected <= game.getPlayer().getInventory().getArrayList().size()){
+            itemSelected = (Item) game.getPlayer().getInventory().getArrayList().get(cellOfItemSelected - 1);
+            itemView.setImage(itemSelected.getImage().getStaticImage());
+        }
+    }
+
+    @FXML
+    private void useItem(ActionEvent event) {
+    }
+
+    @FXML
+    private void sellItem(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteItem(ActionEvent event) {
+        game.getPlayer().getInventory().getArrayList().remove(itemSelected);
+        loadInventory();
+        resetItemSelectedInfo(); 
+    }
+    private void resetItemSelectedInfo(){
+        itemView.setImage(null);
+        itemSelected = null;
+        cellOfItemSelected = 0;
+    }
 }

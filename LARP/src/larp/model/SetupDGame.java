@@ -73,6 +73,7 @@ public interface SetupDGame {
         ArrayList<Item> loot = new ArrayList<>();
         
         loot.add(new Health());
+
         
         return loot;
     }
@@ -84,8 +85,7 @@ public interface SetupDGame {
     public static void initInventory(Knight player, boolean testing){
         if(DGame.getInstance() != null){
             player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
-            player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
-            player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
+ 
         }
         else{
             player.addItemToInventory(new Health());
