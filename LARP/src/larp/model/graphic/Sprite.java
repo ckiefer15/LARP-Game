@@ -117,6 +117,7 @@ public class Sprite extends Graphic{
     }
 
     public Rectangle getCollisionBounds() {
+        
         return new Rectangle(getXCoordinate(), getYCoordinate(), (int)left[0].getWidth(), (int)left[0].getHeight());
     }
     

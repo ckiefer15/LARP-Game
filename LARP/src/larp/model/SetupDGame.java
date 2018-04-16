@@ -49,12 +49,38 @@ public interface SetupDGame {
         ArrayList<RoomObject> objects;
         //==============Build Start Room=============
         objects = new ArrayList<>();
-        objects.add(new RoomObject(true,"Thingy1",0,0,20 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        //objects.add(new RoomObject(true,"Thingy1",x off,y off,length,height,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",0,0,12 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy2",14 * TILE_SIZE,0,6 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy3",0,0,2 * TILE_SIZE,6 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy4",18 * TILE_SIZE,0,2 * TILE_SIZE,11 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy5",0,8 * TILE_SIZE,2 * TILE_SIZE,12 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",8 * TILE_SIZE,0,2 * TILE_SIZE,8 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",10 * TILE_SIZE,6 * TILE_SIZE,2 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",11 * TILE_SIZE,7 * TILE_SIZE,2 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",12 * TILE_SIZE,8 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",14 * TILE_SIZE,9 * TILE_SIZE,1 * TILE_SIZE,2 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",19 * TILE_SIZE,11 * TILE_SIZE,1 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",2 * TILE_SIZE,11 * TILE_SIZE,4 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",5 * TILE_SIZE,7 * TILE_SIZE,1 * TILE_SIZE,7 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",4 * TILE_SIZE,11 * TILE_SIZE,1 * TILE_SIZE,7 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",4 * TILE_SIZE,15 * TILE_SIZE,5 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",7 * TILE_SIZE,9 * TILE_SIZE,1 * TILE_SIZE,5 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",8 * TILE_SIZE,11 * TILE_SIZE,5 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",0,17 * TILE_SIZE,3 * TILE_SIZE,2 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6", 3 * TILE_SIZE,19 * TILE_SIZE,17 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",10 * TILE_SIZE,18 * TILE_SIZE,10 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",18 * TILE_SIZE,17 * TILE_SIZE,2 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",16 * TILE_SIZE,13 * TILE_SIZE,4 * TILE_SIZE,2 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",17 * TILE_SIZE, 12 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy6",18 * TILE_SIZE, 13 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+     
         //objects.add(new RoomObject(true,"Thingy2",400,400,50,50,null));
         //objects.add(new RoomObject(true,"Thingy3",9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE,null));
         //objects.add(new RoomObject(true,"Thingy4",200,500,50,50,null));
-        objects.add(new Door("mainL",'r',1,"battleR",0,300,100,100,testing));
-        objects.add(new Door("mainB",'u',1,"battleT",200,550,100,100,testing));
+        
+        objects.add(new Door("mainL",'r',1,"battleR",0,6 * TILE_SIZE,1*TILE_SIZE,2*TILE_SIZE,testing));
+        objects.add(new Door("mainB",'l',1,"battleT",200,550,100,100,testing));
         rooms.add(new DRoom(objects,"/img/DungeonMap2.png",testing));
         
         //==============Build _____ Room==================
@@ -62,7 +88,6 @@ public interface SetupDGame {
         objects.add(new Door("battleR",'l',0,"mainL",600,100,100,100,testing));
         objects.add(new Door("battleT",'d',0,"mainB",100,10,100,100,testing));
         rooms.add(new DRoom(objects,"/img/FightMap.png",testing));
-        
         return rooms;
     }
     
