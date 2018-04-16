@@ -25,7 +25,7 @@ public interface ModelDefaults {
     //=============Item Defaults========================
     public static final String HEALTH_IMG = "/img/health/default.png";
     public static final String HEALTH_NAME = "Potion";
-    public static final String WEAPON_IMG = "/img/weapons/default.png";
+    public static final String WEAPON_IMG = "/img/weapon/default.png";
     public static final String WEAPON_NAME = "Sword";
     
     //==============Character Defaults====================

@@ -64,4 +64,9 @@ public class Inventory {
             return inventory.add(item);
         return false;
     }
+    
+    public Item removeItem(Item item){
+        inventory.remove(item);
+        return item;
+    }
 }
