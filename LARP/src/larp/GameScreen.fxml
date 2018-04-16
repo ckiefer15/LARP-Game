@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.GameScreenController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" snapToPixel="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.GameScreenController">
   <children>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="24.0" layoutX="30.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="139.0" />
-    <Button id="fight" fx:id="fightButton" layoutX="464.0" layoutY="488.0" mnemonicParsing="false" onAction="#GoToPage" text="Fight Screen" />
+      <Button fx:id="fightButton" layoutX="482.0" layoutY="487.0" mnemonicParsing="false" text="Button" />
   </children>
 </AnchorPane>

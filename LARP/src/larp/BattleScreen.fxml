@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.BattleScreenController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.BattleScreenController">
   <children>
     <ImageView fitHeight="640.0" fitWidth="640.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
       <image>
@@ -51,7 +51,7 @@
         <URL value="@larpCSS.css" />
       </stylesheets>
     </Button>
-    <Button layoutX="368.0" layoutY="596.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" styleClass="run-button" text="" />
+    <Button fx:id="runButton" layoutX="368.0" layoutY="596.0" mnemonicParsing="false" onAction="#run" prefHeight="35.0" prefWidth="111.0" styleClass="run-button" text="" />
     <Button layoutX="262.0" layoutY="596.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" styleClass="heal-button" text="" />
     <Label layoutX="59.0" layoutY="590.0" text="Player Name" textFill="WHITE">
       <font>

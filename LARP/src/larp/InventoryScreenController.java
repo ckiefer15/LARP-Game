@@ -151,8 +151,12 @@ public class InventoryScreenController implements Initializable {
     @FXML
     private void deleteItem(ActionEvent event) {
         game.getPlayer().getInventory().getArrayList().remove(itemSelected);
-        loadInventory();
-        resetItemSelectedInfo(); 
+        try {
+            Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
+            rootPane.getScene().setRoot(inventoryScreen);
+        } catch (IOException ex) {
+            Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void resetItemSelectedInfo(){
         itemView.setImage(null);

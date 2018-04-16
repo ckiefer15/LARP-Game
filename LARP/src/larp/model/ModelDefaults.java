@@ -19,7 +19,7 @@ public interface ModelDefaults {
     public static final String DOOR_NAME = "SomeDoor";
     public static final String CHEST_IMG = "/img/chest/default.png";
     public static final String CHEST_NAME = "SomeChest";
-    public static final String CONFLICT_IMG = "/img/FightMap.png";
+    public static final String CONFLICT_IMG = "/img/enemy/default.png";
     public static final String CONFLICT_NAME = "SomeBattle";
     
     //=============Item Defaults========================

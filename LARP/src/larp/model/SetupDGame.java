@@ -19,8 +19,8 @@ import javafx.scene.shape.Rectangle;
 public interface SetupDGame {
     
     static public final int TILE_SIZE = GameScreenController.TILE_SIZE;
-    static public final int PLAYER_X = 150;
-    static public final int PLAYER_Y = 150;
+    static public final int PLAYER_X = 13 * TILE_SIZE;
+    static public final int PLAYER_Y = 1 * TILE_SIZE;
     static public final int PLAYER_XOFF = 20;
     static public final int PLAYER_YOFF = 20;
     static public final int PLAYER_HEALTH = 50;
@@ -56,9 +56,9 @@ public interface SetupDGame {
         objects.add(new RoomObject(true,"Thingy4",18 * TILE_SIZE,0,2 * TILE_SIZE,11 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy5",0,8 * TILE_SIZE,2 * TILE_SIZE,12 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",8 * TILE_SIZE,0,2 * TILE_SIZE,8 * TILE_SIZE,null,testing));
-        objects.add(new RoomObject(true,"Thingy6",10 * TILE_SIZE,6 * TILE_SIZE,2 * TILE_SIZE,3 * TILE_SIZE,null,testing));
-        objects.add(new RoomObject(true,"Thingy6",11 * TILE_SIZE,7 * TILE_SIZE,2 * TILE_SIZE,3 * TILE_SIZE,null,testing));
-        objects.add(new RoomObject(true,"Thingy6",12 * TILE_SIZE,8 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy7",10 * TILE_SIZE,6 * TILE_SIZE,2 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy8",11 * TILE_SIZE,7 * TILE_SIZE,2 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy9",12 * TILE_SIZE,8 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",14 * TILE_SIZE,9 * TILE_SIZE,1 * TILE_SIZE,2 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",19 * TILE_SIZE,11 * TILE_SIZE,1 * TILE_SIZE,1 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",2 * TILE_SIZE,11 * TILE_SIZE,4 * TILE_SIZE,3 * TILE_SIZE,null,testing));
@@ -74,19 +74,20 @@ public interface SetupDGame {
         objects.add(new RoomObject(true,"Thingy6",16 * TILE_SIZE,13 * TILE_SIZE,4 * TILE_SIZE,2 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",17 * TILE_SIZE, 12 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",18 * TILE_SIZE, 13 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
-     
+        
+        GameCharacter skeleton = new GameCharacter("Skeleton Dude", 1000, 100, "/img/enemy/default.png", testing);
+        objects.add(new Conflict("Skeleton Battle", skeleton, true, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
+ 
         //objects.add(new RoomObject(true,"Thingy2",400,400,50,50,null));
         //objects.add(new RoomObject(true,"Thingy3",9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE,null));
         //objects.add(new RoomObject(true,"Thingy4",200,500,50,50,null));
         
-        objects.add(new Door("mainL",'r',1,"battleR",0,6 * TILE_SIZE,1*TILE_SIZE,2*TILE_SIZE,testing));
-        objects.add(new Door("mainB",'l',1,"battleT",200,550,100,100,testing));
+        objects.add(new Door("mainL",'r',1,"battleR",0,6 * TILE_SIZE,1*TILE_SIZE,2*TILE_SIZE,null,testing));
         rooms.add(new DRoom(objects,"/img/DungeonMap2.png",testing));
         
         //==============Build _____ Room==================
         objects = new ArrayList<>();
-        objects.add(new Door("battleR",'l',0,"mainL",600,100,100,100,testing));
-        objects.add(new Door("battleT",'d',0,"mainB",100,10,100,100,testing));
+        objects.add(new Door("battleR",'l',0,"mainL",600,100,100,100,null,testing));
         rooms.add(new DRoom(objects,"/img/FightMap.png",testing));
         return rooms;
     }

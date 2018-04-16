@@ -103,12 +103,21 @@ public class GameScreenController implements Initializable {
     public void addThingyToPane() {
 
         for (int i = 0; i < roomObjects.size(); i++) {
-            roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
-            roomObjects.get(i).bounds.setStroke(Color.RED);
+            if(roomObjects.get(i) instanceof Door){
+                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                roomObjects.get(i).bounds.setStroke(Color.GREEN);
+            }else if(roomObjects.get(i) instanceof Conflict){
+                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                roomObjects.get(i).bounds.setStroke(Color.BLUE);
+            }else{
+                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                roomObjects.get(i).bounds.setStroke(Color.RED);
+            }
             rootPane.getChildren().add(roomObjects.get(i).bounds);
         }
     }
-    public void removeRoomObjects(){
+
+    public void removeRoomObjects() {
         for (int i = 0; i < roomObjects.size(); i++) {
             rootPane.getChildren().remove(roomObjects.get(i).bounds);
         }
@@ -243,7 +252,15 @@ public class GameScreenController implements Initializable {
             roomObjects = currentRoom.getRoomObjects();
             backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
             addThingyToPane();
-            
+        } else if (obj instanceof Conflict) {
+           try {
+                BattleScreenController.battle = game.initBattle((Conflict) obj);
+                Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
+                rootPane.getScene().setRoot(fightScreen);
+                timer.stop();
+            } catch (IOException ex) {
+                Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -290,14 +307,5 @@ public class GameScreenController implements Initializable {
             }
         }
         return false;
-    }
-
-    @FXML
-    private void GoToPage(ActionEvent event) throws IOException {
-        if (event.getSource() == fightButton) {
-            Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
-            fightButton.getScene().setRoot(fightScreen);
-        }
-        timer.stop();
     }
 }

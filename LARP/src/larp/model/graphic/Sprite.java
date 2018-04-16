@@ -62,7 +62,7 @@ public class Sprite extends Graphic{
             vertices[2] = (int)left[0].getWidth();
             vertices[3] = (int)left[0].getHeight();
         }
-        direction = 'r';
+        direction = 'd';
         frame = 0;
     }
     
