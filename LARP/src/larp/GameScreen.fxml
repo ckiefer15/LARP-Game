@@ -11,23 +11,6 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.GameScreenController">
   <children>
-    <GridPane alignment="CENTER" layoutX="483.0" layoutY="526.0" prefHeight="57.0" prefWidth="67.0">
-      <children>
-        <Button fx:id="menuButton" alignment="CENTER" mnemonicParsing="false" onAction="#GoToPage" prefHeight="20.0" prefWidth="67.0" text="Main Menu" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.rowIndex="1">
-          <font>
-            <Font size="10.0" fx:id="x1" />
-          </font>
-        </Button>
-        <Button fx:id="inventoryButton" alignment="CENTER" font="$x1" mnemonicParsing="false" onAction="#GoToPage" prefHeight="20.0" prefWidth="67.0" text="Inventory" textAlignment="LEFT" />
-      </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints maxHeight="61.0" minHeight="0.0" prefHeight="27.5263671875" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="68.0" minHeight="0.0" prefHeight="40.4736328125" vgrow="SOMETIMES" />
-      </rowConstraints>
-    </GridPane>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="24.0" layoutX="30.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="139.0" />
     <Button id="fight" fx:id="fightButton" layoutX="464.0" layoutY="488.0" mnemonicParsing="false" onAction="#GoToPage" text="Fight Screen" />
   </children>

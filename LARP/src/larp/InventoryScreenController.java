@@ -9,21 +9,24 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import static larp.GameScreenController.game;
 import larp.model.DGame;
-import larp.model.inventory.Health;
 import larp.model.inventory.Item;
-import larp.model.inventory.Weapon;
 
 /**
  * FXML Controller class
@@ -44,14 +47,14 @@ public class InventoryScreenController implements Initializable {
     @FXML
     private GridPane inventoryGrid;
     @FXML
-    private ImageView testview;
-    @FXML
     private ImageView itemView;
     
     public static DGame game;
     private Item itemSelected;
     private int cellOfItemSelected;
     private ImageView itemImageInGrid;
+    @FXML
+    private AnchorPane rootPane;
 
     /**
      * Initializes the controller class.
@@ -60,6 +63,7 @@ public class InventoryScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadInventory();
+        setupKeyPresses();
     }
 
     private void loadInventory() {
@@ -78,6 +82,20 @@ public class InventoryScreenController implements Initializable {
                 count++;
             }
         }
+    }
+    public void setupKeyPresses() {
+        rootPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent e) {
+                if(e.getCode().toString()== "ESCAPE"){
+                    try {
+                        Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+                        rootPane.getScene().setRoot(gameScreen);
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
     }
 
     @FXML

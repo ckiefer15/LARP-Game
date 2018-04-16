@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.InventoryScreenController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.InventoryScreenController">
   <children>
     <ImageView fitHeight="638.0" fitWidth="641.0" pickOnBounds="true" preserveRatio="true">
       <image>
@@ -35,7 +35,6 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <ImageView fx:id="testview" fitHeight="129.0" fitWidth="114.0" layoutX="497.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
     <ImageView fx:id="itemView" fitHeight="80.0" fitWidth="80.0" layoutX="464.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
   </children>
   <stylesheets>

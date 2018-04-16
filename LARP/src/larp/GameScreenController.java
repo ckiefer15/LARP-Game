@@ -27,11 +27,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import larp.model.*;
 import larp.model.graphic.*;
 import larp.model.character.*;
-import larp.model.inventory.Health;
 import larp.model.room.object.*;
 
 /**
@@ -41,9 +39,7 @@ import larp.model.room.object.*;
  */
 public class GameScreenController implements Initializable {
 
-    @FXML
     private Button inventoryButton;
-    @FXML
     private Button menuButton;
 
     static public final int WIDTH = 640;
@@ -70,8 +66,6 @@ public class GameScreenController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
-    @FXML
-    private Font x1;
     @FXML
     private Button fightButton;
 
@@ -114,16 +108,34 @@ public class GameScreenController implements Initializable {
     }
 
     public void setupKeyPresses() {
+        
         rootPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
             public void handle(KeyEvent e) {
-                if (!keyPressed.contains(e.getCode().toString())) {
+                if(e.getCode().toString()== "I"){
+                    InventoryScreenController.game = game;
+                    try {
+                        Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
+                        rootPane.getScene().setRoot(inventoryScreen);
+                        timer.stop();
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else if(e.getCode().toString()== "M"){
+                    try {
+                        Parent inventoryScreen = FXMLLoader.load(getClass().getResource("MainMenuScreen.fxml"));
+                        rootPane.getScene().setRoot(inventoryScreen);
+                        timer.stop();
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else if (!keyPressed.contains(e.getCode().toString())){
                     keyPressed.add(e.getCode().toString());
                 }
             }
         });
+        
         rootPane.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
             public void handle(KeyEvent e) {
                 keyPressed.remove(e.getCode().toString());
             }
@@ -149,7 +161,7 @@ public class GameScreenController implements Initializable {
     public static void update() {
         RoomObject tempObj;
         
-        if (keyPressed.contains("UP")) {
+        if (keyPressed.contains("UP") || keyPressed.contains("W")) {
             if (playerSprite.getYCoordinate() - MOVEMENT >= 0) {
                 tempObj = checkCollisionAllObjects();
                 if (tempObj == null) {
@@ -160,7 +172,7 @@ public class GameScreenController implements Initializable {
                 }
             }
         }
-        if (keyPressed.contains("DOWN")) {
+        if (keyPressed.contains("DOWN") || keyPressed.contains("S")) {
             if (playerSprite.getYOffset() + playerSprite.getYCoordinate() + MOVEMENT <= HEIGHT) {
                 tempObj = checkCollisionAllObjects();
                 if (tempObj == null) {
@@ -171,7 +183,7 @@ public class GameScreenController implements Initializable {
                 }
             }
         }
-        if (keyPressed.contains("LEFT")) {
+        if (keyPressed.contains("LEFT") || keyPressed.contains("A")) {
             if (playerSprite.getXCoordinate() - MOVEMENT >= 0) {
                 tempObj = checkCollisionAllObjects();
                 if (tempObj == null) {
@@ -182,7 +194,7 @@ public class GameScreenController implements Initializable {
                 }
             }
         }
-        if (keyPressed.contains("RIGHT")) {
+        if (keyPressed.contains("RIGHT") || keyPressed.contains("D")) {
             if (playerSprite.getXOffset() + playerSprite.getXCoordinate() + MOVEMENT <= WIDTH) {
                 tempObj = checkCollisionAllObjects();
                 if (tempObj == null) {
@@ -231,25 +243,25 @@ public class GameScreenController implements Initializable {
     }
 
     public static boolean checkCollision(RoomObject objectBounds) {
-        if (keyPressed.contains("RIGHT")) {
+        if (keyPressed.contains("RIGHT") || keyPressed.contains("D")) {
             javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
-        if (keyPressed.contains("LEFT")) {
+        if (keyPressed.contains("LEFT") || keyPressed.contains("A")) {
             javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() - MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
-        if (keyPressed.contains("UP")) {
+        if (keyPressed.contains("UP") || keyPressed.contains("W")) {
             javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() - MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
-        if (keyPressed.contains("DOWN")) {
+        if (keyPressed.contains("DOWN") || keyPressed.contains("S")) {
             javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() + MOVEMENT + OVERLAP_OFFSET, 45, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
@@ -260,15 +272,7 @@ public class GameScreenController implements Initializable {
 
     @FXML
     private void GoToPage(ActionEvent event) throws IOException {
-        if (event.getSource() == inventoryButton) {
-            InventoryScreenController.game = this.game;
-            //game.getPlayer().getInventory().getArrayList().add(new Health());
-            Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
-            inventoryButton.getScene().setRoot(inventoryScreen);
-        } else if (event.getSource() == menuButton) {
-            Parent menuScreen = FXMLLoader.load(getClass().getResource("MainMenuScreen.fxml"));
-            menuButton.getScene().setRoot(menuScreen);
-        } else if (event.getSource() == fightButton) {
+         if (event.getSource() == fightButton) {
             Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
             fightButton.getScene().setRoot(fightScreen);
         }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
@@ -16,13 +18,22 @@
         <Image url="@../img/FightMap.png" />
       </image>
     </ImageView>
-    <Label layoutX="222.0" layoutY="16.0" text="BATTLE" textFill="WHITE">
-      <font>
-        <Font size="45.0" />
-      </font>
-    </Label>
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="27.0" layoutX="14.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="27.0" layoutX="412.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
+    <ImageView fitHeight="640.0" fitWidth="640.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../img/fight_screen_overlay.png" />
+      </image>
+    </ImageView>
+    <Rectangle id="playerHealthRec" fx:id="enemyHealthRec" arcHeight="5.0" arcWidth="5.0" height="16.0001220703125" layoutX="503.0" layoutY="568.0" stroke="#52ff00" strokeType="INSIDE" strokeWidth="0.0" width="81.0">
+      <fill>
+        <Color blue="0.200" green="0.200" red="1.000" fx:id="x1" />
+      </fill>
+    </Rectangle>
+    <Rectangle fx:id="playerHealthRec" arcHeight="5.0" arcWidth="5.0" fill="$x1" height="16.0001220703125" layoutX="54.0" layoutY="568.0" stroke="RED" strokeType="INSIDE" strokeWidth="0.0" width="81.0" />
+    <ImageView fitHeight="638.0" fitWidth="638.0" layoutX="0.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../img/fight_screen_thumbnails.png" />
+      </image>
+    </ImageView>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8fff00" height="84.0" layoutX="214.0" layoutY="283.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a5ff33" height="76.0" layoutX="373.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" width="54.0" />
     <Label layoutX="224.0" layoutY="317.0" minHeight="2.999908447265625" prefHeight="16.0" text="Player Character">
@@ -35,8 +46,21 @@
         <Font size="8.0" />
       </font>
     </Label>
-    <Button layoutX="103.0" layoutY="452.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="ATTACK" />
-    <Button layoutX="251.0" layoutY="449.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="RUN" />
-    <Button layoutX="400.0" layoutY="449.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="HEAL" />
+    <Button layoutX="156.0" layoutY="596.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" styleClass="attack-button" text="">
+      <stylesheets>
+        <URL value="@larpCSS.css" />
+      </stylesheets>
+    </Button>
+    <Button layoutX="368.0" layoutY="596.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" styleClass="run-button" text="" />
+    <Button layoutX="262.0" layoutY="596.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" styleClass="heal-button" text="" />
+    <Label layoutX="59.0" layoutY="590.0" text="Player Name" textFill="WHITE">
+      <font>
+        <Font name="High Jinks" size="14.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label font="$x2" layoutX="515.0" layoutY="588.0" text="Enemy name" textFill="WHITE" />
   </children>
+  <stylesheets>
+    <URL value="@larpCSS.css" />
+  </stylesheets>
 </AnchorPane>
