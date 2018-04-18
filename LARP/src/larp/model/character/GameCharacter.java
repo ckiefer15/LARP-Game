@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 public class GameCharacter {
     
     private int hitPoints;
+    private int maxHitPoints;
     private int damage;
     private String name;
     private StaticImage image;
@@ -22,7 +23,7 @@ public class GameCharacter {
      * Default constructor instantiates needed attributes and variables.
      */
     public GameCharacter(){
-        this("Bobby",9001,9001,null,false);
+        this("Bobby",50,10,null,false);
     }
     
     /**
@@ -35,7 +36,14 @@ public class GameCharacter {
     public GameCharacter(String name, int hitPoints, int damage, String imgPath,
             boolean testing){
         this.name = name;
-        this.hitPoints = hitPoints;
+        if(hitPoints > 0){
+            this.maxHitPoints = hitPoints;
+            this.hitPoints = hitPoints;
+        }
+        else{
+            this.maxHitPoints = 10;
+            this.hitPoints = maxHitPoints;
+        }
         this.damage = damage;
         if(imgPath != null && imgPath.length() > 0)
             image = new StaticImage(imgPath,testing);
@@ -51,6 +59,10 @@ public class GameCharacter {
         return hitPoints;
     }
     
+    public int getMaxHitPoints(){
+        return maxHitPoints;
+    }
+    
     /**
      * Heal the Character by the passed amount. This method will ensure healing
      * amount is greater than zero, if not then nothing is changed.
@@ -59,7 +71,10 @@ public class GameCharacter {
     public void healHitPoints(int healing){
         if(healing <= 0)
             return;
-        hitPoints += healing;
+        else if(healing + hitPoints > maxHitPoints)
+            hitPoints = maxHitPoints;
+        else
+            hitPoints += healing;
     }
     
     /**

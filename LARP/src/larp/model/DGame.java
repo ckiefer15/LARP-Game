@@ -162,4 +162,20 @@ public class DGame {
             
         currentRoom.removeRoomObject(conflict);
     }
+    
+    /**
+     * Open a chest, store the item in player's inventory, and remove chest from
+     * room. If the player's inventory is full when the chest is opened the item
+     * will remain in the chest and the chest will not be removed from the room.
+     * @param chest The chest the player interacted with.
+     * @return Returns the item found in the chest or null if the player inventory is full.
+     */
+    public Item openChest(Chest chest){
+        Item item = chest.getItem();
+        if(player.addItemToInventory(item)){
+            currentRoom.removeRoomObject(chest);
+            return item;
+        }
+        return null;
+    }
 }

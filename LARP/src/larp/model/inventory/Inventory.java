@@ -66,7 +66,8 @@ public class Inventory {
     }
     
     public Item removeItem(Item item){
-        inventory.remove(item);
-        return item;
+        if(inventory.remove(item))
+            return item;
+        return null;
     }
 }
