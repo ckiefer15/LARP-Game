@@ -83,7 +83,7 @@ public class DGame {
     
     private Item searchLoot(String itemName){
         for(Item item : LOOT){
-            if(itemName.equalsIgnoreCase(itemName))
+            if(item.getName().equalsIgnoreCase(itemName))
                 return item;
         }
         return null;

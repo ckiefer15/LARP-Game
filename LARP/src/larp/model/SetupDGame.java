@@ -6,12 +6,10 @@
 package larp.model;
 
 import larp.model.character.*;
-import larp.model.graphic.*;
 import larp.model.inventory.*;
 import larp.model.room.object.*;
 import larp.GameScreenController;
 import java.util.ArrayList;
-import javafx.scene.shape.Rectangle;
 /**
  *
  * @author up6071fd
@@ -78,9 +76,7 @@ public interface SetupDGame {
         GameCharacter skeleton = new GameCharacter("Skeleton Dude", 1000, 100, "/img/enemy/default.png", testing);
         objects.add(new Conflict("Skeleton Battle", skeleton, true, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
  
-        //objects.add(new RoomObject(true,"Thingy2",400,400,50,50,null));
-        //objects.add(new RoomObject(true,"Thingy3",9 * TILE_SIZE,14 * TILE_SIZE,4 * TILE_SIZE,4 * TILE_SIZE,null));
-        //objects.add(new RoomObject(true,"Thingy4",200,500,50,50,null));
+        objects.add(new Chest(2 * TILE_SIZE, 14 * TILE_SIZE,2 * TILE_SIZE, 1 * TILE_SIZE, true, testing));
         
         objects.add(new Door("mainL",'r',1,"battleR",0,6 * TILE_SIZE,1*TILE_SIZE,2*TILE_SIZE,null,testing));
         rooms.add(new DRoom(objects,"/img/DungeonMap2.png",testing));
@@ -111,7 +107,7 @@ public interface SetupDGame {
      */
     public static void initInventory(Knight player, boolean testing){
         if(DGame.getInstance() != null){
-            player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
+            player.addItemToInventory(DGame.getLoot(ModelDefaults.WEAPON_NAME));
             player.addItemToInventory(DGame.getLoot(ModelDefaults.WEAPON_NAME));
             player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));
             player.addItemToInventory(DGame.getLoot(ModelDefaults.HEALTH_NAME));

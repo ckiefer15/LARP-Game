@@ -35,4 +35,8 @@ public class Item {
   public StaticImage getImage() {
     return image;
   }
+  
+  public String getName(){
+      return name;
+  }
 }

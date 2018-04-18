@@ -103,13 +103,13 @@ public class GameScreenController implements Initializable {
     public void addThingyToPane() {
 
         for (int i = 0; i < roomObjects.size(); i++) {
-            if(roomObjects.get(i) instanceof Door){
+            if (roomObjects.get(i) instanceof Door) {
                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                 roomObjects.get(i).bounds.setStroke(Color.GREEN);
-            }else if(roomObjects.get(i) instanceof Conflict){
+            } else if (roomObjects.get(i) instanceof Conflict) {
                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                 roomObjects.get(i).bounds.setStroke(Color.BLUE);
-            }else{
+            } else {
                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                 roomObjects.get(i).bounds.setStroke(Color.RED);
             }
@@ -140,6 +140,7 @@ public class GameScreenController implements Initializable {
                     try {
                         Parent inventoryScreen = FXMLLoader.load(getClass().getResource("MainMenuScreen.fxml"));
                         rootPane.getScene().setRoot(inventoryScreen);
+                        game = null;
                         timer.stop();
                     } catch (IOException ex) {
                         Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,8 +154,16 @@ public class GameScreenController implements Initializable {
                         }
                     } else {
                         for (int i = 0; i < roomObjects.size(); i++) {
-                            roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
-                            roomObjects.get(i).bounds.setStroke(Color.RED);
+                            if (roomObjects.get(i) instanceof Door) {
+                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                                roomObjects.get(i).bounds.setStroke(Color.GREEN);
+                            } else if (roomObjects.get(i) instanceof Conflict) {
+                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                                roomObjects.get(i).bounds.setStroke(Color.BLUE);
+                            } else {
+                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                                roomObjects.get(i).bounds.setStroke(Color.RED);
+                            }
                         }
                     }
 
@@ -253,7 +262,7 @@ public class GameScreenController implements Initializable {
             backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
             addThingyToPane();
         } else if (obj instanceof Conflict) {
-           try {
+            try {
                 BattleScreenController.battle = game.initBattle((Conflict) obj);
                 Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
                 rootPane.getScene().setRoot(fightScreen);
@@ -261,6 +270,8 @@ public class GameScreenController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else if(obj instanceof Chest){
+            player.getInventory().addItem(((Chest) obj).getItem());
         }
     }
 
