@@ -62,7 +62,7 @@ public class BattleScreenController implements Initializable {
         // TODO
         playerHealthRecWidth = playerHealthRec.getWidth();
         enemyHealthRecWidth = enemyHealthRec.getWidth();
-        //updateDisplayInfo();
+        updateDisplayInfo();
     }    
 
     @FXML
@@ -70,6 +70,7 @@ public class BattleScreenController implements Initializable {
         if(battle.run() == 2){
             GoToPage(event);
         }
+        updateDisplayInfo();
     }
     private void GoToPage(ActionEvent event) throws IOException {
         if (event.getSource() == runButton || event.getSource() == attackButton) {

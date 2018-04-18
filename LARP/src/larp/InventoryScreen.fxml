@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.InventoryScreenController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="640.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.InventoryScreenController">
   <children>
     <ImageView fitHeight="638.0" fitWidth="641.0" pickOnBounds="true" preserveRatio="true">
       <image>
@@ -36,6 +36,9 @@
       </rowConstraints>
     </GridPane>
     <ImageView fx:id="itemView" fitHeight="80.0" fitWidth="80.0" layoutX="464.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="itemName" layoutX="449.0" layoutY="288.0" />
+      <Label fx:id="itemStat" layoutX="449.0" layoutY="307.0" />
+      <Button fx:id="showEquipButton" layoutX="451.0" layoutY="366.0" mnemonicParsing="false" onAction="#showEquipped" text="Show Equipped" />
   </children>
   <stylesheets>
     <URL value="@larpCSS.css" />

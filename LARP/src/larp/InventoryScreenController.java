@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -26,7 +27,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import static larp.GameScreenController.game;
 import larp.model.DGame;
+import larp.model.inventory.Health;
 import larp.model.inventory.Item;
+import larp.model.inventory.Weapon;
 
 /**
  * FXML Controller class
@@ -55,6 +58,12 @@ public class InventoryScreenController implements Initializable {
     private ImageView itemImageInGrid;
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private Label itemName;
+    @FXML
+    private Label itemStat;
+    @FXML
+    private Button showEquipButton;
 
     /**
      * Initializes the controller class.
@@ -137,11 +146,25 @@ public class InventoryScreenController implements Initializable {
         if(cellOfItemSelected <= game.getPlayer().getInventory().getArrayList().size()){
             itemSelected = (Item) game.getPlayer().getInventory().getArrayList().get(cellOfItemSelected - 1);
             itemView.setImage(itemSelected.getImage().getStaticImage());
+            
+            updateItemInfo();
         }
+    }
+    private void updateItemInfo(){
+        itemName.setText("Name: " + itemSelected.getName());
+            if(itemSelected instanceof Weapon){
+                itemStat.setText("Damage: " + ((Weapon)itemSelected).getWeaponDamage());
+            }else if(itemSelected instanceof Health){
+                itemStat.setText("Heal: " + ((Health)itemSelected).getHealthPoints());
+            }
     }
 
     @FXML
     private void useItem(ActionEvent event) {
+        if(itemSelected != null){
+            game.getPlayer().useItem(itemSelected);
+        }
+        refreshScreen();
     }
 
     @FXML
@@ -151,6 +174,9 @@ public class InventoryScreenController implements Initializable {
     @FXML
     private void deleteItem(ActionEvent event) {
         game.getPlayer().getInventory().getArrayList().remove(itemSelected);
+        refreshScreen();
+    }
+    private void refreshScreen(){
         try {
             Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
             rootPane.getScene().setRoot(inventoryScreen);
@@ -162,5 +188,15 @@ public class InventoryScreenController implements Initializable {
         itemView.setImage(null);
         itemSelected = null;
         cellOfItemSelected = 0;
+    }
+
+    @FXML
+    private void showEquipped(ActionEvent event) {
+        itemSelected = game.getPlayer().getEquippedWeapon();
+        if(itemSelected != null){
+            itemView.setImage(itemSelected.getImage().getStaticImage());
+            updateItemInfo();
+        }
+        
     }
 }
