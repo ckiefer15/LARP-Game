@@ -51,13 +51,18 @@ public class BattleScreenController implements Initializable {
     private Label playerHPLabel;
     @FXML
     private Label enemyHPLabel;
+    
+    private double playerHealthRecWidth;
+    private double enemyHealthRecWidth;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        updateDisplayInfo();
+        playerHealthRecWidth = playerHealthRec.getWidth();
+        enemyHealthRecWidth = enemyHealthRec.getWidth();
+        //updateDisplayInfo();
     }    
 
     @FXML
@@ -89,14 +94,14 @@ public class BattleScreenController implements Initializable {
     }
     private void updateDisplayInfo(){
         playerNameLabel.setText(battle.getPlayer().getName());
-        double playerHPPercent = (battle.getPlayer().getHitPoints()/battle.getPlayer().getMaxHitPoints()) * 100;
-        System.out.println(battle.getPlayer().getHitPoints()/battle.getPlayer().getMaxHitPoints() * 100);
+        double playerHPPercent = ((double)battle.getPlayer().getHitPoints()/(double)battle.getPlayer().getMaxHitPoints()) * 100;
         playerHPLabel.setText(String.format("%.0f",playerHPPercent) + "%");
-        
+        playerHealthRec.setWidth(playerHealthRecWidth * (playerHPPercent/100));
         
         enemyNameLabel.setText(battle.getEnemy().getName());
-        double enemyHPPercent = (battle.getEnemy().getHitPoints()/battle.getEnemy().getMaxHitPoints()) * 100;
-        enemyHPLabel.setText(Double.toString(enemyHPPercent));
+        double enemyHPPercent = ((double)battle.getEnemy().getHitPoints()/(double)battle.getEnemy().getMaxHitPoints()) * 100;
+        enemyHPLabel.setText(String.format("%.0f",enemyHPPercent) + "%");
+        enemyHealthRec.setWidth(enemyHealthRecWidth * (enemyHPPercent/100));
     }
 
     @FXML
