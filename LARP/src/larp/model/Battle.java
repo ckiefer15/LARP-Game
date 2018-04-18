@@ -91,4 +91,10 @@ public class Battle {
     public Conflict getConflict(){
         return conflict;
     }
+    public Knight getPlayer(){
+        return player;
+    }
+    public GameCharacter getEnemy(){
+        return enemy;
+    }
 }

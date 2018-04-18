@@ -37,6 +37,10 @@ public class BattleScreenController implements Initializable {
     private Button runButton;
     @FXML
     private Font x2;
+    @FXML
+    private Button attackButton;
+    @FXML
+    private Button healButton;
     /**
      * Initializes the controller class.
      */
@@ -47,14 +51,30 @@ public class BattleScreenController implements Initializable {
 
     @FXML
     private void run(ActionEvent event) throws IOException {
-        GoToPage(event);
+        if(battle.run() == 2){
+            GoToPage(event);
+        }
     }
-    @FXML
     private void GoToPage(ActionEvent event) throws IOException {
-        if (event.getSource() == runButton) {
+        if (event.getSource() == runButton || event.getSource() == attackButton) {
             Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
             runButton.getScene().setRoot(gameScreen);
         }
+    }
+
+    @FXML
+    private void attack(ActionEvent event) throws IOException {
+        int x = battle.attack();
+        System.out.println(x);
+        if(x == 1 || x == 0){
+            GoToPage(event);
+        }else{
+        }
+    }
+
+    @FXML
+    private void heal(ActionEvent event) {
+        battle.heal();
     }
     
 }

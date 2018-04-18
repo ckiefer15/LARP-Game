@@ -39,13 +39,10 @@ import larp.model.room.object.*;
  */
 public class GameScreenController implements Initializable {
 
-    private Button inventoryButton;
-    private Button menuButton;
-
     static public final int WIDTH = 640;
     static public final int HEIGHT = 640;
     static public final int MOVEMENT = 5;
-    static public final int OVERLAP_OFFSET = 45;
+    static public final int OVERLAP_OFFSET = 40;
     static public final int TILE_SIZE = 32;
     static private boolean trace = true;
 
@@ -69,6 +66,8 @@ public class GameScreenController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private Button fightButton;
+
+    Rectangle playerBounds = new Rectangle();
 
     /**
      * Initializes the controller class.
@@ -95,12 +94,12 @@ public class GameScreenController implements Initializable {
             playerSprite = player.getSprite();
         }
         rootPane.getChildren().add(0, graphics);
-        addThingyToPane();
+        addBoundsToPane();
         setupKeyPresses();
         startGameLoop();
     }
 
-    public void addThingyToPane() {
+    public void addBoundsToPane() {
 
         for (int i = 0; i < roomObjects.size(); i++) {
             if (roomObjects.get(i) instanceof Door) {
@@ -109,12 +108,18 @@ public class GameScreenController implements Initializable {
             } else if (roomObjects.get(i) instanceof Conflict) {
                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                 roomObjects.get(i).bounds.setStroke(Color.BLUE);
+            } else if (roomObjects.get(i) instanceof Chest) {
+                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                roomObjects.get(i).bounds.setStroke(Color.YELLOW);
             } else {
                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                 roomObjects.get(i).bounds.setStroke(Color.RED);
             }
             rootPane.getChildren().add(roomObjects.get(i).bounds);
         }
+        playerBounds.setFill(Color.TRANSPARENT);
+        playerBounds.setStroke(Color.BLUEVIOLET);
+        rootPane.getChildren().add(playerBounds);
     }
 
     public void removeRoomObjects() {
@@ -152,6 +157,8 @@ public class GameScreenController implements Initializable {
                             roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                             roomObjects.get(i).bounds.setStroke(Color.TRANSPARENT);
                         }
+                        playerBounds.setFill(Color.TRANSPARENT);
+                        playerBounds.setStroke(Color.TRANSPARENT);
                     } else {
                         for (int i = 0; i < roomObjects.size(); i++) {
                             if (roomObjects.get(i) instanceof Door) {
@@ -160,11 +167,16 @@ public class GameScreenController implements Initializable {
                             } else if (roomObjects.get(i) instanceof Conflict) {
                                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                                 roomObjects.get(i).bounds.setStroke(Color.BLUE);
+                            } else if (roomObjects.get(i) instanceof Chest) {
+                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
+                                roomObjects.get(i).bounds.setStroke(Color.YELLOW);
                             } else {
                                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                                 roomObjects.get(i).bounds.setStroke(Color.RED);
                             }
                         }
+                        playerBounds.setFill(Color.TRANSPARENT);
+                        playerBounds.setStroke(Color.BLUEVIOLET);
                     }
 
                 } else if (!keyPressed.contains(e.getCode().toString())) {
@@ -186,6 +198,7 @@ public class GameScreenController implements Initializable {
             public void handle(long nanoseconds) {
                 update();
                 paint();
+                updateBoundsOnPlayer();
                 try {
                     Thread.sleep(45);
                 } catch (InterruptedException ex) {
@@ -194,6 +207,13 @@ public class GameScreenController implements Initializable {
             }
         };
         timer.start();
+    }
+
+    private void updateBoundsOnPlayer() {
+        playerBounds.setHeight(60 - OVERLAP_OFFSET);
+        playerBounds.setWidth(25);
+        playerBounds.setX(playerSprite.getXCoordinate());
+        playerBounds.setY(playerSprite.getYCoordinate()+ OVERLAP_OFFSET);
     }
 
     public void update() {
@@ -260,7 +280,7 @@ public class GameScreenController implements Initializable {
             currentRoom = game.changeRoom((Door) obj);
             roomObjects = currentRoom.getRoomObjects();
             backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
-            addThingyToPane();
+            addBoundsToPane();
         } else if (obj instanceof Conflict) {
             try {
                 BattleScreenController.battle = game.initBattle((Conflict) obj);
@@ -270,8 +290,8 @@ public class GameScreenController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if(obj instanceof Chest){
-            player.getInventory().addItem(((Chest) obj).getItem());
+        } else if (obj instanceof Chest) {
+            game.openChest((Chest) obj);
         }
     }
 
@@ -294,25 +314,25 @@ public class GameScreenController implements Initializable {
 
     public static boolean checkCollision(RoomObject objectBounds) {
         if (keyPressed.contains("RIGHT") || keyPressed.contains("D")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 15, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
         if (keyPressed.contains("LEFT") || keyPressed.contains("A")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() - MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 15, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() - MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
         if (keyPressed.contains("UP") || keyPressed.contains("W")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() - MOVEMENT + OVERLAP_OFFSET, 15, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() - MOVEMENT + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
         if (keyPressed.contains("DOWN") || keyPressed.contains("S")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() + MOVEMENT + OVERLAP_OFFSET, 15, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() + MOVEMENT + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
