@@ -14,10 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import larp.model.Battle;
+import larp.model.DGame;
 
 /**
  * FXML Controller class
@@ -41,12 +43,21 @@ public class BattleScreenController implements Initializable {
     private Button attackButton;
     @FXML
     private Button healButton;
+    @FXML
+    private Label playerNameLabel;
+    @FXML
+    private Label enemyNameLabel;
+    @FXML
+    private Label playerHPLabel;
+    @FXML
+    private Label enemyHPLabel;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        updateDisplayInfo();
     }    
 
     @FXML
@@ -67,9 +78,25 @@ public class BattleScreenController implements Initializable {
         int x = battle.attack();
         System.out.println(x);
         if(x == 1 || x == 0){
+            if(DGame.getInstance().getGameStatus()){
+               //display winning message
+            } else{
             GoToPage(event);
+            }
         }else{
+            updateDisplayInfo();
         }
+    }
+    private void updateDisplayInfo(){
+        playerNameLabel.setText(battle.getPlayer().getName());
+        double playerHPPercent = (battle.getPlayer().getHitPoints()/battle.getPlayer().getMaxHitPoints()) * 100;
+        System.out.println(battle.getPlayer().getHitPoints()/battle.getPlayer().getMaxHitPoints() * 100);
+        playerHPLabel.setText(String.format("%.0f",playerHPPercent) + "%");
+        
+        
+        enemyNameLabel.setText(battle.getEnemy().getName());
+        double enemyHPPercent = (battle.getEnemy().getHitPoints()/battle.getEnemy().getMaxHitPoints()) * 100;
+        enemyHPLabel.setText(Double.toString(enemyHPPercent));
     }
 
     @FXML
