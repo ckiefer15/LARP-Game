@@ -24,12 +24,12 @@ import larp.model.room.object.RoomObject;
  *
  * @author up6071fd
  */
-public class TestKnightSpawn {
+public class KnightSpawnTest {
     
     private Knight player;
     private ArrayList<DRoom> rooms;
     
-    public TestKnightSpawn() {
+    public KnightSpawnTest() {
         player = SetupDGame.initPlayer(true);
         rooms = SetupDGame.initRooms(true);
     }

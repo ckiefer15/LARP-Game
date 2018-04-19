@@ -20,12 +20,12 @@ import java.util.ArrayList;
  *
  * @author up6071fd
  */
-public class ConsumeItem {
+public class ConsumeItemTest {
     
     private Knight player;
     private Health potion, elixir;
     
-    public ConsumeItem() {
+    public ConsumeItemTest() {
         potion = new Health("Potion",10,0,0,0,0,null,true);
         elixir = new Health("Elixir",100,0,0,0,0,null,true);
         player = new Knight("Bob",50,10,0,0,0,0,null,null,true);
