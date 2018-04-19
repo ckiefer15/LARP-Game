@@ -47,10 +47,6 @@ public class Knight extends GameCharacter{
         equippedWeapon = new Weapon(10, "Wooden Sword", 0,0,0,0,"/img/weapon/woodenSword.png", testing);
     }
     
-    public Weapon getEquippedWeapon(){
-        return equippedWeapon;
-    }
-    
     public void useItem(Item item){
         if(item != null){
             if(item instanceof Weapon){
@@ -83,8 +79,8 @@ public class Knight extends GameCharacter{
         return inventory.addItem(item);
     }
     
-    public Sprite getSprite(){
-        return animation;
+    public Item removeItemFromInventory(Item item){
+        return inventory.removeItem(item);
     }
     
     @Override
@@ -92,6 +88,20 @@ public class Knight extends GameCharacter{
         if(equippedWeapon == null)
             return super.getDamage();
         return equippedWeapon.getWeaponDamage() + super.getDamage();
+    }
+    
+    public Weapon setEquippedWeapon(Weapon weapon){
+        Weapon temp = equippedWeapon;
+        equippedWeapon = weapon;
+        return temp;
+    }
+    
+    public Weapon getEquippedWeapon(){
+        return equippedWeapon;
+    }
+    
+    public Sprite getSprite(){
+        return animation;
     }
     
     public void changeRoom(Door nextDoor){
