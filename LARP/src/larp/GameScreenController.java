@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -45,15 +43,18 @@ public class GameScreenController implements Initializable {
     static public final int OVERLAP_OFFSET = 40;
     static public final int TILE_SIZE = 32;
     static private boolean trace = true;
-
-    //static ArrayList<MapObjects> thingyList = new ArrayList<MapObjects>();
+    static private Rectangle playerBounds = new Rectangle();
+    
     static Scene scene;
     static Canvas graphics;
     static GraphicsContext gc;
     static ArrayList<String> keyPressed;
     static AnimationTimer timer;
     static ImagePattern backgroundPattern;
-
+    
+    @FXML
+    private AnchorPane rootPane;
+    
     //============DGame Attributes===============
     static DGame game;
     static DRoom currentRoom;
@@ -61,13 +62,6 @@ public class GameScreenController implements Initializable {
     static ArrayList<RoomObject> blockable;
     static Knight player;
     static Sprite playerSprite;
-
-    @FXML
-    private AnchorPane rootPane;
-    @FXML
-    private Button fightButton;
-
-    Rectangle playerBounds = new Rectangle();
 
     /**
      * Initializes the controller class.
@@ -78,7 +72,6 @@ public class GameScreenController implements Initializable {
     }
 
     public void setup() {
-
         graphics = new Canvas(WIDTH, HEIGHT);
         gc = graphics.getGraphicsContext2D();
         keyPressed = new ArrayList<>();
@@ -181,7 +174,10 @@ public class GameScreenController implements Initializable {
                     }
 
                 } else if (!keyPressed.contains(e.getCode().toString())) {
-                    keyPressed.add(e.getCode().toString());
+                    if(e.getCode().toString() == "W" || e.getCode().toString() == "A" || e.getCode().toString() == "S" || e.getCode().toString() == "D" ||
+                            e.getCode().toString() == "UP" || e.getCode().toString() == "DOWN" || e.getCode().toString() == "LEFT" || e.getCode().toString() == "RIGHT"){
+                        keyPressed.add(e.getCode().toString());
+                    }
                 }
             }
         });

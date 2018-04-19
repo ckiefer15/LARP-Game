@@ -21,7 +21,7 @@ public class Knight extends GameCharacter{
     private Sprite animation;
     
     public Knight(){
-        equippedWeapon = null;
+        equippedWeapon = new Weapon(10, "Wooden Sword", 0,0,0,0,"/img/weapon/woodenSword.png", true);
         inventory = null;
         animation = null;
     }
@@ -36,7 +36,7 @@ public class Knight extends GameCharacter{
         super(name, hitPoints, damage,imgPath, testing);
         animation = new Sprite();
         inventory = new Inventory();
-        equippedWeapon = null;
+        equippedWeapon = new Weapon(10, "Wooden Sword", 0,0,0,0,"/img/weapon/woodenSword.png", testing);
     }
     
     public Knight(String name, int hitPoints, int damage, int xPos, int yPos,
@@ -44,7 +44,7 @@ public class Knight extends GameCharacter{
         super(name, hitPoints, damage,imgPath, testing);
         animation = new Sprite(xPos, yPos, hitWidth, hitHeight, animPath, testing);
         inventory = new Inventory();
-        equippedWeapon = null;
+        equippedWeapon = new Weapon(10, "Wooden Sword", 0,0,0,0,"/img/weapon/woodenSword.png", true);
     }
     
     public Weapon getEquippedWeapon(){
