@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -62,6 +63,8 @@ public class GameScreenController implements Initializable {
     static ArrayList<RoomObject> blockable;
     static Knight player;
     static Sprite playerSprite;
+    @FXML
+    private ImageView victoryImage;
 
     /**
      * Initializes the controller class.
@@ -145,7 +148,10 @@ public class GameScreenController implements Initializable {
                         Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if (e.getCode().toString() == "T") {
+                    //Toggle Trace
                     trace = !trace;
+                    
+                    //Remove Trace
                     if (trace == false) {
                         for (int i = 0; i < roomObjects.size(); i++) {
                             roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
@@ -154,6 +160,7 @@ public class GameScreenController implements Initializable {
                         playerBounds.setFill(Color.TRANSPARENT);
                         playerBounds.setStroke(Color.TRANSPARENT);
                     } else {
+                        //Apply Trace (Door: Green, Conflict: BLUE, Chest: Yellow, Nonmoveable: Red)
                         for (int i = 0; i < roomObjects.size(); i++) {
                             if (roomObjects.get(i) instanceof Door) {
                                 roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
@@ -169,10 +176,11 @@ public class GameScreenController implements Initializable {
                                 roomObjects.get(i).bounds.setStroke(Color.RED);
                             }
                         }
+                        //Apply Trace On Player (Player: Purple)
                         playerBounds.setFill(Color.TRANSPARENT);
                         playerBounds.setStroke(Color.BLUEVIOLET);
                     }
-
+                  //Add pressed movement keys to keypressed array (W, A, S, D, UP, DOWN, LEFT, RIGHT)
                 } else if (!keyPressed.contains(e.getCode().toString())) {
                     if(e.getCode().toString() == "W" || e.getCode().toString() == "A" || e.getCode().toString() == "S" || e.getCode().toString() == "D" ||
                             e.getCode().toString() == "UP" || e.getCode().toString() == "DOWN" || e.getCode().toString() == "LEFT" || e.getCode().toString() == "RIGHT"){
@@ -181,7 +189,7 @@ public class GameScreenController implements Initializable {
                 }
             }
         });
-
+        //Remove pressed keys on release from keypressed array
         rootPane.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
                 keyPressed.remove(e.getCode().toString());
@@ -261,7 +269,8 @@ public class GameScreenController implements Initializable {
             }
         }
     }
-
+    
+    //Check collision for all objects in current room
     public static RoomObject checkCollisionAllObjects() {
         for (int i = 0; i < roomObjects.size(); i++) {
             if (checkCollision(roomObjects.get(i))) {
@@ -270,7 +279,8 @@ public class GameScreenController implements Initializable {
         }
         return null;
     }
-
+    
+    //Determine action when collision occurs with room objects
     public void handleRoomObject(RoomObject obj) {
         if (obj instanceof Door) {
             removeObjectBounds();
@@ -308,7 +318,9 @@ public class GameScreenController implements Initializable {
             gc.drawImage(playerSprite.move(), playerSprite.getXCoordinate(), playerSprite.getYCoordinate());
         }
     }
-
+    
+    //Determine if the movement in a given direction is valid by checking one move ahead of the current position.
+    //Create the bounds of the next move from the player's current position and check to see if it interscts any room objects
     public static boolean checkCollision(RoomObject objectBounds) {
         if (keyPressed.contains("RIGHT") || keyPressed.contains("D")) {
             javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);

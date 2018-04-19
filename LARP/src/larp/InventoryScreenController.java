@@ -172,9 +172,7 @@ public class InventoryScreenController implements Initializable {
         if(itemSelected != null){
             game.getPlayer().useItem(itemSelected);
         }
-        if(itemSelected instanceof Weapon){
-            refreshScreen();
-        }
+        refreshScreen();
     }
 
     @FXML
