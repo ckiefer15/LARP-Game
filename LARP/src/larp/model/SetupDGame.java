@@ -95,16 +95,16 @@ public interface SetupDGame {
     public static ArrayList<Item> initLoot(boolean testing){
         ArrayList<Item> loot = new ArrayList<>();
         
-        loot.add(new Health("Red Potion", 25, 0,0,0,0, "/img/health/potionRed", testing));
-        loot.add(new Health("Blue Potion", 50, 0,0,0,0, "/img/health/potionBlue", testing));
-        loot.add(new Health("Green Potion", 100, 0,0,0,0, "/img/health/potionGreen", testing));
-        loot.add(new Weapon(15, "Axe", 0,0,0,0,"/img/weapon/axe", testing));
-        loot.add(new Weapon(20, "Double Axe", 0,0,0,0,"/img/weapon/axeDouble", testing));
-        loot.add(new Weapon(20, "Hammer", 0,0,0,0,"/img/weapon/hammer", testing));
-        loot.add(new Weapon(25, "Sword", 0,0,0,0,"/img/weapon/sword", testing));
-        loot.add(new Weapon(35, "Upgraded Axe", 0,0,0,0,"/img/weapon/upg_axe", testing));
-        loot.add(new Weapon(40, "Upgraded Hammer", 0,0,0,0,"/img/weapon/upg_hammer", testing));
-        loot.add(new Weapon(50, "Upgraded Sword", 0,0,0,0,"/img/weapon/upg_sword", testing));
+        loot.add(new Health("Red Potion", 25, 0,0,0,0, "/img/health/potionRed.png", testing));
+        loot.add(new Health("Blue Potion", 50, 0,0,0,0, "/img/health/potionBlue.png", testing));
+        loot.add(new Health("Green Potion", 100, 0,0,0,0, "/img/health/potionGreen.png", testing));
+        loot.add(new Weapon(15, "Axe", 0,0,0,0,"/img/weapon/axe.png", testing));
+        loot.add(new Weapon(20, "Double Axe", 0,0,0,0,"/img/weapon/axeDouble.png", testing));
+        loot.add(new Weapon(20, "Hammer", 0,0,0,0,"/img/weapon/hammer.png", testing));
+        loot.add(new Weapon(25, "Sword", 0,0,0,0,"/img/weapon/sword.png", testing));
+        loot.add(new Weapon(35, "Upgraded Axe", 0,0,0,0,"/img/weapon/upg_axe.png", testing));
+        loot.add(new Weapon(40, "Upgraded Hammer", 0,0,0,0,"/img/weapon/upg_hammer.png", testing));
+        loot.add(new Weapon(50, "Upgraded Sword", 0,0,0,0,"/img/weapon/upg_sword.png", testing));
         
         /*public Weapon(int damage, String name, int xPos, int yPos, int hitWidth,
             int hitHeight, String imgPath, boolean testing){
