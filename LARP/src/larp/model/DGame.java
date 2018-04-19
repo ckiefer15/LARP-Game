@@ -159,7 +159,7 @@ public class DGame {
             gameStatus = true;
             return;
         }
-            
+        player.addItemToInventory(LOOT.get((int)(Math.random() * LOOT.size() + 0.5)));
         currentRoom.removeRoomObject(conflict);
     }
     
