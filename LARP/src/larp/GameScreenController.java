@@ -122,10 +122,11 @@ public class GameScreenController implements Initializable {
         rootPane.getChildren().add(playerBounds);
     }
 
-    public void removeRoomObjects() {
+    public void removeObjectBounds() {
         for (int i = 0; i < roomObjects.size(); i++) {
             rootPane.getChildren().remove(roomObjects.get(i).bounds);
         }
+        rootPane.getChildren().remove(playerBounds);
     }
 
     public void setupKeyPresses() {
@@ -276,7 +277,7 @@ public class GameScreenController implements Initializable {
 
     public void handleRoomObject(RoomObject obj) {
         if (obj instanceof Door) {
-            removeRoomObjects();
+            removeObjectBounds();
             currentRoom = game.changeRoom((Door) obj);
             roomObjects = currentRoom.getRoomObjects();
             backgroundPattern = new ImagePattern(currentRoom.getImage().getStaticImage());
