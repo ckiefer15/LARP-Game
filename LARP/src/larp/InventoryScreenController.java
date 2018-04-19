@@ -25,6 +25,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import static larp.GameScreenController.game;
 import larp.model.DGame;
 import larp.model.inventory.Health;
@@ -41,8 +42,6 @@ public class InventoryScreenController implements Initializable {
     private static final double Y_CELL_SIZE = 82.8;
     @FXML
     private Button equipItemButton;
-    @FXML
-    private Button sellItemButton;
     @FXML
     private Button deleteItemButton;
     @FXML
@@ -64,6 +63,12 @@ public class InventoryScreenController implements Initializable {
     private Label itemStat;
     @FXML
     private Button showEquipButton;
+    @FXML
+    private Font x1;
+    @FXML
+    private Label playerHPLabel;
+    @FXML
+    private Button showEquippedButton;
 
     /**
      * Initializes the controller class.
@@ -72,6 +77,8 @@ public class InventoryScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadInventory();
+        itemSelected = game.getPlayer().getEquippedWeapon();
+        updateItemInfo();
         setupKeyPresses();
     }
 
@@ -83,8 +90,8 @@ public class InventoryScreenController implements Initializable {
             for (int y = 0; y < 4; y++) {
                 if(count < inventorySize){
                     itemImageInGrid = new ImageView(temp.get(count).getImage().getStaticImage());
-                    itemImageInGrid.setFitHeight(50);
-                    itemImageInGrid.setFitWidth(50);
+                    itemImageInGrid.setFitHeight(75);
+                    itemImageInGrid.setFitWidth(75);
                     GridPane.setHalignment(itemImageInGrid, HPos.CENTER);
                     inventoryGrid.add(itemImageInGrid, y, x);   
                 }
@@ -145,17 +152,18 @@ public class InventoryScreenController implements Initializable {
         cellOfItemSelected = (row - 1) * 4 + col;
         if(cellOfItemSelected <= game.getPlayer().getInventory().getArrayList().size()){
             itemSelected = (Item) game.getPlayer().getInventory().getArrayList().get(cellOfItemSelected - 1);
-            itemView.setImage(itemSelected.getImage().getStaticImage());
-            
             updateItemInfo();
         }
     }
     private void updateItemInfo(){
+        itemView.setImage(itemSelected.getImage().getStaticImage());
         itemName.setText("Name: " + itemSelected.getName());
             if(itemSelected instanceof Weapon){
                 itemStat.setText("Damage: " + ((Weapon)itemSelected).getWeaponDamage());
+                playerHPLabel.setText("");
             }else if(itemSelected instanceof Health){
-                itemStat.setText("Heal: " + ((Health)itemSelected).getHealthPoints());
+                itemStat.setText("Heal: +" + ((Health)itemSelected).getHealthPoints());
+                playerHPLabel.setText("HP " + game.getPlayer().getHitPoints() + "/" + game.getPlayer().getMaxHitPoints());
             }
     }
 
@@ -164,11 +172,9 @@ public class InventoryScreenController implements Initializable {
         if(itemSelected != null){
             game.getPlayer().useItem(itemSelected);
         }
-        refreshScreen();
-    }
-
-    @FXML
-    private void sellItem(ActionEvent event) {
+        if(itemSelected instanceof Weapon){
+            refreshScreen();
+        }
     }
 
     @FXML
@@ -184,11 +190,6 @@ public class InventoryScreenController implements Initializable {
             Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void resetItemSelectedInfo(){
-        itemView.setImage(null);
-        itemSelected = null;
-        cellOfItemSelected = 0;
-    }
 
     @FXML
     private void showEquipped(ActionEvent event) {
@@ -199,4 +200,5 @@ public class InventoryScreenController implements Initializable {
         }
         
     }
+
 }

@@ -82,7 +82,7 @@ public class BattleScreenController implements Initializable {
     @FXML
     private void attack(ActionEvent event) throws IOException {
         int x = battle.attack();
-        System.out.println(x);
+        System.out.println(battle.getPlayer().getDamage());
         if(x == 1 || x == 0){
             if(DGame.getInstance().getGameStatus()){
                //display winning message
@@ -96,12 +96,12 @@ public class BattleScreenController implements Initializable {
     private void updateDisplayInfo(){
         playerNameLabel.setText(battle.getPlayer().getName());
         double playerHPPercent = ((double)battle.getPlayer().getHitPoints()/(double)battle.getPlayer().getMaxHitPoints()) * 100;
-        playerHPLabel.setText(String.format("%.0f",playerHPPercent) + "%");
+        playerHPLabel.setText(battle.getPlayer().getHitPoints() + "/" + battle.getPlayer().getMaxHitPoints());
         playerHealthRec.setWidth(playerHealthRecWidth * (playerHPPercent/100));
         
         enemyNameLabel.setText(battle.getEnemy().getName());
         double enemyHPPercent = ((double)battle.getEnemy().getHitPoints()/(double)battle.getEnemy().getMaxHitPoints()) * 100;
-        enemyHPLabel.setText(String.format("%.0f",enemyHPPercent) + "%");
+        enemyHPLabel.setText(battle.getEnemy().getHitPoints() + "/" + battle.getEnemy().getMaxHitPoints());
         enemyHealthRec.setWidth(enemyHealthRecWidth * (enemyHPPercent/100));
     }
 

@@ -21,7 +21,7 @@ public interface SetupDGame {
     static public final int PLAYER_Y = 1 * TILE_SIZE;
     static public final int PLAYER_XOFF = 20;
     static public final int PLAYER_YOFF = 20;
-    static public final int PLAYER_HEALTH = 50;
+    static public final int PLAYER_HEALTH = 250;
     static public final int PLAYER_DAMAGE = 10;
     
     public static DGame setupGame(boolean testing){
@@ -73,7 +73,7 @@ public interface SetupDGame {
         objects.add(new RoomObject(true,"Thingy6",17 * TILE_SIZE, 12 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",18 * TILE_SIZE, 13 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         
-        GameCharacter skeleton = new GameCharacter("Skeleton Dude", 50, 5, "/img/enemy/default.png", testing);
+        GameCharacter skeleton = new GameCharacter("Skeleton", 250, 10, "/img/enemy/default.png", testing);
         objects.add(new Conflict("Skeleton Battle", skeleton, false, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
  
         objects.add(new Chest(2 * TILE_SIZE, 14 * TILE_SIZE,2 * TILE_SIZE, 1 * TILE_SIZE, true, testing));
@@ -105,10 +105,9 @@ public interface SetupDGame {
         loot.add(new Weapon(35, "Upgraded Axe", 0,0,0,0,"/img/weapon/upg_axe.png", testing));
         loot.add(new Weapon(40, "Upgraded Hammer", 0,0,0,0,"/img/weapon/upg_hammer.png", testing));
         loot.add(new Weapon(50, "Upgraded Sword", 0,0,0,0,"/img/weapon/upg_sword.png", testing));
+        loot.add(new Weapon(10, "Wooden Sword", 0,0,0,0,"/img/weapon/woodenSword.png", testing));
         
-        /*public Weapon(int damage, String name, int xPos, int yPos, int hitWidth,
-            int hitHeight, String imgPath, boolean testing){
-        */
+        
         return loot;
     }
     
@@ -118,8 +117,12 @@ public interface SetupDGame {
      */
     public static void initInventory(Knight player, boolean testing){
         if(DGame.getInstance() != null){
-            //player.addItemToInventory(DGame.getLoot("Red Potion"));
-
+            player.addItemToInventory(DGame.getLoot("Red Potion"));
+            player.addItemToInventory(DGame.getLoot("Red Potion"));
+            player.addItemToInventory(DGame.getLoot("Red Potion"));
+            player.addItemToInventory(DGame.getLoot("Sword"));
+            player.addItemToInventory(DGame.getLoot("Hammer"));
+            player.addItemToInventory(DGame.getLoot("Upgraded Sword"));
         }
         else{
             player.addItemToInventory(new Health());
