@@ -108,6 +108,7 @@ public class BattleScreenController implements Initializable {
     @FXML
     private void heal(ActionEvent event) {
         battle.heal();
+        updateDisplayInfo();
     }
     
 }
