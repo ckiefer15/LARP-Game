@@ -44,7 +44,7 @@ public class Knight extends GameCharacter{
         super(name, hitPoints, damage,imgPath, testing);
         animation = new Sprite(xPos, yPos, hitWidth, hitHeight, animPath, testing);
         inventory = new Inventory();
-        equippedWeapon = new Weapon(10, "Wooden Sword", 0,0,0,0,"/img/weapon/woodenSword.png", true);
+        equippedWeapon = new Weapon(10, "Wooden Sword", 0,0,0,0,"/img/weapon/woodenSword.png", testing);
     }
     
     public Weapon getEquippedWeapon(){
