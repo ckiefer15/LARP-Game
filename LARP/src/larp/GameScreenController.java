@@ -41,7 +41,10 @@ public class GameScreenController implements Initializable {
     static public final int WIDTH = 640;
     static public final int HEIGHT = 640;
     static public final int MOVEMENT = 5;
-    static public final int OVERLAP_OFFSET = 40;
+    static public final int COLLISION_BOX_OFFSET_Y = 30;
+    static public final int COLLISION_BOX_OFFSET_X = 5;
+    static public final int COLLISION_BOX_X = 20;
+    static public final int COLLISION_BOX_Y = 45;
     static public final int TILE_SIZE = 32;
     static private boolean trace = true;
     static private Rectangle playerBounds = new Rectangle();
@@ -63,8 +66,6 @@ public class GameScreenController implements Initializable {
     static ArrayList<RoomObject> blockable;
     static Knight player;
     static Sprite playerSprite;
-    @FXML
-    private ImageView victoryImage;
 
     /**
      * Initializes the controller class.
@@ -215,10 +216,10 @@ public class GameScreenController implements Initializable {
     }
 
     private void updateBoundsOnPlayer() {
-        playerBounds.setHeight(60 - OVERLAP_OFFSET);
-        playerBounds.setWidth(25);
-        playerBounds.setX(playerSprite.getXCoordinate());
-        playerBounds.setY(playerSprite.getYCoordinate()+ OVERLAP_OFFSET);
+        playerBounds.setHeight(COLLISION_BOX_Y - COLLISION_BOX_OFFSET_Y);
+        playerBounds.setWidth(COLLISION_BOX_X);
+        playerBounds.setX(playerSprite.getXCoordinate() + COLLISION_BOX_OFFSET_X);
+        playerBounds.setY(playerSprite.getYCoordinate() + COLLISION_BOX_OFFSET_Y);
     }
 
     public void update() {
@@ -323,25 +324,25 @@ public class GameScreenController implements Initializable {
     //Create the bounds of the next move from the player's current position and check to see if it interscts any room objects
     public static boolean checkCollision(RoomObject objectBounds) {
         if (keyPressed.contains("RIGHT") || keyPressed.contains("D")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + MOVEMENT + COLLISION_BOX_OFFSET_X, playerSprite.getYCoordinate() + COLLISION_BOX_OFFSET_Y, COLLISION_BOX_X, COLLISION_BOX_Y - COLLISION_BOX_OFFSET_Y);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
         if (keyPressed.contains("LEFT") || keyPressed.contains("A")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() - MOVEMENT, playerSprite.getYCoordinate() + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() - MOVEMENT + COLLISION_BOX_OFFSET_X, playerSprite.getYCoordinate() + COLLISION_BOX_OFFSET_Y, COLLISION_BOX_X, COLLISION_BOX_Y - COLLISION_BOX_OFFSET_Y);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
         if (keyPressed.contains("UP") || keyPressed.contains("W")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() - MOVEMENT + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + COLLISION_BOX_OFFSET_X, playerSprite.getYCoordinate() - MOVEMENT + COLLISION_BOX_OFFSET_Y, COLLISION_BOX_X, COLLISION_BOX_Y - COLLISION_BOX_OFFSET_Y);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
         }
         if (keyPressed.contains("DOWN") || keyPressed.contains("S")) {
-            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate(), playerSprite.getYCoordinate() + MOVEMENT + OVERLAP_OFFSET, 25, 60 - OVERLAP_OFFSET);
+            javafx.scene.shape.Rectangle temp = new Rectangle(playerSprite.getXCoordinate() + COLLISION_BOX_OFFSET_X, playerSprite.getYCoordinate() + MOVEMENT + COLLISION_BOX_OFFSET_Y, COLLISION_BOX_X, COLLISION_BOX_Y - COLLISION_BOX_OFFSET_Y);
             if (temp.getBoundsInParent().intersects(objectBounds.bounds.getBoundsInParent())) {
                 return true;
             }
