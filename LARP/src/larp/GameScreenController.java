@@ -7,6 +7,7 @@ package larp;
  */
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,6 +24,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -30,6 +33,9 @@ import larp.model.*;
 import larp.model.graphic.*;
 import larp.model.character.*;
 import larp.model.room.object.*;
+
+import javax.swing.*;
+
 
 /**
  * FXML Controller class
@@ -48,6 +54,9 @@ public class GameScreenController implements Initializable {
     static public final int TILE_SIZE = 32;
     static private boolean trace = true;
     static private Rectangle playerBounds = new Rectangle();
+
+
+
     
     static Scene scene;
     static Canvas graphics;
@@ -89,11 +98,17 @@ public class GameScreenController implements Initializable {
             blockable = currentRoom.getBlockable();
             player = game.getPlayer();
             playerSprite = player.getSprite();
+
+
         }
         rootPane.getChildren().add(0, graphics);
         addBoundsToPane();
         setupKeyPresses();
         startGameLoop();
+        Media m = new Media(Paths.get("/Users/we2423hd/Downloads/sdf.mp3").toUri().toString());
+        new MediaPlayer(m).play();
+
+
     }
 
     public void addBoundsToPane() {
