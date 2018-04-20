@@ -13,7 +13,7 @@ import java.util.*;
 public class Inventory {
     
     private ArrayList<Item> inventory;
-    private static final int MAX_SIZE = 15;
+    public static final int MAX_SIZE = 15;
     
     public Inventory(){
         inventory = new ArrayList<>();
