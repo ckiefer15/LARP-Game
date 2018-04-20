@@ -73,18 +73,18 @@ public interface SetupDGame {
         objects.add(new RoomObject(true,"Thingy6",17 * TILE_SIZE, 12 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",18 * TILE_SIZE, 13 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         
-        GameCharacter skeleton = new GameCharacter("Skeleton", 20, 10, "/img/enemy/default.png", testing);
-        objects.add(new Conflict("Skeleton Battle", skeleton, false, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
+        GameCharacter skeleton = new GameCharacter("Skeleton", 250, 10, "/img/enemy/default.png", testing);
+        objects.add(new Conflict("Skeleton Battle", skeleton, true, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
  
         objects.add(new Chest(2 * TILE_SIZE, 14 * TILE_SIZE,2 * TILE_SIZE, 1 * TILE_SIZE, true, testing));
         
         objects.add(new Door("mainL",'r',1,"battleR",0,6 * TILE_SIZE,1*TILE_SIZE,2*TILE_SIZE,null,testing));
-        rooms.add(new DRoom(objects,"/img/DungeonMap2.png",testing));
+        rooms.add(new DRoom(objects,"/img/DungeonMapRoom1.png",testing));
         
         //==============Build _____ Room==================
         objects = new ArrayList<>();
         objects.add(new Door("battleR",'l',0,"mainL",600,100,100,100,null,testing));
-        rooms.add(new DRoom(objects,"/img/FightMap.png",testing));
+        rooms.add(new DRoom(objects,"/img/DungeonMapFinalRoom.png",testing));
         return rooms;
     }
     
