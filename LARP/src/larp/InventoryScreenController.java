@@ -42,6 +42,12 @@ import larp.model.inventory.Weapon;
 public class InventoryScreenController implements Initializable {
     private static final double X_CELL_SIZE = 84.5;
     private static final double Y_CELL_SIZE = 82.8;
+    public static DGame game;
+    private Item itemSelected;
+    private int cellOfItemSelected;
+    private double playerHealthRecWidth;
+    private ImageView itemImageInGrid;
+    
     @FXML
     private Button equipItemButton;
     @FXML
@@ -52,12 +58,6 @@ public class InventoryScreenController implements Initializable {
     private GridPane inventoryGrid;
     @FXML
     private ImageView itemView;
-    
-    public static DGame game;
-    private Item itemSelected;
-    private int cellOfItemSelected;
-    private double playerHealthRecWidth;
-    private ImageView itemImageInGrid;
     @FXML
     private AnchorPane rootPane;
     @FXML

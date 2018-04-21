@@ -30,7 +30,11 @@ import larp.model.DGame;
  * @author Tyree Gustafson
  */
 public class BattleScreenController implements Initializable {
-
+    
+    public static DGame game;
+    private double playerHealthRecWidth;
+    private double enemyHealthRecWidth;
+    
     static Battle battle;
     @FXML
     private Rectangle enemyHealthRec;
@@ -72,10 +76,6 @@ public class BattleScreenController implements Initializable {
     private Label enemyTurnResult;
     @FXML
     private AnchorPane rootPane;
-    
-    private DGame game;
-    private double playerHealthRecWidth;
-    private double enemyHealthRecWidth;
 
     /**
      * Initializes the controller class.
@@ -85,7 +85,6 @@ public class BattleScreenController implements Initializable {
         // TODO
         playerNameLabel.setText(battle.getPlayer().getName());
         enemyNameLabel.setText(battle.getEnemy().getName());
-        game = GameScreenController.game;
         playerHealthRecWidth = playerHealthRec.getWidth();
         enemyHealthRecWidth = enemyHealthRec.getWidth();
         updateDisplayInfo();

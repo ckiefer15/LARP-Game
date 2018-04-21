@@ -7,7 +7,6 @@ package larp;
  */
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,8 +25,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -106,12 +103,12 @@ public class GameScreenController implements Initializable {
 
 
         }
+        
         rootPane.getChildren().add(0, graphics);
         addBoundsToPane();
         setupKeyPresses();
         startGameLoop();
-        //Media m = new Media(Paths.get("/Users/we2423hd/Downloads/sdf.mp3").toUri().toString());
-        //new MediaPlayer(m).play();
+        
 
     }
 
@@ -289,6 +286,7 @@ public class GameScreenController implements Initializable {
         } else if (obj instanceof Conflict) {
             try {
                 BattleScreenController.battle = game.initBattle((Conflict) obj);
+                BattleScreenController.game = game;
                 Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
                 rootPane.getScene().setRoot(fightScreen);
                 timer.stop();
