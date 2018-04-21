@@ -25,6 +25,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import static larp.GameScreenController.game;
 import larp.model.DGame;
@@ -54,6 +56,7 @@ public class InventoryScreenController implements Initializable {
     public static DGame game;
     private Item itemSelected;
     private int cellOfItemSelected;
+    private double playerHealthRecWidth;
     private ImageView itemImageInGrid;
     @FXML
     private AnchorPane rootPane;
@@ -62,13 +65,15 @@ public class InventoryScreenController implements Initializable {
     @FXML
     private Label itemStat;
     @FXML
-    private Button showEquipButton;
-    @FXML
     private Font x1;
     @FXML
     private Label playerHPLabel;
     @FXML
     private Button showEquippedButton;
+    @FXML
+    private Color x2;
+    @FXML
+    private Rectangle playerHPRec;
 
     /**
      * Initializes the controller class.
@@ -76,9 +81,11 @@ public class InventoryScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        playerHealthRecWidth = playerHPRec.getWidth();
         loadInventory();
         itemSelected = game.getPlayer().getEquippedWeapon();
         updateItemInfo();
+        updatePlayerHPBar();
         setupKeyPresses();
     }
 
@@ -155,15 +162,19 @@ public class InventoryScreenController implements Initializable {
             updateItemInfo();
         }
     }
+    private void updatePlayerHPBar(){
+        double playerHPPercent = ((double) game.getPlayer().getHitPoints() / (double) game.getPlayer().getMaxHitPoints()) * 100;
+        playerHPRec.setWidth(playerHealthRecWidth * (playerHPPercent / 100));
+        playerHPLabel.setText(game.getPlayer().getHitPoints() + "/" + game.getPlayer().getMaxHitPoints());
+    }
     private void updateItemInfo(){
         itemView.setImage(itemSelected.getImage().getStaticImage());
         itemName.setText("Name: " + itemSelected.getName());
             if(itemSelected instanceof Weapon){
                 itemStat.setText("Damage: " + ((Weapon)itemSelected).getWeaponDamage());
-                playerHPLabel.setText("");
             }else if(itemSelected instanceof Health){
                 itemStat.setText("Heal: +" + ((Health)itemSelected).getHealthPoints());
-                playerHPLabel.setText("HP " + game.getPlayer().getHitPoints() + "/" + game.getPlayer().getMaxHitPoints());
+                updatePlayerHPBar();
             }
     }
 

@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -53,9 +54,6 @@ public class BattleScreenController implements Initializable {
     private Label playerHPLabel;
     @FXML
     private Label enemyHPLabel;
-    private DGame game;
-    private double playerHealthRecWidth;
-    private double enemyHealthRecWidth;
     @FXML
     private Pane finishGamePane;
     @FXML
@@ -72,6 +70,12 @@ public class BattleScreenController implements Initializable {
     private Font x4;
     @FXML
     private Label enemyTurnResult;
+    @FXML
+    private AnchorPane rootPane;
+    
+    private DGame game;
+    private double playerHealthRecWidth;
+    private double enemyHealthRecWidth;
 
     /**
      * Initializes the controller class.
@@ -79,34 +83,19 @@ public class BattleScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        playerNameLabel.setText(battle.getPlayer().getName());
+        enemyNameLabel.setText(battle.getEnemy().getName());
         game = GameScreenController.game;
         playerHealthRecWidth = playerHealthRec.getWidth();
         enemyHealthRecWidth = enemyHealthRec.getWidth();
         updateDisplayInfo();
     }
 
-    @FXML
-    private void run(ActionEvent event) throws IOException {
-        int healthHPBeforeRun = battle.getPlayer().getHitPoints();
-        if (battle.run() == 2) {
-            GoToPage(2);
-        } else {
-            //display result of player after run turn
-            if (healthHPBeforeRun == battle.getPlayer().getHitPoints()) {
-                playerTurnResult.setText("MISS");
-            } else {
-                playerTurnResult.setText("-" + (healthHPBeforeRun - battle.getPlayer().getHitPoints()));
-            }
-        }
-        updateDisplayInfo();
-        enemyTurnResult.setText("");
-    }
-
     private void GoToPage(int x) throws IOException {
         if (x == 1 || x == 2) {
             if (!game.getGameStatus() || x == 2) {
                 Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-                runButton.getScene().setRoot(gameScreen);
+                rootPane.getScene().setRoot(gameScreen);
             } else {
                 updateDisplayInfo();
                 GameScreenController.game = null;
@@ -143,6 +132,31 @@ public class BattleScreenController implements Initializable {
             enemyTurnResult.setText("-" + (enemyHPBeforeAttack - battle.getEnemy().getHitPoints()));
         }
     }
+    
+    @FXML
+    private void heal(ActionEvent event) {
+        int healthHPBeforeHeal = battle.getPlayer().getHitPoints();
+        battle.heal();
+        playerTurnResult.setText("+" + (battle.getPlayer().getHitPoints() - healthHPBeforeHeal));
+        updateDisplayInfo();
+    }
+    
+    @FXML
+    private void run(ActionEvent event) throws IOException {
+        int healthHPBeforeRun = battle.getPlayer().getHitPoints();
+        if (battle.run() == 2) {
+            GoToPage(2);
+        } else {
+            //display result of player after run turn
+            if (healthHPBeforeRun == battle.getPlayer().getHitPoints()) {
+                playerTurnResult.setText("MISS");
+            } else {
+                playerTurnResult.setText("-" + (healthHPBeforeRun - battle.getPlayer().getHitPoints()));
+            }
+        }
+        updateDisplayInfo();
+        enemyTurnResult.setText("");
+    }
 
     private void showFinishGame() {
         overlayImage.setVisible(true);
@@ -161,23 +175,13 @@ public class BattleScreenController implements Initializable {
     }
 
     private void updateDisplayInfo() {
-        playerNameLabel.setText(battle.getPlayer().getName());
         double playerHPPercent = ((double) battle.getPlayer().getHitPoints() / (double) battle.getPlayer().getMaxHitPoints()) * 100;
         playerHPLabel.setText(battle.getPlayer().getHitPoints() + "/" + battle.getPlayer().getMaxHitPoints());
         playerHealthRec.setWidth(playerHealthRecWidth * (playerHPPercent / 100));
 
-        enemyNameLabel.setText(battle.getEnemy().getName());
         double enemyHPPercent = ((double) battle.getEnemy().getHitPoints() / (double) battle.getEnemy().getMaxHitPoints()) * 100;
         enemyHPLabel.setText(battle.getEnemy().getHitPoints() + "/" + battle.getEnemy().getMaxHitPoints());
         enemyHealthRec.setWidth(enemyHealthRecWidth * (enemyHPPercent / 100));
-    }
-
-    @FXML
-    private void heal(ActionEvent event) {
-        int healthHPBeforeHeal = battle.getPlayer().getHitPoints();
-        battle.heal();
-        playerTurnResult.setText("+" + (battle.getPlayer().getHitPoints() - healthHPBeforeHeal));
-        updateDisplayInfo();
     }
 
     @FXML

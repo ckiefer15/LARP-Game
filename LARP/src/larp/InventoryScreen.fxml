@@ -8,6 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.InventoryScreenController">
@@ -46,7 +47,13 @@
       </textFill>
     </Label>
     <Label fx:id="itemStat" alignment="TOP_LEFT" font="$x1" layoutX="447.0" layoutY="333.0" prefHeight="40.0" text="DAMAGE" textFill="$x2" />
-    <Label fx:id="playerHPLabel" font="$x1" layoutX="467.0" layoutY="369.0" minHeight="21.0001220703125" prefHeight="21.0001220703125" text="" textFill="RED" />
+    <Rectangle fx:id="playerHPRec" arcHeight="5.0" arcWidth="5.0" fill="#ff3333" height="35.0" layoutX="468.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
+    <ImageView fitHeight="43.789474303463855" fitWidth="160.0" layoutX="464.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../img/Other/HealthBar.png" />
+      </image>
+    </ImageView>
+    <Label fx:id="playerHPLabel" alignment="CENTER" font="$x1" layoutX="504.0" layoutY="24.0" prefWidth="80.0" text="" textFill="WHITE" />
   </children>
   <stylesheets>
     <URL value="@larpCSS.css" />

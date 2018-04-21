@@ -35,8 +35,6 @@ import larp.model.*;
 import larp.model.graphic.*;
 import larp.model.character.*;
 import larp.model.room.object.*;
-
-import javax.swing.*;
 import larp.model.inventory.Item;
 
 
@@ -55,11 +53,8 @@ public class GameScreenController implements Initializable {
     static public final int COLLISION_BOX_X = 20;
     static public final int COLLISION_BOX_Y = 45;
     static public final int TILE_SIZE = 32;
-    static private boolean trace = true;
+    static private boolean trace = false;
     static private Rectangle playerBounds = new Rectangle();
-
-
-
     
     static Scene scene;
     static Canvas graphics;
@@ -69,7 +64,14 @@ public class GameScreenController implements Initializable {
     static ImagePattern backgroundPattern;
     
     @FXML
+    private ImageView overlayImage;
+    @FXML
+    private Pane itemReceivedPane;
+    @FXML
+    private ImageView itemImage;
+    @FXML
     private AnchorPane rootPane;
+    
     
     //============DGame Attributes===============
     static DGame game;
@@ -78,12 +80,6 @@ public class GameScreenController implements Initializable {
     static ArrayList<RoomObject> blockable;
     static Knight player;
     static Sprite playerSprite;
-    @FXML
-    private ImageView overlayImage;
-    @FXML
-    private Pane itemReceivedPane;
-    @FXML
-    private ImageView itemImage;
 
     /**
      * Initializes the controller class.
@@ -117,30 +113,21 @@ public class GameScreenController implements Initializable {
         //Media m = new Media(Paths.get("/Users/we2423hd/Downloads/sdf.mp3").toUri().toString());
         //new MediaPlayer(m).play();
 
-
     }
 
     public void addBoundsToPane() {
-
         for (int i = 0; i < roomObjects.size(); i++) {
-            if (roomObjects.get(i) instanceof Door) {
-                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
-                roomObjects.get(i).bounds.setStroke(Color.GREEN);
-            } else if (roomObjects.get(i) instanceof Conflict) {
-                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
-                roomObjects.get(i).bounds.setStroke(Color.BLUE);
-            } else if (roomObjects.get(i) instanceof Chest) {
-                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
-                roomObjects.get(i).bounds.setStroke(Color.YELLOW);
-            } else {
-                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
-                roomObjects.get(i).bounds.setStroke(Color.RED);
-            }
+            roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
             rootPane.getChildren().add(roomObjects.get(i).bounds);
         }
         playerBounds.setFill(Color.TRANSPARENT);
-        playerBounds.setStroke(Color.BLUEVIOLET);
         rootPane.getChildren().add(playerBounds);
+    }
+    private void updateBoundsOnPlayer() {
+        playerBounds.setHeight(COLLISION_BOX_Y - COLLISION_BOX_OFFSET_Y);
+        playerBounds.setWidth(COLLISION_BOX_X);
+        playerBounds.setX(playerSprite.getXCoordinate() + COLLISION_BOX_OFFSET_X);
+        playerBounds.setY(playerSprite.getYCoordinate() + COLLISION_BOX_OFFSET_Y);
     }
 
     public void removeObjectBounds() {
@@ -179,30 +166,23 @@ public class GameScreenController implements Initializable {
                     //Remove Trace
                     if (trace == false) {
                         for (int i = 0; i < roomObjects.size(); i++) {
-                            roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                             roomObjects.get(i).bounds.setStroke(Color.TRANSPARENT);
                         }
-                        playerBounds.setFill(Color.TRANSPARENT);
                         playerBounds.setStroke(Color.TRANSPARENT);
                     } else {
                         //Apply Trace (Door: Green, Conflict: BLUE, Chest: Yellow, Nonmoveable: Red)
                         for (int i = 0; i < roomObjects.size(); i++) {
                             if (roomObjects.get(i) instanceof Door) {
-                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                                 roomObjects.get(i).bounds.setStroke(Color.GREEN);
                             } else if (roomObjects.get(i) instanceof Conflict) {
-                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                                 roomObjects.get(i).bounds.setStroke(Color.BLUE);
                             } else if (roomObjects.get(i) instanceof Chest) {
-                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                                 roomObjects.get(i).bounds.setStroke(Color.YELLOW);
                             } else {
-                                roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
                                 roomObjects.get(i).bounds.setStroke(Color.RED);
                             }
                         }
                         //Apply Trace On Player (Player: Purple)
-                        playerBounds.setFill(Color.TRANSPARENT);
                         playerBounds.setStroke(Color.BLUEVIOLET);
                     }
                   //Add pressed movement keys to keypressed array (W, A, S, D, UP, DOWN, LEFT, RIGHT)
@@ -237,13 +217,6 @@ public class GameScreenController implements Initializable {
             }
         };
         timer.start();
-    }
-
-    private void updateBoundsOnPlayer() {
-        playerBounds.setHeight(COLLISION_BOX_Y - COLLISION_BOX_OFFSET_Y);
-        playerBounds.setWidth(COLLISION_BOX_X);
-        playerBounds.setX(playerSprite.getXCoordinate() + COLLISION_BOX_OFFSET_X);
-        playerBounds.setY(playerSprite.getYCoordinate() + COLLISION_BOX_OFFSET_Y);
     }
 
     public void update() {
@@ -382,7 +355,6 @@ public class GameScreenController implements Initializable {
         }
         return false;
     }
-
     @FXML
     private void hideItemReceived(ActionEvent event) {
         itemReceivedPane.setVisible(false);

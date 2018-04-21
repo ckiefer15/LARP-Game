@@ -17,15 +17,15 @@
         <Image url="@../img/Other/overlay.png" />
       </image>
     </ImageView>
-    <Pane id="finishGamePane" fx:id="itemReceivedPane" layoutX="162.0" layoutY="144.0" prefHeight="156.0" prefWidth="316.0" visible="false">
+    <Pane id="finishGamePane" fx:id="itemReceivedPane" layoutX="166.0" layoutY="122.0" prefHeight="175.0" prefWidth="336.0" visible="false">
       <children>
-        <ImageView fitHeight="149.2803497314453" fitWidth="318.98113038780605" layoutX="-1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" visible="true">
+        <ImageView fitHeight="179.74944060656074" fitWidth="336.2659606933594" layoutX="-1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" visible="true">
           <image>
             <Image url="@../img/Other/ItemReceived.png" />
           </image>
         </ImageView>
-        <ImageView fx:id="itemImage" fitHeight="60.0" fitWidth="60.0" layoutX="128.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" />
-        <Button id="finishButton" cancelButton="false" defaultButton="false" layoutX="0.0" layoutY="0.0" mnemonicParsing="false" onAction="#hideItemReceived" opacity="0.0" prefHeight="156.0" prefWidth="316.0" text="" visible="true" />
+        <ImageView fx:id="itemImage" fitHeight="60.0" fitWidth="60.0" layoutX="141.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
+        <Button id="finishButton" cancelButton="false" defaultButton="false" layoutX="27.0" layoutY="24.0" mnemonicParsing="false" onAction="#hideItemReceived" opacity="0.0" prefHeight="132.0" prefWidth="280.0" text="" visible="true" />
       </children>
     </Pane>
   </children>
