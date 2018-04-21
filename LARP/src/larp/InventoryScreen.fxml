@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.InventoryScreenController">
@@ -36,12 +37,15 @@
       </rowConstraints>
     </GridPane>
     <ImageView fx:id="itemView" fitHeight="80.0" fitWidth="80.0" layoutX="464.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
-    <Label fx:id="itemName" alignment="TOP_LEFT" layoutX="445.0" layoutY="279.0" prefHeight="47.0" prefWidth="125.0" styleClass="outline" text="" textFill="WHITE" wrapText="true">
+    <Label fx:id="itemName" alignment="TOP_LEFT" layoutX="445.0" layoutY="279.0" prefHeight="47.0" prefWidth="125.0" text="NAME" wrapText="true">
       <font>
         <Font name="High Jinks" size="20.0" fx:id="x1" />
       </font>
+      <textFill>
+        <Color blue="0.345" green="0.282" red="0.349" fx:id="x2" />
+      </textFill>
     </Label>
-    <Label fx:id="itemStat" alignment="TOP_LEFT" font="$x1" layoutX="447.0" layoutY="333.0" prefHeight="40.0" styleClass="outline" text="" textFill="WHITE" />
+    <Label fx:id="itemStat" alignment="TOP_LEFT" font="$x1" layoutX="447.0" layoutY="333.0" prefHeight="40.0" text="DAMAGE" textFill="$x2" />
     <Label fx:id="playerHPLabel" font="$x1" layoutX="467.0" layoutY="369.0" minHeight="21.0001220703125" prefHeight="21.0001220703125" text="" textFill="RED" />
   </children>
   <stylesheets>

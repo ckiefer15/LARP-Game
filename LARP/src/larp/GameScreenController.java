@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +25,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -35,6 +37,7 @@ import larp.model.character.*;
 import larp.model.room.object.*;
 
 import javax.swing.*;
+import larp.model.inventory.Item;
 
 
 /**
@@ -75,6 +78,12 @@ public class GameScreenController implements Initializable {
     static ArrayList<RoomObject> blockable;
     static Knight player;
     static Sprite playerSprite;
+    @FXML
+    private ImageView overlayImage;
+    @FXML
+    private Pane itemReceivedPane;
+    @FXML
+    private ImageView itemImage;
 
     /**
      * Initializes the controller class.
@@ -105,8 +114,8 @@ public class GameScreenController implements Initializable {
         addBoundsToPane();
         setupKeyPresses();
         startGameLoop();
-        Media m = new Media(Paths.get("/Users/we2423hd/Downloads/sdf.mp3").toUri().toString());
-        new MediaPlayer(m).play();
+        //Media m = new Media(Paths.get("/Users/we2423hd/Downloads/sdf.mp3").toUri().toString());
+        //new MediaPlayer(m).play();
 
 
     }
@@ -315,7 +324,16 @@ public class GameScreenController implements Initializable {
             }
         } else if (obj instanceof Chest) {
             game.openChest((Chest) obj);
+            showItemReceived();
         }
+    }
+    
+    //Show lastest item in inventory
+    private void showItemReceived(){
+        itemReceivedPane.setVisible(true);
+        overlayImage.setVisible(true);
+        ArrayList<Item>  temp = game.getPlayer().getInventory().getArrayList();
+        itemImage.setImage(temp.get(temp.size()-1).getImage().getStaticImage());
     }
 
     public static void paint() {
@@ -363,5 +381,11 @@ public class GameScreenController implements Initializable {
             }
         }
         return false;
+    }
+
+    @FXML
+    private void hideItemReceived(ActionEvent event) {
+        itemReceivedPane.setVisible(false);
+        overlayImage.setVisible(false);
     }
 }

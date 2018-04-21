@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -60,9 +61,17 @@ public class BattleScreenController implements Initializable {
     @FXML
     private Button finishButton;
     @FXML
-    private Button finishButton1;
-    @FXML
     private Pane endGamePane;
+    @FXML
+    private Font x3;
+    @FXML
+    private ImageView overlayImage;
+    @FXML
+    private Label playerTurnResult;
+    @FXML
+    private Font x4;
+    @FXML
+    private Label enemyTurnResult;
 
     /**
      * Initializes the controller class.
@@ -78,10 +87,19 @@ public class BattleScreenController implements Initializable {
 
     @FXML
     private void run(ActionEvent event) throws IOException {
+        int healthHPBeforeRun = battle.getPlayer().getHitPoints();
         if (battle.run() == 2) {
             GoToPage(2);
+        } else {
+            //display result of player after run turn
+            if (healthHPBeforeRun == battle.getPlayer().getHitPoints()) {
+                playerTurnResult.setText("MISS");
+            } else {
+                playerTurnResult.setText("-" + (healthHPBeforeRun - battle.getPlayer().getHitPoints()));
+            }
         }
         updateDisplayInfo();
+        enemyTurnResult.setText("");
     }
 
     private void GoToPage(int x) throws IOException {
@@ -94,31 +112,48 @@ public class BattleScreenController implements Initializable {
                 GameScreenController.game = null;
                 showFinishGame();
             }
-        }else{
+        } else {
             updateDisplayInfo();
-                GameScreenController.game = null;
-                showEndGame();
+            GameScreenController.game = null;
+            showEndGame();
         }
     }
 
-    // 1 = battle won, 0 == battle lost, 2 == run
     @FXML
     private void attack(ActionEvent event) throws IOException {
+        int healthHPBeforeAttack = battle.getPlayer().getHitPoints();
+        int enemyHPBeforeAttack = battle.getEnemy().getHitPoints();
         int x = battle.attack();
         if (x == 1 || x == 0) {
             GoToPage(x);
-        }else {
+        } else {
             updateDisplayInfo();
+        }
+
+        //display result of player after attack turn
+        if (healthHPBeforeAttack == battle.getPlayer().getHitPoints()) {
+            playerTurnResult.setText("MISS");
+        } else {
+            playerTurnResult.setText("-" + (healthHPBeforeAttack - battle.getPlayer().getHitPoints()));
+        }
+        //display result of enemy after attack turn
+        if (enemyHPBeforeAttack == battle.getEnemy().getHitPoints()) {
+            enemyTurnResult.setText("MISS");
+        } else {
+            enemyTurnResult.setText("-" + (enemyHPBeforeAttack - battle.getEnemy().getHitPoints()));
         }
     }
 
     private void showFinishGame() {
+        overlayImage.setVisible(true);
         finishGamePane.setVisible(true);
         attackButton.setDisable(true);
         healButton.setDisable(true);
         runButton.setDisable(true);
     }
-    private void showEndGame(){
+
+    private void showEndGame() {
+        overlayImage.setVisible(true);
         endGamePane.setVisible(true);
         attackButton.setDisable(true);
         healButton.setDisable(true);
@@ -139,7 +174,9 @@ public class BattleScreenController implements Initializable {
 
     @FXML
     private void heal(ActionEvent event) {
+        int healthHPBeforeHeal = battle.getPlayer().getHitPoints();
         battle.heal();
+        playerTurnResult.setText("+" + (battle.getPlayer().getHitPoints() - healthHPBeforeHeal));
         updateDisplayInfo();
     }
 
