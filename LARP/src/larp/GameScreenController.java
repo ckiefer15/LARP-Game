@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -50,7 +51,7 @@ public class GameScreenController implements Initializable {
     static public final int COLLISION_BOX_X = 20;
     static public final int COLLISION_BOX_Y = 45;
     static public final int TILE_SIZE = 32;
-    static private boolean trace = false;
+    static private boolean trace = true;
     static private Rectangle playerBounds = new Rectangle();
     
     static Scene scene;
@@ -59,6 +60,7 @@ public class GameScreenController implements Initializable {
     static ArrayList<String> keyPressed;
     static AnimationTimer timer;
     static ImagePattern backgroundPattern;
+    double playerHealthRecWidth;
     
     @FXML
     private ImageView overlayImage;
@@ -77,6 +79,10 @@ public class GameScreenController implements Initializable {
     static ArrayList<RoomObject> blockable;
     static Knight player;
     static Sprite playerSprite;
+    @FXML
+    private Rectangle playerHealthRec;
+    @FXML
+    private Label playerHPLabel;
 
     /**
      * Initializes the controller class.
@@ -90,7 +96,8 @@ public class GameScreenController implements Initializable {
         graphics = new Canvas(WIDTH, HEIGHT);
         gc = graphics.getGraphicsContext2D();
         keyPressed = new ArrayList<>();
-
+        playerHealthRecWidth = playerHealthRec.getWidth();
+        
         //============Initialize Game and Reference Variables==============
         if (game == null) {
             game = SetupDGame.setupGame(false);
@@ -100,18 +107,15 @@ public class GameScreenController implements Initializable {
             blockable = currentRoom.getBlockable();
             player = game.getPlayer();
             playerSprite = player.getSprite();
-
-
         }
         
         rootPane.getChildren().add(0, graphics);
         addBoundsToPane();
         setupKeyPresses();
+        updateHealthBar();
         startGameLoop();
-        
 
     }
-
     public void addBoundsToPane() {
         for (int i = 0; i < roomObjects.size(); i++) {
             roomObjects.get(i).bounds.setFill(Color.TRANSPARENT);
@@ -125,6 +129,11 @@ public class GameScreenController implements Initializable {
         playerBounds.setWidth(COLLISION_BOX_X);
         playerBounds.setX(playerSprite.getXCoordinate() + COLLISION_BOX_OFFSET_X);
         playerBounds.setY(playerSprite.getYCoordinate() + COLLISION_BOX_OFFSET_Y);
+    }
+    private void updateHealthBar(){
+        double playerHPPercent = ((double) game.getPlayer().getHitPoints() / (double) game.getPlayer().getMaxHitPoints()) * 100;
+        playerHealthRec.setWidth(playerHealthRecWidth * (playerHPPercent / 100));
+        playerHPLabel.setText(game.getPlayer().getHitPoints() + "/" + game.getPlayer().getMaxHitPoints());
     }
 
     public void removeObjectBounds() {

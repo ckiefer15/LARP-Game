@@ -47,7 +47,7 @@ public interface SetupDGame {
         ArrayList<RoomObject> objects;
         //==============Build Start Room=============
         objects = new ArrayList<>();
-        //objects.add(new RoomObject(true,"Thingy1",x off,y off,length,height,null,testing));
+        //Nonmoveable objects
         objects.add(new RoomObject(true,"Thingy1",0,0,12 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy2",14 * TILE_SIZE,0,6 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy3",0,0,2 * TILE_SIZE,6 * TILE_SIZE,null,testing));
@@ -72,18 +72,48 @@ public interface SetupDGame {
         objects.add(new RoomObject(true,"Thingy6",16 * TILE_SIZE,13 * TILE_SIZE,4 * TILE_SIZE,2 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",17 * TILE_SIZE, 12 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",18 * TILE_SIZE, 13 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        //Conflicts Objects
+        GameCharacter skeleton = new GameCharacter("Skeleton", 50, 10, "/img/enemy/default.png", testing);
+        objects.add(new Conflict("Skeleton Battle", skeleton, false, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
         
-        GameCharacter skeleton = new GameCharacter("Skeleton", 250, 10, "/img/enemy/default.png", testing);
-        objects.add(new Conflict("Skeleton Battle", skeleton, true, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
- 
+        GameCharacter spider = new GameCharacter("Skeleton", 100, 10, "/img/enemy/default.png", testing);
+        objects.add(new Conflict("Spider Battle", spider, false, 6 * TILE_SIZE,11 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
+        //Chest Objects
         objects.add(new Chest(2 * TILE_SIZE, 14 * TILE_SIZE,2 * TILE_SIZE, 1 * TILE_SIZE, true, testing));
+        objects.add(new Chest(8 * TILE_SIZE, 10 * TILE_SIZE,2 * TILE_SIZE, 1 * TILE_SIZE, true, testing));
         
+        //Door Objects
         objects.add(new Door("mainL",'r',1,"battleR",0,6 * TILE_SIZE,1*TILE_SIZE,2*TILE_SIZE,null,testing));
         rooms.add(new DRoom(objects,"/img/DungeonMapRoom1.png",testing));
         
-        //==============Build _____ Room==================
+        //==============Build Final Room==================
+        
         objects = new ArrayList<>();
-        objects.add(new Door("battleR",'l',0,"mainL",600,100,100,100,null,testing));
+        //Nonmoveable objects
+        objects.add(new RoomObject(true,"Thingy1",0,0,20 * TILE_SIZE,2 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",15 * TILE_SIZE,0,5 * TILE_SIZE,5 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",0,0,1 * TILE_SIZE,20 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",0,0,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",0,13 * TILE_SIZE,16 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",3 * TILE_SIZE,7 * TILE_SIZE,17 * TILE_SIZE,4 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",3 * TILE_SIZE,6 * TILE_SIZE,3 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",4 * TILE_SIZE,4 * TILE_SIZE,3 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",4 * TILE_SIZE,5 * TILE_SIZE,2 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",9 * TILE_SIZE,4 * TILE_SIZE,3 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",10 * TILE_SIZE,4 * TILE_SIZE,2 * TILE_SIZE,3 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",18 * TILE_SIZE,11 * TILE_SIZE,2 * TILE_SIZE,9 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",5 * TILE_SIZE,16 * TILE_SIZE,11 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        objects.add(new RoomObject(true,"Thingy1",5 * TILE_SIZE,19 * TILE_SIZE,15 * TILE_SIZE,1 * TILE_SIZE,null,testing));
+        
+        //Conflicts Objects
+        GameCharacter cyclops = new GameCharacter("Skeleton", 250, 20, "/img/enemy/default.png", testing);
+        objects.add(new Conflict("Skeleton Battle", cyclops, true, 1 * TILE_SIZE, 16 * TILE_SIZE, 4 * TILE_SIZE, 4 * TILE_SIZE, null, testing));
+        
+        //Chest Objects
+        objects.add(new Chest(7 * TILE_SIZE, 6 * TILE_SIZE,2 * TILE_SIZE, 1 * TILE_SIZE, true, testing));
+        
+        //Door Objects
+        objects.add(new Door("battleR",'l',0,"mainL",19*TILE_SIZE,5 * TILE_SIZE,1 * TILE_SIZE,2 * TILE_SIZE,null,testing));
         rooms.add(new DRoom(objects,"/img/DungeonMapFinalRoom.png",testing));
         return rooms;
     }
@@ -118,11 +148,8 @@ public interface SetupDGame {
     public static void initInventory(Knight player, boolean testing){
         if(DGame.getInstance() != null){
             player.addItemToInventory(DGame.getLoot("Red Potion"));
-            player.addItemToInventory(DGame.getLoot("Red Potion"));
-            player.addItemToInventory(DGame.getLoot("Red Potion"));
-            player.addItemToInventory(DGame.getLoot("Sword"));
-            player.addItemToInventory(DGame.getLoot("Hammer"));
-            player.addItemToInventory(DGame.getLoot("Upgraded Sword"));
+            player.addItemToInventory(DGame.getLoot("Blue Potion"));
+            player.addItemToInventory(DGame.getLoot("Green Potion"));
         }
         else{
             player.addItemToInventory(new Health());
@@ -130,7 +157,7 @@ public interface SetupDGame {
     }
     
     public static Knight initPlayer(boolean testing){
-        return new Knight("Bobby",PLAYER_HEALTH,PLAYER_DAMAGE,PLAYER_X,PLAYER_Y,
+        return new Knight("Knight",PLAYER_HEALTH,PLAYER_DAMAGE,PLAYER_X,PLAYER_Y,
                     PLAYER_XOFF,PLAYER_YOFF,null,"/img/player/sprite",testing);
     }
 }

@@ -53,9 +53,9 @@
     </Button>
     <Button fx:id="runButton" layoutX="368.0" layoutY="596.0" mnemonicParsing="false" onAction="#run" prefHeight="35.0" prefWidth="111.0" styleClass="run-button" text="" />
     <Button fx:id="healButton" layoutX="262.0" layoutY="596.0" mnemonicParsing="false" onAction="#heal" prefHeight="35.0" prefWidth="111.0" styleClass="heal-button" text="" />
-    <Label fx:id="playerNameLabel" layoutX="10.0" layoutY="609.0" prefHeight="24.0" prefWidth="128.0" text="Player Name" textFill="WHITE">
+    <Label fx:id="playerNameLabel" layoutX="10.0" layoutY="611.0" prefHeight="24.0" prefWidth="128.0" text="Player Name" textFill="WHITE">
       <font>
-        <Font name="High Jinks" size="14.0" fx:id="x2" />
+        <Font name="High Jinks" size="18.0" fx:id="x2" />
       </font>
     </Label>
     <Label fx:id="enemyNameLabel" alignment="CENTER_RIGHT" font="$x2" layoutX="499.0" layoutY="613.0" prefWidth="128.0" text="Enemy name" textAlignment="JUSTIFY" textFill="WHITE" />

@@ -18,7 +18,7 @@
         <Image url="@../img/inventory_background.png" />
       </image>
     </ImageView>
-    <Button fx:id="backButton" layoutX="0.0" layoutY="86.0" mnemonicParsing="false" onAction="#GoToPage" prefHeight="74.0" prefWidth="80.0" styleClass="back-button" text="" />
+    <Button fx:id="backButton" layoutX="-12.0" layoutY="75.0" mnemonicParsing="false" onAction="#GoToPage" prefHeight="100.0" prefWidth="106.0" styleClass="back-button" text="" />
     <Button fx:id="equipItemButton" layoutX="428.0" layoutY="404.0" mnemonicParsing="false" onAction="#useItem" prefHeight="47.0" prefWidth="160.0" styleClass="equip-button" text="" />
     <Button id="sellItemButton" fx:id="showEquippedButton" layoutX="428.0" layoutY="444.0" mnemonicParsing="false" onAction="#showEquipped" prefHeight="47.0" prefWidth="160.0" styleClass="showEquip-button" text="" />
     <Button fx:id="deleteItemButton" layoutX="428.0" layoutY="485.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="47.0" prefWidth="160.0" styleClass="delete-button" text="" />
