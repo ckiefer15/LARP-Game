@@ -40,6 +40,7 @@ import larp.model.inventory.Weapon;
  * @author Tyree Gustafson
  */
 public class InventoryScreenController implements Initializable {
+
     private static final double X_CELL_SIZE = 84.5;
     private static final double Y_CELL_SIZE = 82.8;
     public static DGame game;
@@ -47,7 +48,7 @@ public class InventoryScreenController implements Initializable {
     private int cellOfItemSelected;
     private double playerHealthRecWidth;
     private ImageView itemImageInGrid;
-    
+
     @FXML
     private Button equipItemButton;
     @FXML
@@ -88,28 +89,32 @@ public class InventoryScreenController implements Initializable {
         updatePlayerHPBar();
         setupKeyPresses();
     }
-
+    
+    //Get player inventory, load the item grid with item images from inventory
     private void loadInventory() {
         int count = 0;
         int inventorySize = game.getPlayer().getInventory().getArrayList().size();
-        ArrayList<Item>  temp = game.getPlayer().getInventory().getArrayList();
+        ArrayList<Item> temp = game.getPlayer().getInventory().getArrayList();
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 4; y++) {
-                if(count < inventorySize){
+                if (count < inventorySize) {
                     itemImageInGrid = new ImageView(temp.get(count).getImage().getStaticImage());
                     itemImageInGrid.setFitHeight(75);
                     itemImageInGrid.setFitWidth(75);
                     GridPane.setHalignment(itemImageInGrid, HPos.CENTER);
-                    inventoryGrid.add(itemImageInGrid, y, x);   
+                    inventoryGrid.add(itemImageInGrid, y, x);
                 }
                 count++;
             }
         }
     }
+    
+
     public void setupKeyPresses() {
         rootPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
-                if(e.getCode().toString()== "ESCAPE"){
+                //Pressing escape returns you back to the game
+                if (e.getCode().toString() == "ESCAPE") {
                     try {
                         Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
                         rootPane.getScene().setRoot(gameScreen);
@@ -128,59 +133,64 @@ public class InventoryScreenController implements Initializable {
             backButton.getScene().setRoot(gameScreen);
         }
     }
-
+    
+    //Using the cell sizes, determine the selected cell based off the x and y of a mouse click
     @FXML
     private void getCellSelection(MouseEvent event) {
         double tempX = event.getX() / X_CELL_SIZE;
         double tempY = event.getY() / Y_CELL_SIZE;
         int row, col;
-        
-        if(tempX <= 1){
+
+        if (tempX <= 1) {
             col = 1;
-        }else if(tempX <= 2){
+        } else if (tempX <= 2) {
             col = 2;
-        }else if(tempX <= 3){
+        } else if (tempX <= 3) {
             col = 3;
-        }else{
+        } else {
             col = 4;
         }
-        if(tempY <= 1){
+        if (tempY <= 1) {
             row = 1;
-        }else if(tempY <= 2){
+        } else if (tempY <= 2) {
             row = 2;
-        }else if(tempY <= 3){
+        } else if (tempY <= 3) {
             row = 3;
-        }else if(tempY <= 4){
+        } else if (tempY <= 4) {
             row = 4;
-        }else{
+        } else {
             row = 5;
         }
-        
+
         cellOfItemSelected = (row - 1) * 4 + col;
-        if(cellOfItemSelected <= game.getPlayer().getInventory().getArrayList().size()){
+        if (cellOfItemSelected <= game.getPlayer().getInventory().getArrayList().size()) {
             itemSelected = (Item) game.getPlayer().getInventory().getArrayList().get(cellOfItemSelected - 1);
             updateItemInfo();
         }
     }
-    private void updatePlayerHPBar(){
+    
+    //Update the display of player health bar
+    private void updatePlayerHPBar() {
         double playerHPPercent = ((double) game.getPlayer().getHitPoints() / (double) game.getPlayer().getMaxHitPoints()) * 100;
         playerHPRec.setWidth(playerHealthRecWidth * (playerHPPercent / 100));
         playerHPLabel.setText(game.getPlayer().getHitPoints() + "/" + game.getPlayer().getMaxHitPoints());
     }
-    private void updateItemInfo(){
+
+    //Change the item displayed info 
+    private void updateItemInfo() {
         itemView.setImage(itemSelected.getImage().getStaticImage());
         itemName.setText("Name: " + itemSelected.getName());
-            if(itemSelected instanceof Weapon){
-                itemStat.setText("Damage: " + ((Weapon)itemSelected).getWeaponDamage());
-            }else if(itemSelected instanceof Health){
-                itemStat.setText("Heal: +" + ((Health)itemSelected).getHealthPoints());
-                updatePlayerHPBar();
-            }
+        if (itemSelected instanceof Weapon) {
+            itemStat.setText("Damage: " + ((Weapon) itemSelected).getWeaponDamage());
+        } else if (itemSelected instanceof Health) {
+            itemStat.setText("Heal: +" + ((Health) itemSelected).getHealthPoints());
+            updatePlayerHPBar();
+        }
     }
-
+    
     @FXML
     private void useItem(ActionEvent event) {
-        if(itemSelected != null){
+        if (itemSelected != null) {
             game.getPlayer().useItem(itemSelected);
         }
         refreshScreen();
@@ -191,7 +201,8 @@ public class InventoryScreenController implements Initializable {
         game.getPlayer().getInventory().getArrayList().remove(itemSelected);
         refreshScreen();
     }
-    private void refreshScreen(){
+    
+    private void refreshScreen() {
         try {
             Parent inventoryScreen = FXMLLoader.load(getClass().getResource("InventoryScreen.fxml"));
             rootPane.getScene().setRoot(inventoryScreen);
@@ -203,11 +214,11 @@ public class InventoryScreenController implements Initializable {
     @FXML
     private void showEquipped(ActionEvent event) {
         itemSelected = game.getPlayer().getEquippedWeapon();
-        if(itemSelected != null){
+        if (itemSelected != null) {
             itemView.setImage(itemSelected.getImage().getStaticImage());
             updateItemInfo();
         }
-        
+
     }
 
 }

@@ -30,11 +30,11 @@ import larp.model.DGame;
  * @author Tyree Gustafson
  */
 public class BattleScreenController implements Initializable {
-    
+
     public static DGame game;
     private double playerHealthRecWidth;
     private double enemyHealthRecWidth;
-    
+
     static Battle battle;
     @FXML
     private Rectangle enemyHealthRec;
@@ -89,7 +89,7 @@ public class BattleScreenController implements Initializable {
         enemyHealthRecWidth = enemyHealthRec.getWidth();
         updateDisplayInfo();
     }
-
+    //Decide what screen to switch to when battle ends
     private void GoToPage(int x) throws IOException {
         if (x == 1 || x == 2) {
             if (!game.getGameStatus() || x == 2) {
@@ -131,7 +131,7 @@ public class BattleScreenController implements Initializable {
             enemyTurnResult.setText("-" + (enemyHPBeforeAttack - battle.getEnemy().getHitPoints()));
         }
     }
-    
+
     @FXML
     private void heal(ActionEvent event) {
         int healthHPBeforeHeal = battle.getPlayer().getHitPoints();
@@ -139,7 +139,7 @@ public class BattleScreenController implements Initializable {
         playerTurnResult.setText("+" + (battle.getPlayer().getHitPoints() - healthHPBeforeHeal));
         updateDisplayInfo();
     }
-    
+
     @FXML
     private void run(ActionEvent event) throws IOException {
         int healthHPBeforeRun = battle.getPlayer().getHitPoints();
@@ -156,7 +156,7 @@ public class BattleScreenController implements Initializable {
         updateDisplayInfo();
         enemyTurnResult.setText("");
     }
-
+    //Display finish game pane
     private void showFinishGame() {
         overlayImage.setVisible(true);
         finishGamePane.setVisible(true);
@@ -164,7 +164,8 @@ public class BattleScreenController implements Initializable {
         healButton.setDisable(true);
         runButton.setDisable(true);
     }
-
+    
+    //Display game over pane
     private void showEndGame() {
         overlayImage.setVisible(true);
         endGamePane.setVisible(true);
@@ -172,7 +173,8 @@ public class BattleScreenController implements Initializable {
         healButton.setDisable(true);
         runButton.setDisable(true);
     }
-
+    
+    //Update player health info
     private void updateDisplayInfo() {
         double playerHPPercent = ((double) battle.getPlayer().getHitPoints() / (double) battle.getPlayer().getMaxHitPoints()) * 100;
         playerHPLabel.setText(battle.getPlayer().getHitPoints() + "/" + battle.getPlayer().getMaxHitPoints());

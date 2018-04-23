@@ -14,20 +14,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
-
-
 
 /**
  *
  * @author Tyree Gustafson
  */
 public class MainMenuScreenController implements Initializable {
-    
+
     @FXML
     private Button playButton;
     @FXML
@@ -42,17 +38,17 @@ public class MainMenuScreenController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private Font x1;
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }    
+    }
 
     @FXML
     private void GoToGame(ActionEvent event) throws IOException {
         Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
         playButton.getScene().setRoot(gameScreen);
     }
+
     @FXML
     private void closeGame(ActionEvent event) throws IOException {
         Platform.exit();
