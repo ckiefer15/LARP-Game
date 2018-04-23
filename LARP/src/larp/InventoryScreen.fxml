@@ -7,6 +7,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="640.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.InventoryScreenController">
@@ -16,7 +18,7 @@
         <Image url="@../img/inventory_background.png" />
       </image>
     </ImageView>
-    <Button fx:id="backButton" layoutX="0.0" layoutY="86.0" mnemonicParsing="false" onAction="#GoToPage" prefHeight="74.0" prefWidth="80.0" styleClass="back-button" text="" />
+    <Button fx:id="backButton" layoutX="-12.0" layoutY="75.0" mnemonicParsing="false" onAction="#GoToPage" prefHeight="100.0" prefWidth="106.0" styleClass="back-button" text="" />
     <Button fx:id="equipItemButton" layoutX="428.0" layoutY="404.0" mnemonicParsing="false" onAction="#useItem" prefHeight="47.0" prefWidth="160.0" styleClass="equip-button" text="" />
     <Button id="sellItemButton" fx:id="showEquippedButton" layoutX="428.0" layoutY="444.0" mnemonicParsing="false" onAction="#showEquipped" prefHeight="47.0" prefWidth="160.0" styleClass="showEquip-button" text="" />
     <Button fx:id="deleteItemButton" layoutX="428.0" layoutY="485.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="47.0" prefWidth="160.0" styleClass="delete-button" text="" />
@@ -36,13 +38,22 @@
       </rowConstraints>
     </GridPane>
     <ImageView fx:id="itemView" fitHeight="80.0" fitWidth="80.0" layoutX="464.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
-    <Label fx:id="itemName" alignment="TOP_LEFT" layoutX="445.0" layoutY="279.0" prefHeight="47.0" prefWidth="125.0" styleClass="outline" text="" textFill="WHITE" wrapText="true">
+    <Label fx:id="itemName" alignment="TOP_LEFT" layoutX="445.0" layoutY="279.0" prefHeight="47.0" prefWidth="125.0" text="NAME" wrapText="true">
       <font>
         <Font name="High Jinks" size="20.0" fx:id="x1" />
       </font>
+      <textFill>
+        <Color blue="0.345" green="0.282" red="0.349" fx:id="x2" />
+      </textFill>
     </Label>
-    <Label fx:id="itemStat" alignment="TOP_LEFT" font="$x1" layoutX="447.0" layoutY="333.0" prefHeight="40.0" styleClass="outline" text="" textFill="WHITE" />
-    <Label fx:id="playerHPLabel" font="$x1" layoutX="467.0" layoutY="369.0" minHeight="21.0001220703125" prefHeight="21.0001220703125" text="" textFill="RED" />
+    <Label fx:id="itemStat" alignment="TOP_LEFT" font="$x1" layoutX="447.0" layoutY="333.0" prefHeight="40.0" text="DAMAGE" textFill="$x2" />
+    <Rectangle fx:id="playerHPRec" arcHeight="5.0" arcWidth="5.0" fill="#ff3333" height="35.0" layoutX="468.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
+    <ImageView fitHeight="43.789474303463855" fitWidth="160.0" layoutX="464.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../img/Other/HealthBar.png" />
+      </image>
+    </ImageView>
+    <Label fx:id="playerHPLabel" alignment="CENTER" font="$x1" layoutX="504.0" layoutY="24.0" prefWidth="80.0" text="" textFill="WHITE" />
   </children>
   <stylesheets>
     <URL value="@larpCSS.css" />

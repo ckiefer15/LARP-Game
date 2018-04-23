@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -9,13 +10,38 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" snapToPixel="true" visible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="larp.GameScreenController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="640.0" snapToPixel="true" styleClass="outline" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="larp.GameScreenController">
   <children>
     <Button id="fightButton" layoutX="482.0" layoutY="487.0" mnemonicParsing="false" opacity="0.0" text="Button" visible="true" />
-      <ImageView fx:id="victoryImage" fitHeight="150.0" fitWidth="200.0" layoutX="220.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../img/victory.png" />
-         </image>
-      </ImageView>
+    <ImageView fx:id="overlayImage" fitHeight="638.0000305175781" fitWidth="638.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="false" visible="false">
+      <image>
+        <Image url="@../img/Other/overlay.png" />
+      </image>
+    </ImageView>
+    <Rectangle fx:id="playerHealthRec" arcHeight="5.0" arcWidth="5.0" fill="#ff3333" height="21.0" layoutX="15.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" width="105.0" />
+    <ImageView fitHeight="31.00000762939453" fitWidth="109.33334350585938" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="false">
+      <image>
+        <Image url="@../img/Other/HealthBar.png" />
+      </image>
+    </ImageView>
+    <Label fx:id="playerHPLabel" alignment="CENTER" layoutX="45.0" layoutY="22.0" styleClass="outline" text="250/250" textFill="WHITE">
+      <font>
+        <Font name="High Jinks" size="16.0" />
+      </font>
+    </Label>
+    <Pane id="finishGamePane" fx:id="itemReceivedPane" layoutX="166.0" layoutY="122.0" prefHeight="175.0" prefWidth="336.0" visible="false">
+      <children>
+        <ImageView fitHeight="179.74944060656074" fitWidth="336.2659606933594" layoutX="-1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" visible="true">
+          <image>
+            <Image url="@../img/Other/ItemReceived.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="itemImage" fitHeight="50.0" fitWidth="50.0" layoutX="147.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" />
+        <Button id="finishButton" cancelButton="false" defaultButton="false" disable="false" focusTraversable="true" layoutX="0.0" layoutY="0.0" mnemonicParsing="false" onAction="#hideItemReceived" opacity="0.0" prefHeight="175.0" prefWidth="336.0" text="" visible="true" />
+      </children>
+    </Pane>
   </children>
+  <stylesheets>
+    <URL value="@larpCSS.css" />
+  </stylesheets>
 </AnchorPane>

@@ -37,7 +37,8 @@ public class Chest extends RoomObject {
         if (loot == null) {
             ArrayList<Item> temp = DGame.getLoot();
             Random rand = new Random();
-            return temp.get(rand.nextInt(temp.size()));
+            loot = temp.get(rand.nextInt(temp.size()));
+            return loot;
         }
         return loot;
     }
