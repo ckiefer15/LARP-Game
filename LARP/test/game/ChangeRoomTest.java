@@ -15,7 +15,8 @@ import static org.junit.Assert.*;
 import larp.model.*;
 import larp.model.character.*;
 import larp.model.room.object.*;
-import java.util.ArrayList;
+import larp.model.graphic.Sprite;
+import javafx.scene.shape.Rectangle;
 /**
  *
  * @author up6071fd
@@ -25,10 +26,12 @@ public class ChangeRoomTest {
     DGame game;
     DRoom room;
     Knight player;
+    Sprite sprite;
     
     public ChangeRoomTest() {
         game = SetupDGame.setupGame(true);
         room = game.getCurrentRoom();
+        player = game.getPlayer();
     }
     
     @BeforeClass
@@ -64,6 +67,11 @@ public class ChangeRoomTest {
             DRoom tempRoom = game.changeRoom(tempDoor);
             if(tempRoom == room)
                 fail("The 'currentRoom' in game didn't change!");
+            Rectangle playerBounds = player.getSprite().testingCollisionBounds();
+            for(RoomObject obj : tempRoom.getRoomObjects()){
+                if(obj.bounds.intersects(playerBounds.getBoundsInParent()))
+                    fail("Player intersects with " + obj.getName() + " in new room!");
+            }
         }
         else
             fail("There is no door to test in the starting room!");
