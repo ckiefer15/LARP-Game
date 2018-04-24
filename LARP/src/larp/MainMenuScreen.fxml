@@ -29,9 +29,9 @@
             <Font size="20.0" fx:id="x1" />
           </font>
         </Label>
-        <Button fx:id="creditButton" focusTraversable="false" font="$x1" layoutX="231.0" layoutY="471.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="credit-button" text="" />
-        <Button fx:id="tutorialButton" focusTraversable="false" font="$x1" layoutX="231.0" layoutY="398.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="tut-button" text="" />
-        <Button fx:id="optionButton" focusTraversable="false" font="$x1" layoutX="231.0" layoutY="325.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="option-button" text="">
+        <Button fx:id="creditButton" disable="true" focusTraversable="false" font="$x1" layoutX="231.0" layoutY="471.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="credit-button" text="" />
+        <Button fx:id="tutorialButton" disable="true" focusTraversable="false" font="$x1" layoutX="231.0" layoutY="398.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="tut-button" text="" />
+        <Button fx:id="optionButton" disable="true" focusTraversable="false" font="$x1" layoutX="231.0" layoutY="325.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" styleClass="option-button" text="">
           <stylesheets>
             <URL value="@larpCSS.css" />
           </stylesheets>
