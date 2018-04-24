@@ -51,7 +51,7 @@ public class GameScreenController implements Initializable {
     static public final int COLLISION_BOX_X = 20;
     static public final int COLLISION_BOX_Y = 45;
     static public final int TILE_SIZE = 32;
-    static private boolean trace = true;
+    static private boolean trace = false;
     static private Rectangle playerBounds = new Rectangle();
     
     static Scene scene;
