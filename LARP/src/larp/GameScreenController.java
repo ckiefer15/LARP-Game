@@ -26,6 +26,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -53,6 +55,10 @@ public class GameScreenController implements Initializable {
     static public final int TILE_SIZE = 32;
     static private boolean trace = false;
     static private Rectangle playerBounds = new Rectangle();
+
+    Media bossMusic = new Media("file:///Users/we2423hd/Documents/larp2-cs410-winonaNew/sounds/ds3.mp3"); //replace /Movies/test.mp3 with your file
+    //Media backgroundMusic = new Media("file://")
+    MediaPlayer musicPlayer = new MediaPlayer(bossMusic);
     
     static Scene scene;
     static Canvas graphics;
@@ -107,7 +113,10 @@ public class GameScreenController implements Initializable {
             blockable = currentRoom.getBlockable();
             player = game.getPlayer();
             playerSprite = player.getSprite();
+
+            musicPlayer.play();
         }
+
         
         rootPane.getChildren().add(0, graphics);
         addBoundsToPane();
