@@ -99,6 +99,7 @@ public class GameScreenController implements Initializable {
     }
 
     public void setup() {
+
         graphics = new Canvas(WIDTH, HEIGHT);
         gc = graphics.getGraphicsContext2D();
         keyPressed = new ArrayList<>();
