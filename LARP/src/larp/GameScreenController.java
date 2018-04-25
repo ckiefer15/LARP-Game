@@ -56,9 +56,8 @@ public class GameScreenController implements Initializable {
     static private boolean trace = false;
     static private Rectangle playerBounds = new Rectangle();
 
-    Media bossMusic = new Media("file:///Users/we2423hd/Documents/larp2-cs410-winonaNew/sounds/ds3.mp3"); //replace /Movies/test.mp3 with your file
-    //Media backgroundMusic = new Media("file://")
-    MediaPlayer musicPlayer = new MediaPlayer(bossMusic);
+    private Media music = new Media("file:///Users/rn9627cw/Desktop/larp2-cs410-winona/LARP/src/larp/ds3back.mp3"); //replace /Movies/test.mp3 with your file
+    private MediaPlayer musicPlayer = new MediaPlayer(music);
     
     static Scene scene;
     static Canvas graphics;
@@ -114,7 +113,6 @@ public class GameScreenController implements Initializable {
             blockable = currentRoom.getBlockable();
             player = game.getPlayer();
             playerSprite = player.getSprite();
-
             musicPlayer.play();
         }
 
@@ -308,6 +306,7 @@ public class GameScreenController implements Initializable {
                 BattleScreenController.game = game;
                 Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
                 rootPane.getScene().setRoot(fightScreen);
+                musicPlayer.stop();
                 timer.stop();
             } catch (IOException ex) {
                 Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);
