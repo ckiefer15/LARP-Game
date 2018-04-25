@@ -28,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -56,7 +57,7 @@ public class GameScreenController implements Initializable {
     static private boolean trace = false;
     static private Rectangle playerBounds = new Rectangle();
 
-    private Media music = new Media("file:///Users/rn9627cw/Desktop/larp2-cs410-winona/LARP/src/larp/ds3back.mp3"); //replace /Movies/test.mp3 with your file
+    private Media music = new Media(getClass().getResource("/sounds/ds3back.mp3").toExternalForm()); //replace /Movies/test.mp3 with your file
     private MediaPlayer musicPlayer = new MediaPlayer(music);
     
     static Scene scene;
@@ -95,6 +96,10 @@ public class GameScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setup();
+        
+        if(!(musicPlayer.getStatus().equals(Status.PLAYING))){
+            musicPlayer.play();
+        }
     }
 
     public void setup() {
@@ -115,7 +120,6 @@ public class GameScreenController implements Initializable {
             playerSprite = player.getSprite();
             musicPlayer.play();
         }
-
         
         rootPane.getChildren().add(0, graphics);
         addBoundsToPane();
@@ -306,7 +310,7 @@ public class GameScreenController implements Initializable {
                 BattleScreenController.game = game;
                 Parent fightScreen = FXMLLoader.load(getClass().getResource("BattleScreen.fxml"));
                 rootPane.getScene().setRoot(fightScreen);
-                musicPlayer.stop();
+                musicPlayer.pause();
                 timer.stop();
             } catch (IOException ex) {
                 Logger.getLogger(GameScreenController.class.getName()).log(Level.SEVERE, null, ex);

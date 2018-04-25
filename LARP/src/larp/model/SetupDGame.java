@@ -73,7 +73,7 @@ public interface SetupDGame {
         objects.add(new RoomObject(true,"Thingy6",17 * TILE_SIZE, 12 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         objects.add(new RoomObject(true,"Thingy6",18 * TILE_SIZE, 13 * TILE_SIZE,2 * TILE_SIZE,4 * TILE_SIZE,null,testing));
         //Conflicts Objects
-        GameCharacter skeleton = new GameCharacter("Skeleton", 50, 10, "/img/enemy/default.png", testing);
+        GameCharacter skeleton = new GameCharacter("Skeleton", 1500, 200, "/img/enemy/default.png", testing);
         objects.add(new Conflict("Skeleton Battle", skeleton, false, 15 * TILE_SIZE, 8 * TILE_SIZE, 1 * TILE_SIZE, 1 * TILE_SIZE, null, testing));
         
         GameCharacter spider = new GameCharacter("Skeleton", 100, 10, "/img/enemy/default.png", testing);

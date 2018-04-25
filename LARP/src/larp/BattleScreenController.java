@@ -18,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -34,6 +36,10 @@ public class BattleScreenController implements Initializable {
     public static DGame game;
     private double playerHealthRecWidth;
     private double enemyHealthRecWidth;
+    private Media music = new Media(getClass().getResource("/sounds/ds3.mp3").toExternalForm()); //replace /Movies/test.mp3 with your file
+    private Media winMusic = new Media(getClass().getResource("/sounds/youwon.mp3").toExternalForm());
+    private Media loseMusic = new Media(getClass().getResource("/sounds/youlose.mp3").toExternalForm());
+    private MediaPlayer musicPlayer = new MediaPlayer(music);
 
     static Battle battle;
     @FXML
@@ -87,10 +93,12 @@ public class BattleScreenController implements Initializable {
         enemyNameLabel.setText(battle.getEnemy().getName());
         playerHealthRecWidth = playerHealthRec.getWidth();
         enemyHealthRecWidth = enemyHealthRec.getWidth();
+        musicPlayer.play();
         updateDisplayInfo();
     }
     //Decide what screen to switch to when battle ends
     private void GoToPage(int x) throws IOException {
+        musicPlayer.stop();
         if (x == 1 || x == 2) {
             if (!game.getGameStatus() || x == 2) {
                 Parent gameScreen = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
@@ -98,11 +106,15 @@ public class BattleScreenController implements Initializable {
             } else {
                 updateDisplayInfo();
                 GameScreenController.game = null;
+                musicPlayer = new MediaPlayer(winMusic);
+                musicPlayer.play();
                 showFinishGame();
             }
         } else {
             updateDisplayInfo();
             GameScreenController.game = null;
+            musicPlayer = new MediaPlayer(loseMusic);
+            musicPlayer.play();
             showEndGame();
         }
     }
@@ -187,6 +199,7 @@ public class BattleScreenController implements Initializable {
 
     @FXML
     private void finishGame(ActionEvent event) throws IOException {
+        musicPlayer.stop();
         Parent menuScreen = FXMLLoader.load(getClass().getResource("MainMenuScreen.fxml"));
         finishButton.getScene().setRoot(menuScreen);
     }
